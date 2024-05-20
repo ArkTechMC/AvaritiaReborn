@@ -1,0 +1,14 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "avaritia:item/neutron_pile",
+    "halo": "avaritia:item/halo_noise"
+  },
+  "loader": "avaritia:halo",
+  "halo": {
+    "texture": "#halo",
+    "color": 872415231,
+    "size": 8,
+    "pulse": false
+  }
+}

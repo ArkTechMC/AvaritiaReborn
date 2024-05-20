@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "id": "avaritia",
+  "version": "${version}",
+  "name": "AvaritiaReborn",
+  "description": "",
+  "authors": [],
+  "contact": {
+    "repo": "https://github.com/IAFEnvoy/AvaritiaReborn"
+  },
+  "license": "LGPL-3.0",
+  "icon": "assets/avaritia/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "com.iafenvoy.avaritia.AvaritiaRebornClient"
+    ],
+    "main": [
+      "com.iafenvoy.avaritia.AvaritiaReborn"
+    ],
+    "annotation_lib": [
+      "com.iafenvoy.avaritia.registry.ModBlockEntities",
+      "com.iafenvoy.avaritia.registry.ModBlocks",
+      "com.iafenvoy.avaritia.registry.ModItemGroups",
+      "com.iafenvoy.avaritia.registry.ModItems"
+    ]
+  },
+  "mixins": [
+    "avaritia.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}

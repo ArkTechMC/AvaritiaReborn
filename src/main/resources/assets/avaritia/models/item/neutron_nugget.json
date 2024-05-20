@@ -1,0 +1,14 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "avaritia:item/neutron_nugget",
+    "halo": "avaritia:item/halo_noise"
+  },
+  "loader": "avaritia:halo",
+  "halo": {
+    "texture": "#halo",
+    "color": 1308622847,
+    "size": 8,
+    "pulse": false
+  }
+}
