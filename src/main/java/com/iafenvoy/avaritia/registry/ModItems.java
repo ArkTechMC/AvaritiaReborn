@@ -8,7 +8,9 @@ import com.iafenvoy.annotationlib.annotation.registration.Link;
 import com.iafenvoy.annotationlib.api.IAnnotatedRegistryEntry;
 import com.iafenvoy.annotationlib.util.TargetType;
 import com.iafenvoy.avaritia.AvaritiaReborn;
+import com.iafenvoy.avaritia.item.armor.InfinityArmor;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.minecraft.item.ArmorItem;
 import net.minecraft.item.Item;
 
 @ModId(AvaritiaReborn.MOD_ID)
@@ -44,8 +46,19 @@ public class ModItems implements IAnnotatedRegistryEntry {
     public static Item COMPRESSOR = null;
     @Group(@TargetId("main"))
     @Link(type = TargetType.BLOCK, target = @TargetId("neutronium_block"))
-    public static Item NEUTRONIUM_BLOCK;
+    public static Item NEUTRONIUM_BLOCK = null;
     @Group(@TargetId("main"))
     @Link(type = TargetType.BLOCK, target = @TargetId("compressed_crafting_table"))
-    public static Item COMPRESSED_CRAFTING_TABLE;
+    public static Item COMPRESSED_CRAFTING_TABLE = null;
+    @Group(@TargetId("main"))
+    @Link(type = TargetType.BLOCK, target = @TargetId("crystal_matrix_block"))
+    public static Item CRYSTAL_MATRIX_BLOCK = null;
+    @ItemReg(group = @TargetId("main"))
+    public static final Item INFINITY_HELMET = new InfinityArmor(ArmorItem.Type.HELMET, new FabricItemSettings().fireproof());
+    @ItemReg(group = @TargetId("main"))
+    public static final Item INFINITY_CHESTPLATE = new InfinityArmor(ArmorItem.Type.CHESTPLATE, new FabricItemSettings().fireproof());
+    @ItemReg(group = @TargetId("main"))
+    public static final Item INFINITY_LEGS = new InfinityArmor(ArmorItem.Type.LEGGINGS, new FabricItemSettings().fireproof());
+    @ItemReg(group = @TargetId("main"))
+    public static final Item INFINITY_BOOTS = new InfinityArmor(ArmorItem.Type.BOOTS, new FabricItemSettings().fireproof());
 }
