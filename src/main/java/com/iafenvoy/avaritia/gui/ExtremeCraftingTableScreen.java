@@ -11,7 +11,7 @@ import net.minecraft.util.Identifier;
 
 public class ExtremeCraftingTableScreen extends HandledScreen<ExtremeCraftingTableScreenHandler> {
     //A path to the gui texture. In this example we use the texture from the dispenser
-    private static final Identifier TEXTURE = new Identifier(AvaritiaReborn.MOD_ID, "textures/gui/extreme_crafting.png");
+    public static final Identifier TEXTURE = new Identifier(AvaritiaReborn.MOD_ID, "textures/gui/extreme_crafting.png");
 
 
     protected boolean isClickOutsideBounds(double mouseX, double mouseY, int left, int top, int button) {

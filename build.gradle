@@ -13,6 +13,10 @@ repositories {
     // See https://docs.gradle.org/current/userguide/declaring_repositories.html
     // for more information about repositories.
     maven {
+        name = "TerraformersMC"
+        url = "https://maven.terraformersmc.com/"
+    }
+    maven {
         name "IAFEnvoy's Maven"
         url "https://maven.iafenvoy.com/releases"
     }
@@ -28,6 +32,12 @@ dependencies {
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
     modImplementation "com.iafenvoy:annotationlib:${annotationlib_version}"
+
+    // Optional dependencies
+    // EMI
+    modCompileOnly "dev.emi:emi-fabric:${emi_version}:api"
+    modLocalRuntime "dev.emi:emi-fabric:${emi_version}"
+
 }
 
 processResources {

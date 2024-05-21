@@ -1,6 +1,7 @@
 package com.iafenvoy.avaritia.item.block.entity;
 
 import com.iafenvoy.avaritia.gui.NeutroniumCompressorScreenHandler;
+import com.iafenvoy.avaritia.item.block.NeutroniumCompressorBlock;
 import com.iafenvoy.avaritia.registry.ModBlockEntities;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
@@ -154,8 +155,11 @@ public class NeutroniumCompressorBlockEntity extends BlockEntity implements Name
 
     public static void tick(World world, BlockPos pos, BlockState state, NeutroniumCompressorBlockEntity entity) {
         if (entity.inventory.get(0).getItem() != null && entity.inventory.get(0).getItem() != Items.AIR) {
+            world.setBlockState(pos, state.with(NeutroniumCompressorBlock.ACTIVE, true));
             consumeItem(entity);
-        }
+        } else
+            world.setBlockState(pos, state.with(NeutroniumCompressorBlock.ACTIVE, false));
+
         if (entity.progress >= 200) {
             craftItem(entity);
         }

@@ -42,4 +42,10 @@ public class ModItems implements IAnnotatedRegistryEntry {
     @Group(@TargetId("main"))
     @Link(type = TargetType.BLOCK, target = @TargetId("compressor"))
     public static Item COMPRESSOR = null;
+    @Group(@TargetId("main"))
+    @Link(type = TargetType.BLOCK, target = @TargetId("neutronium_block"))
+    public static Item NEUTRONIUM_BLOCK;
+    @Group(@TargetId("main"))
+    @Link(type = TargetType.BLOCK, target = @TargetId("compressed_crafting_table"))
+    public static Item COMPRESSED_CRAFTING_TABLE;
 }

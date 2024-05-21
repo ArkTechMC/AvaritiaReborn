@@ -27,21 +27,21 @@ public class NeutroniumCompressorScreen extends HandledScreen<NeutroniumCompress
         int y = (height - backgroundHeight) / 2;
         context.drawTexture(TEXTURE, x, y, 0, 0, backgroundWidth, backgroundHeight);
 
-//        renderProgressArrow(context.getMatrices(), x, y);
+        renderProgressArrow(context, x, y);
         context.getMatrices().push();
         context.getMatrices().translate(x, y, 0);
         //textRenderer.draw(matrices, "Progress: " + String.valueOf(handler.getScaledProgress()) + "%",50,60,0);
-        context.drawText(textRenderer, (int) handler.getCurrentProgress() + " / " + (int) handler.getMaxProgress(), 65, 60, 0,false);
+        context.drawText(textRenderer, (int) handler.getCurrentProgress() + " / " + (int) handler.getMaxProgress(), 65, 60, 0, false);
         context.getMatrices().pop();
 
     }
 
-//    private void renderProgressArrow(MatrixStack matrices, int x, int y) {
-//        if (handler.getCurrentProgress() > 0) {
-//            drawTexture(matrices, x + 90, y + 35, 176, 16, 18, (int) handler.getScaledProgressSingularity());
-//            drawTexture(matrices, x + 62, y + 34, 176, 0, (int) handler.getScaledProgressArrow(), 16);
-//        }
-//    }
+    private void renderProgressArrow(DrawContext context, int x, int y) {
+        if (handler.getCurrentProgress() > 0) {
+            context.drawTexture(TEXTURE, x + 90, y + 35, 176, 16, 18, handler.getScaledProgressSingularity());
+            context.drawTexture(TEXTURE, x + 62, y + 34, 176, 0, (int) handler.getScaledProgressArrow(), 16);
+        }
+    }
 
 
     @Override
