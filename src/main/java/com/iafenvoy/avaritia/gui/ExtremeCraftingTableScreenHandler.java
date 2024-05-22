@@ -1,5 +1,6 @@
 package com.iafenvoy.avaritia.gui;
 
+import com.iafenvoy.avaritia.recipe.ExtremeCraftingShapedRecipe;
 import com.iafenvoy.avaritia.registry.ModScreenHandlers;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -8,6 +9,7 @@ import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.slot.Slot;
+import net.minecraft.screen.slot.SlotActionType;
 import net.minecraft.text.Text;
 
 
@@ -42,7 +44,6 @@ public class ExtremeCraftingTableScreenHandler extends ScreenHandler {
 
         this.addSlot(new NeutronCollectorOutputSlot(inventory, 81, 202, 80));
     }
-
 
     @Override
     public ItemStack quickMove(PlayerEntity player, int invSlot) {
@@ -119,8 +120,19 @@ public class ExtremeCraftingTableScreenHandler extends ScreenHandler {
     private void addCraftingSlots(Inventory inventory) {
         for (int i = 0; i < 9; ++i) {
             for (int l = 0; l < 9; ++l) {
-                this.addSlot(new CraftingSlot(inventory, l + i * 9, 4 + l * 18, 8 + i * 18));
+                this.addSlot(new CraftingSlot(inventory, l + i * 9, 3 + l * 18, 8 + i * 18));
             }
         }
+    }
+
+    @Override
+    public void onSlotClick(int slotIndex, int button, SlotActionType actionType, PlayerEntity player) {
+        super.onSlotClick(slotIndex, button, actionType, player);
+        this.inventory.setStack(81, ItemStack.EMPTY);
+        for (ExtremeCraftingShapedRecipe recipe : ExtremeCraftingShapedRecipe.recipes)
+            if (recipe.matches(this.inventory)) {
+                this.inventory.setStack(81, recipe.getOutput());
+                break;
+            }
     }
 }

@@ -26,6 +26,8 @@ public class InfinityArmor extends ArmorItem {
         return false;
     }
 
+
+
     @Override
     public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
         if (world.isClient) {

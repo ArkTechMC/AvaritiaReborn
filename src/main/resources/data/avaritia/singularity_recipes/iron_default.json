@@ -1,0 +1,27 @@
+{
+  "result": "iron",
+  "ingredients": [
+    {
+      "type": "item",
+      "value": "minecraft:iron_ingot",
+      "amount": 1
+    },
+    {
+      "type": "block",
+      "value": "minecraft:iron_block",
+      "amount": 9
+    },
+    {
+      "type": "item_tag",
+      "value": "c:iron_ingots",
+      "amount": 1
+    },
+    {
+      "type": "block_tag",
+      "value": "c:iron_blocks",
+      "amount": 9
+    }
+  ],
+  "dependency": [
+  ]
+}

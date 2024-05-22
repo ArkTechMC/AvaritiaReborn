@@ -3,12 +3,13 @@ package com.iafenvoy.avaritia.item.block.entity;
 import com.iafenvoy.avaritia.gui.NeutroniumCompressorScreenHandler;
 import com.iafenvoy.avaritia.item.block.NeutroniumCompressorBlock;
 import com.iafenvoy.avaritia.registry.ModBlockEntities;
+import com.iafenvoy.avaritia.singularity.Singularity;
+import com.iafenvoy.avaritia.singularity.SingularityHelper;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventories;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
@@ -21,36 +22,34 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Objects;
-
 public class NeutroniumCompressorBlockEntity extends BlockEntity implements NamedScreenHandlerFactory, ImplementedInventory {
     private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(2, ItemStack.EMPTY);
-    //private static int tickCounter;
-
     protected final PropertyDelegate propertyDelegate;
     private int progress = 0;
-    private int maxProgress = 200;//7111 METER ESTE VALOR
-    private String material = "";
-
+    private Singularity material = Singularity.EMPTY;
 
     public NeutroniumCompressorBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.NEUTRONIUM_COMPRESSOR, pos, state);
         this.propertyDelegate = new PropertyDelegate() {
+            @Override
             public int get(int index) {
                 return switch (index) {
                     case 0 -> NeutroniumCompressorBlockEntity.this.progress;
-                    case 1 -> NeutroniumCompressorBlockEntity.this.maxProgress;
+                    case 1 -> NeutroniumCompressorBlockEntity.this.material.getCost();
                     default -> 0;
                 };
             }
 
+            @Override
             public void set(int index, int value) {
                 switch (index) {
                     case 0 -> NeutroniumCompressorBlockEntity.this.progress = value;
-                    case 1 -> NeutroniumCompressorBlockEntity.this.maxProgress = value;
+                    case 1 -> {
+                    }
                 }
             }
 
+            @Override
             public int size() {
                 return 2;
             }
@@ -65,9 +64,7 @@ public class NeutroniumCompressorBlockEntity extends BlockEntity implements Name
     @Override
     public Text getDisplayName() {
         return Text.translatable(getCachedState().getBlock().getTranslationKey());
-        //return new TranslatableText(getCachedState().getBlock().getTranslationKey());
     }
-    // For versions 1.18.2 and below, please use return new TranslatableText(getCachedState().getBlock().getTranslationKey());
 
     @Nullable
     @Override
@@ -75,12 +72,11 @@ public class NeutroniumCompressorBlockEntity extends BlockEntity implements Name
         return new NeutroniumCompressorScreenHandler(syncId, inv, this, this.propertyDelegate);
     }
 
-
-    @Override//adicionar isto para quando sair do mundo progresso estar guardado
+    @Override
     protected void writeNbt(NbtCompound nbt) {
         super.writeNbt(nbt);
         nbt.putInt("neutronium_compressor.progress", progress);
-        nbt.putString("neutronium_compressor.material", material);
+        nbt.putString("neutronium_compressor.material", material.getId());
         Inventories.writeNbt(nbt, inventory);
     }
 
@@ -88,7 +84,7 @@ public class NeutroniumCompressorBlockEntity extends BlockEntity implements Name
     public void readNbt(NbtCompound nbt) {
         Inventories.readNbt(nbt, inventory);
         progress = nbt.getInt("neutronium_compressor.progress");
-        material = nbt.getString("neutronium_compressor.material");
+        material = Singularity.MATERIALS.getOrDefault(nbt.getString("neutronium_compressor.material"), Singularity.EMPTY);
         super.readNbt(nbt);
     }
 
@@ -97,14 +93,15 @@ public class NeutroniumCompressorBlockEntity extends BlockEntity implements Name
     }
 
     private static void consumeItem(NeutroniumCompressorBlockEntity entity) {
-        if (entity.propertyDelegate.get(0) == 0) { //progress == 0
-            if (getMaterial(entity.inventory.get(0).getItem()) != null) {
-                entity.material = getMaterial(entity.inventory.get(0).getItem());
+        Singularity singularity = SingularityHelper.get(entity.inventory.get(0).getItem());
+        if (entity.propertyDelegate.get(0) == 0) {
+            if (singularity != Singularity.EMPTY) {
+                entity.material = singularity;
                 addToProgress(entity);
                 entity.inventory.get(0).decrement(1);
             }
         } else {
-            if (Objects.equals(getMaterial(entity.inventory.get(0).getItem()), entity.material)) {
+            if (singularity == entity.material) {
                 addToProgress(entity);
                 entity.inventory.get(0).decrement(1);
             }
@@ -112,46 +109,11 @@ public class NeutroniumCompressorBlockEntity extends BlockEntity implements Name
     }
 
     private static void addToProgress(NeutroniumCompressorBlockEntity entity) {
-        if (entity.inventory.get(0).getItem() == null) {
+        if (entity.inventory.get(0).getItem() == null)
             return;
-        }
-        if (entity.inventory.get(0).getItem() == Items.REDSTONE_BLOCK ||
-                entity.inventory.get(0).getItem() == Items.IRON_BLOCK ||
-                entity.inventory.get(0).getItem() == Items.LAPIS_BLOCK ||
-                entity.inventory.get(0).getItem() == Items.DIAMOND_BLOCK ||
-                entity.inventory.get(0).getItem() == Items.EMERALD_BLOCK ||
-                entity.inventory.get(0).getItem() == Items.GOLD_BLOCK ||
-                entity.inventory.get(0).getItem() == Items.QUARTZ_BLOCK) {
-            entity.propertyDelegate.set(0, entity.propertyDelegate.get(0) + 9);
-        } else {
-            entity.propertyDelegate.set(0, entity.propertyDelegate.get(0) + 1);
-        }
+        Singularity.SingularityIngredient ingredient = SingularityHelper.getIngredient(entity.inventory.get(0).getItem(), entity.material);
+        entity.propertyDelegate.set(0, entity.propertyDelegate.get(0) + ingredient.amount());
     }
-
-    private static String getMaterial(Item item) {
-        if (item == Items.IRON_BLOCK || item == Items.IRON_INGOT) {
-            return "IRON";
-        } else if (item == Items.REDSTONE_BLOCK || item == Items.REDSTONE) {
-            return "REDSTONE";
-        } else if (item == Items.GOLD_BLOCK || item == Items.GOLD_INGOT) {
-            return "GOLD";
-        } else if (item == Items.DIAMOND_BLOCK || item == Items.DIAMOND) {
-            return "DIAMOND";
-        } else if (item == Items.EMERALD_BLOCK || item == Items.EMERALD) {
-            return "EMERALD";
-        } else if (item == Items.LAPIS_BLOCK || item == Items.LAPIS_LAZULI) {
-            return "LAPIS";
-        } else if (item == Items.QUARTZ_BLOCK || item == Items.QUARTZ) {
-            return "QUARTZ";
-        } else {
-            return null;
-        }
-    }
-
-    private static Item getSingularityToCraft(NeutroniumCompressorBlockEntity entity) {
-        return null;
-    }
-
 
     public static void tick(World world, BlockPos pos, BlockState state, NeutroniumCompressorBlockEntity entity) {
         if (entity.inventory.get(0).getItem() != null && entity.inventory.get(0).getItem() != Items.AIR) {
@@ -159,38 +121,19 @@ public class NeutroniumCompressorBlockEntity extends BlockEntity implements Name
             consumeItem(entity);
         } else
             world.setBlockState(pos, state.with(NeutroniumCompressorBlock.ACTIVE, false));
-
-        if (entity.progress >= 200) {
+        if (entity.material != Singularity.EMPTY && entity.progress >= entity.material.getCost())
             craftItem(entity);
-        }
-
-
-
-        /*entity.propertyDelegate.set(0,entity.propertyDelegate.get(0)+1);
-        entity.progress++;
-        //markDirty(world, pos,state);
-        if(entity.progress >= entity.maxProgress) {
-            craftItem(entity);
-            entity.resetProgress();
-            //markDirty(world, pos, state);
-        }*/
-
-        //trabalhar na funcao percentagem para gerar o nuggetzitos
-        /*++tickCounter;
-        if(tickCounter > 80){//7111 METER ESTE VALOR
-            //METER ITEM PILE OF NEUTRONS
-            be.inventory.set(0,new ItemStack(Items.DIAMOND, 1 + be.inventory.get(0).getCount()));
-            tickCounter = 0;
-
-
-
-        }*/
     }
 
     private static void craftItem(NeutroniumCompressorBlockEntity entity) {
-//        entity.inventory.set(1, new ItemStack(getSingularityToCraft(entity), entity.inventory.get(1).getCount() + 1));
-//        entity.resetProgress();
-//        entity.material = "";
+        if (entity.inventory.get(1).getItem() == Items.AIR) {
+            entity.inventory.set(1, SingularityHelper.buildStack(entity.material));
+            entity.resetProgress();
+            entity.material = Singularity.EMPTY;
+        } else if (SingularityHelper.same(entity.inventory.get(1), entity.material)) {
+            entity.inventory.get(1).increment(1);
+            entity.resetProgress();
+            entity.material = Singularity.EMPTY;
+        }
     }
-
 }

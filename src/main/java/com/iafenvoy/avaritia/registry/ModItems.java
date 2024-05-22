@@ -8,6 +8,7 @@ import com.iafenvoy.annotationlib.annotation.registration.Link;
 import com.iafenvoy.annotationlib.api.IAnnotatedRegistryEntry;
 import com.iafenvoy.annotationlib.util.TargetType;
 import com.iafenvoy.avaritia.AvaritiaReborn;
+import com.iafenvoy.avaritia.item.SingularityItem;
 import com.iafenvoy.avaritia.item.armor.InfinityArmor;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.item.ArmorItem;
@@ -28,7 +29,7 @@ public class ModItems implements IAnnotatedRegistryEntry {
     @ItemReg(group = @TargetId("main"))//TODO
     public static final Item ENDEST_PEARL = new Item(new FabricItemSettings());
     @ItemReg(group = @TargetId("main"))//TODO
-    public static final Item SINGULARITY = new Item(new FabricItemSettings());
+    public static final Item SINGULARITY = new SingularityItem(new FabricItemSettings());
     @ItemReg(group = @TargetId("main"))
     public static final Item INFINITY_CATALYST = new Item(new FabricItemSettings().fireproof());
     @ItemReg(group = @TargetId("main"))

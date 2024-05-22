@@ -1,0 +1,94 @@
+package com.iafenvoy.avaritia.singularity;
+
+import com.iafenvoy.avaritia.util.IdUtil;
+import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.block.Block;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.registry.RegistryKeys;
+import net.minecraft.registry.tag.TagKey;
+import net.minecraft.util.Identifier;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+public class Singularity {
+    public static final Singularity EMPTY = new Singularity("", -1, 0);
+    public static final HashMap<String, Singularity> MATERIALS = new HashMap<>();
+    private final String id;
+    private final int color;
+    private final int cost;
+    private List<SingularityRecipe> recipes = new ArrayList<>();
+
+    public Singularity(String id, int color, int cost) {
+        this.id = id;
+        this.color = color;
+        this.cost = cost;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public int getColor() {
+        return color;
+    }
+
+    public int getCost() {
+        return cost;
+    }
+
+    public void addRecipe(SingularityRecipe recipe) {
+        if (this.recipes == null) this.recipes = new ArrayList<>();
+        this.recipes.add(recipe);
+    }
+
+    public SingularityIngredient checkBlock(Block block) {
+        if (this.recipes == null) this.recipes = new ArrayList<>();
+        for (SingularityRecipe recipe : this.recipes.stream().filter(SingularityRecipe::canUse).toList()) {
+            for (SingularityIngredient ingredient : recipe.ingredients) {
+                if (ingredient.type.equals("block")) {
+                    if (IdUtil.getId(block).equals(new Identifier(ingredient.value)))
+                        return ingredient;
+                } else if (ingredient.type.equals("block_tag")) {
+                    TagKey<Block> tagKey = TagKey.of(RegistryKeys.BLOCK, new Identifier(ingredient.value));
+                    if (block.getDefaultState().isIn(tagKey))
+                        return ingredient;
+                }
+            }
+        }
+        return null;
+    }
+
+    public SingularityIngredient checkItem(Item item) {
+        if (this.recipes == null) this.recipes = new ArrayList<>();
+        for (SingularityRecipe recipe : this.recipes.stream().filter(SingularityRecipe::canUse).toList()) {
+            for (SingularityIngredient ingredient : recipe.ingredients) {
+                if (ingredient.type.equals("item")) {
+                    if (IdUtil.getId(item).equals(new Identifier(ingredient.value)))
+                        return ingredient;
+                } else if (ingredient.type.equals("item_tag")) {
+                    TagKey<Item> tagKey = TagKey.of(RegistryKeys.ITEM, new Identifier(ingredient.value));
+                    if (new ItemStack(item).isIn(tagKey))
+                        return ingredient;
+                }
+            }
+        }
+        return null;
+    }
+
+    public boolean hasAvailable() {
+        return this.recipes.stream().anyMatch(SingularityRecipe::canUse);
+    }
+
+    public record SingularityRecipe(List<String> dependency, String result, List<SingularityIngredient> ingredients) {
+        public boolean canUse() {
+            return dependency.isEmpty() || dependency.stream().anyMatch(FabricLoader.getInstance()::isModLoaded);
+        }
+    }
+
+    public record SingularityIngredient(String type, String value, int amount) {
+        public static final SingularityIngredient EMPTY = new SingularityIngredient("", "", 0);
+    }
+}

@@ -2,6 +2,7 @@ package com.iafenvoy.avaritia.recipe;
 
 import com.google.gson.JsonObject;
 import com.iafenvoy.avaritia.util.RecipeUtil;
+import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
@@ -9,12 +10,14 @@ import net.minecraft.recipe.*;
 import net.minecraft.registry.DynamicRegistryManager;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.JsonHelper;
-import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.world.World;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class ExtremeCraftingShapedRecipe implements Recipe<SimpleInventory> {
+    public static final List<ExtremeCraftingShapedRecipe> recipes = new ArrayList<>();
     private final Identifier id;
     private final ItemStack output;
     private final Ingredient[][] recipeItems;
@@ -23,10 +26,15 @@ public class ExtremeCraftingShapedRecipe implements Recipe<SimpleInventory> {
         this.id = id;
         this.output = output;
         this.recipeItems = recipeItems;
+        recipes.add(this);
     }
 
     @Override
     public boolean matches(SimpleInventory inventory, World world) {
+        return this.matches(inventory);
+    }
+
+    public boolean matches(Inventory inventory) {
         for (int i = 0; i < 9 - this.recipeItems.length; i++)
             for (int j = 0; j < 9 - this.recipeItems[i].length; j++)
                 if (this.matches(inventory, i, j))
@@ -34,7 +42,7 @@ public class ExtremeCraftingShapedRecipe implements Recipe<SimpleInventory> {
         return false;
     }
 
-    private boolean matches(SimpleInventory inventory, int offsetX, int offsetY) {
+    private boolean matches(Inventory inventory, int offsetX, int offsetY) {
         for (int i = 0; i < this.recipeItems.length; i++)
             for (int j = 0; j < this.recipeItems[i].length; j++)
                 if (!this.recipeItems[i][j].test(inventory.getStack(i + offsetX + (j + offsetY) * 9)))
@@ -110,10 +118,10 @@ public class ExtremeCraftingShapedRecipe implements Recipe<SimpleInventory> {
 
         @Override
         public ExtremeCraftingShapedRecipe read(Identifier id, PacketByteBuf buf) {
-            Ingredient[][] inputs=new Ingredient[buf.readInt()][buf.readInt()];
+            Ingredient[][] inputs = new Ingredient[buf.readInt()][buf.readInt()];
             for (int i = 0; i < inputs.length; i++)
                 for (int j = 0; j < inputs[i].length; j++)
-                    inputs[i][j]=Ingredient.fromPacket(buf);
+                    inputs[i][j] = Ingredient.fromPacket(buf);
             ItemStack output = buf.readItemStack();
             return new ExtremeCraftingShapedRecipe(id, output, inputs);
         }
