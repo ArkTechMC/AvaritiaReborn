@@ -1,4 +1,4 @@
-package com.iafenvoy.avaritia.recipe;
+package com.iafenvoy.avaritia.data.recipe;
 
 import com.google.gson.*;
 import com.iafenvoy.avaritia.AvaritiaReborn;

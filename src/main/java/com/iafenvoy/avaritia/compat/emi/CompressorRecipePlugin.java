@@ -2,8 +2,8 @@ package com.iafenvoy.avaritia.compat.emi;
 
 import com.iafenvoy.avaritia.AvaritiaReborn;
 import com.iafenvoy.avaritia.registry.ModBlocks;
-import com.iafenvoy.avaritia.singularity.Singularity;
-import com.iafenvoy.avaritia.singularity.SingularityHelper;
+import com.iafenvoy.avaritia.data.singularity.Singularity;
+import com.iafenvoy.avaritia.data.singularity.SingularityHelper;
 import dev.emi.emi.api.EmiPlugin;
 import dev.emi.emi.api.EmiRegistry;
 import dev.emi.emi.api.recipe.EmiRecipe;

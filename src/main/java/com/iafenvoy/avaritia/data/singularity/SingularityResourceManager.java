@@ -1,4 +1,4 @@
-package com.iafenvoy.avaritia.singularity;
+package com.iafenvoy.avaritia.data.singularity;
 
 import com.google.gson.Gson;
 import com.iafenvoy.avaritia.AvaritiaReborn;

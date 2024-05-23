@@ -1,4 +1,4 @@
-package com.iafenvoy.avaritia.recipe;
+package com.iafenvoy.avaritia.data.recipe;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.Ingredient;

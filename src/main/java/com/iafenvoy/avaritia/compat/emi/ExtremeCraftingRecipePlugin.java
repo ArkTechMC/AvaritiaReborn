@@ -1,8 +1,8 @@
 package com.iafenvoy.avaritia.compat.emi;
 
 import com.iafenvoy.avaritia.AvaritiaReborn;
-import com.iafenvoy.avaritia.recipe.ExtremeCraftingShapedRecipe;
-import com.iafenvoy.avaritia.recipe.ReadOnlyInventoryHolder;
+import com.iafenvoy.avaritia.data.recipe.ExtremeCraftingShapedRecipe;
+import com.iafenvoy.avaritia.data.recipe.ReadOnlyInventoryHolder;
 import com.iafenvoy.avaritia.registry.ModBlocks;
 import dev.emi.emi.api.EmiPlugin;
 import dev.emi.emi.api.EmiRegistry;

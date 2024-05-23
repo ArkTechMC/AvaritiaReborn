@@ -1,4 +1,4 @@
-package com.iafenvoy.avaritia.singularity;
+package com.iafenvoy.avaritia.data.singularity;
 
 import com.iafenvoy.avaritia.registry.ModItems;
 import net.minecraft.block.Block;

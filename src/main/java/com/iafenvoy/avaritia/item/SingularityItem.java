@@ -1,7 +1,7 @@
 package com.iafenvoy.avaritia.item;
 
-import com.iafenvoy.avaritia.singularity.Singularity;
-import com.iafenvoy.avaritia.singularity.SingularityHelper;
+import com.iafenvoy.avaritia.data.singularity.Singularity;
+import com.iafenvoy.avaritia.data.singularity.SingularityHelper;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

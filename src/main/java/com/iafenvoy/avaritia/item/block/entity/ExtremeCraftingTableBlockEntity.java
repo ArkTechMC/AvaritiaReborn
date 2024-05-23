@@ -1,8 +1,8 @@
 package com.iafenvoy.avaritia.item.block.entity;
 
 import com.iafenvoy.avaritia.gui.ExtremeCraftingTableScreenHandler;
-import com.iafenvoy.avaritia.recipe.ExtremeCraftingShapedRecipe;
-import com.iafenvoy.avaritia.recipe.ReadOnlyInventoryHolder;
+import com.iafenvoy.avaritia.data.recipe.ExtremeCraftingShapedRecipe;
+import com.iafenvoy.avaritia.data.recipe.ReadOnlyInventoryHolder;
 import com.iafenvoy.avaritia.registry.ModBlockEntities;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;

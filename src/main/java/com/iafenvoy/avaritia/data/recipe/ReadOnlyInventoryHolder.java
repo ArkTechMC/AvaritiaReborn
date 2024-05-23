@@ -1,7 +1,6 @@
-package com.iafenvoy.avaritia.recipe;
+package com.iafenvoy.avaritia.data.recipe;
 
 import com.iafenvoy.avaritia.util.ISizeable;
-import net.minecraft.util.collection.DefaultedList;
 
 import java.util.ArrayList;
 import java.util.List;
