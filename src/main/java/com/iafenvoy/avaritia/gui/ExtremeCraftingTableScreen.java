@@ -10,7 +10,6 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
 public class ExtremeCraftingTableScreen extends HandledScreen<ExtremeCraftingTableScreenHandler> {
-    //A path to the gui texture. In this example we use the texture from the dispenser
     public static final Identifier TEXTURE = new Identifier(AvaritiaReborn.MOD_ID, "textures/gui/extreme_crafting.png");
 
 
@@ -19,7 +18,7 @@ public class ExtremeCraftingTableScreen extends HandledScreen<ExtremeCraftingTab
     }
 
     public ExtremeCraftingTableScreen(ExtremeCraftingTableScreenHandler handler, PlayerInventory inventory, Text title) {
-        super(handler, inventory, Text.of(""));
+        super(handler, inventory, title);
         this.backgroundWidth = 239;
         this.backgroundHeight = 256;
     }
@@ -30,17 +29,17 @@ public class ExtremeCraftingTableScreen extends HandledScreen<ExtremeCraftingTab
         RenderSystem.setShader(GameRenderer::getPositionProgram);
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
         RenderSystem.setShaderTexture(0, TEXTURE);
-        int x = (width - 256) / 2;
-        int y = (height - 256) / 2;
+        int x = (this.width - 256) / 2;
+        int y = (this.height - 256) / 2;
 
         context.drawTexture(TEXTURE,x,y,0,0,256,256);
     }
 
     @Override
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
-        renderBackground(context);
+        this.renderBackground(context);
         super.render(context, mouseX, mouseY, delta);
-        drawMouseoverTooltip(context, mouseX, mouseY);
+        this.drawMouseoverTooltip(context, mouseX, mouseY);
     }
 
     @Override
@@ -51,7 +50,6 @@ public class ExtremeCraftingTableScreen extends HandledScreen<ExtremeCraftingTab
     @Override
     protected void init() {
         super.init();
-        // Center the title
-        titleX = (backgroundWidth - textRenderer.getWidth(title)) / 2;
+        this.titleX = (this.backgroundWidth - this.textRenderer.getWidth(this.title)) / 2;
     }
 }

@@ -1,16 +1,18 @@
 package com.iafenvoy.avaritia.gui;
 
-import com.iafenvoy.avaritia.recipe.ExtremeCraftingShapedRecipe;
 import com.iafenvoy.avaritia.registry.ModScreenHandlers;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.inventory.Inventories;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.PacketByteBuf;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.slot.Slot;
 import net.minecraft.screen.slot.SlotActionType;
 import net.minecraft.text.Text;
+import net.minecraft.util.collection.DefaultedList;
 
 
 public class ExtremeCraftingTableScreenHandler extends ScreenHandler {
@@ -29,20 +31,12 @@ public class ExtremeCraftingTableScreenHandler extends ScreenHandler {
         super(ModScreenHandlers.EXTREME_CRAFTING_TABLE_SCREEN_HANDLER, syncId);
         checkSize(inventory, 1);
         this.inventory = inventory;
-
-        //some inventories do custom logic when a player opens it.
-        inventory.onOpen(playerInventory.player);
-
-        //This will place the slot in the correct locations for a 3x3 Grid. The slots exist on both server and client!
-        //This will not render the background of the slots however, this is the Screens job
-
-
-        //CRIAR CUSTOM CRAFTING SLOT EM VEZ DE SLOTS NORMAIS PARA INDEX SEREM MAIS FACEIS
-        addCraftingSlots(inventory);
-        addPlayerInventory(playerInventory);
-        addPlayerHotbar(playerInventory);
-
-        this.addSlot(new NeutronCollectorOutputSlot(inventory, 81, 202, 80));
+        this.inventory.onOpen(playerInventory.player);
+        this.addCraftingSlots(inventory);
+        this.addSlot(new OutputSlot(inventory, 81, 201, 80));
+        this.addPlayerInventory(playerInventory);
+        this.addPlayerHotbar(playerInventory);
+        this.inventory.markDirty();
     }
 
     @Override
@@ -97,11 +91,9 @@ public class ExtremeCraftingTableScreenHandler extends ScreenHandler {
 
 
     private void addPlayerInventory(PlayerInventory playerInventory) {
-        for (int i = 0; i < 3; ++i) {
-            for (int l = 0; l < 9; ++l) {
+        for (int i = 0; i < 3; ++i)
+            for (int l = 0; l < 9; ++l)
                 this.addSlot(new Slot(playerInventory, l + i * 9 + 9, 31 + l * 18, 174 + i * 18));
-            }
-        }
     }
 
     @Override
@@ -112,27 +104,20 @@ public class ExtremeCraftingTableScreenHandler extends ScreenHandler {
 
 
     private void addPlayerHotbar(PlayerInventory playerInventory) {
-        for (int i = 0; i < 9; ++i) {
+        for (int i = 0; i < 9; ++i)
             this.addSlot(new Slot(playerInventory, i, 31 + i * 18, 232));
-        }
     }
 
     private void addCraftingSlots(Inventory inventory) {
-        for (int i = 0; i < 9; ++i) {
-            for (int l = 0; l < 9; ++l) {
+        for (int i = 0; i < 9; ++i)
+            for (int l = 0; l < 9; ++l)
                 this.addSlot(new CraftingSlot(inventory, l + i * 9, 3 + l * 18, 8 + i * 18));
-            }
-        }
     }
 
     @Override
     public void onSlotClick(int slotIndex, int button, SlotActionType actionType, PlayerEntity player) {
         super.onSlotClick(slotIndex, button, actionType, player);
-        this.inventory.setStack(81, ItemStack.EMPTY);
-        for (ExtremeCraftingShapedRecipe recipe : ExtremeCraftingShapedRecipe.recipes)
-            if (recipe.matches(this.inventory)) {
-                this.inventory.setStack(81, recipe.getOutput());
-                break;
-            }
+        if (slotIndex >= 0)
+            this.slots.get(slotIndex).markDirty();
     }
 }

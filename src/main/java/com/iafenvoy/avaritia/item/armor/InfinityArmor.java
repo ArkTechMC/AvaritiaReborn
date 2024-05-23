@@ -31,9 +31,8 @@ public class InfinityArmor extends ArmorItem {
     @Override
     public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
         if (world.isClient) {
-            if (entity instanceof PlayerEntity) {
-                PlayerEntity player = (PlayerEntity) entity;
-                if (hasFullSuitOfArmorOn(player)) {
+            if (entity instanceof PlayerEntity player) {
+                if (this.hasFullSuitOfArmorOn(player)) {
                     player.getAbilities().allowFlying = true;
                     //player.setHealth(20);
                 } else {
@@ -46,10 +45,9 @@ public class InfinityArmor extends ArmorItem {
         }
 
         if (!world.isClient()) {
-            if (entity instanceof PlayerEntity) {
-                PlayerEntity player = (PlayerEntity) entity;
+            if (entity instanceof PlayerEntity player) {
 
-                if (hasFullSuitOfArmorOn(player)) {
+                if (this.hasFullSuitOfArmorOn(player)) {
                     //player.sendMessage(Text.literal("tas com o set de armadura"),true);
 
 

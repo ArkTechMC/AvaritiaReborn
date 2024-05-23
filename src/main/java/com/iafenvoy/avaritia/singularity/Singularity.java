@@ -27,16 +27,20 @@ public class Singularity {
         this.cost = cost;
     }
 
+    public List<SingularityRecipe> getRecipes() {
+        return this.recipes;
+    }
+
     public String getId() {
-        return id;
+        return this.id;
     }
 
     public int getColor() {
-        return color;
+        return this.color;
     }
 
     public int getCost() {
-        return cost;
+        return this.cost;
     }
 
     public void addRecipe(SingularityRecipe recipe) {
@@ -70,7 +74,7 @@ public class Singularity {
                         return ingredient;
                 } else if (ingredient.type.equals("item_tag")) {
                     TagKey<Item> tagKey = TagKey.of(RegistryKeys.ITEM, new Identifier(ingredient.value));
-                    if (new ItemStack(item).isIn(tagKey))
+                    if (item.getDefaultStack().isIn(tagKey))
                         return ingredient;
                 }
             }
@@ -84,7 +88,7 @@ public class Singularity {
 
     public record SingularityRecipe(List<String> dependency, String result, List<SingularityIngredient> ingredients) {
         public boolean canUse() {
-            return dependency.isEmpty() || dependency.stream().anyMatch(FabricLoader.getInstance()::isModLoaded);
+            return this.dependency.isEmpty() || this.dependency.stream().anyMatch(FabricLoader.getInstance()::isModLoaded);
         }
     }
 

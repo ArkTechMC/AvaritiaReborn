@@ -19,13 +19,13 @@
       "item": "avaritia:neutronium_ingot"
     },
     "E": {
-      "tag": "forge:end_stones"
+      "item": "minecraft:end_stone"
     },
     "S": {
-      "tag": "forge:nether_stars"
+      "item": "minecraft:nether_star"
     },
     "P": {
-      "tag": "forge:ender_pearls"
+      "item": "minecraft:ender_pearl"
     }
   }
 }

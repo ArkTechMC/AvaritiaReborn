@@ -1,6 +1,8 @@
 package com.iafenvoy.avaritia.item.block.entity;
 
 import com.iafenvoy.avaritia.gui.ExtremeCraftingTableScreenHandler;
+import com.iafenvoy.avaritia.recipe.ExtremeCraftingShapedRecipe;
+import com.iafenvoy.avaritia.recipe.ReadOnlyInventoryHolder;
 import com.iafenvoy.avaritia.registry.ModBlockEntities;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
@@ -27,30 +29,25 @@ public class ExtremeCraftingTableBlockEntity extends BlockEntity implements Name
 
     @Override
     public DefaultedList<ItemStack> getItems() {
-        return inventory;
+        return this.inventory;
     }
 
     @Override
     public Text getDisplayName() {
-        return Text.translatable(getCachedState().getBlock().getTranslationKey());
-        //return new TranslatableText(getCachedState().getBlock().getTranslationKey());
+        return Text.translatable(this.getCachedState().getBlock().getTranslationKey());
     }
-    // For versions 1.18.2 and below, please use return new TranslatableText(getCachedState().getBlock().getTranslationKey());
 
-    @Override//adicionar isto para quando sair do mundo progresso estar guardado
+    @Override
     protected void writeNbt(NbtCompound nbt) {
         super.writeNbt(nbt);
-        Inventories.writeNbt(nbt, inventory);
+        Inventories.writeNbt(nbt, this.inventory);
     }
 
     @Override
     public void readNbt(NbtCompound nbt) {
         super.readNbt(nbt);
-        Inventories.readNbt(nbt, inventory);
+        Inventories.readNbt(nbt, this.inventory);
     }
-
-
-
 
     @Nullable
     @Override
@@ -59,6 +56,14 @@ public class ExtremeCraftingTableBlockEntity extends BlockEntity implements Name
     }
 
     public static void tick(World world, BlockPos pos, BlockState state, ExtremeCraftingTableBlockEntity entity) {
-
+        entity.inventory.set(81, ItemStack.EMPTY);
+        ReadOnlyInventoryHolder<ItemStack> holder = new ReadOnlyInventoryHolder<>(entity.inventory, 9, 9) ;
+        for (ExtremeCraftingShapedRecipe recipe : ExtremeCraftingShapedRecipe.recipes.values()) {
+            if (recipe.matches(holder)) {
+                entity.inventory.set(81, recipe.output());
+                break;
+            }
+        }
+        entity.markDirty();
     }
 }

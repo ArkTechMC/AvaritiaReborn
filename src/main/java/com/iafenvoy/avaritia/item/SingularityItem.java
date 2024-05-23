@@ -22,5 +22,7 @@ public class SingularityItem extends Item {
         Singularity singularity = SingularityHelper.getFromStack(stack);
         if (singularity != Singularity.EMPTY)
             tooltip.add(Text.translatable("item.avaritia.singularity." + singularity.getId()));
+        else
+            tooltip.add(Text.literal("???"));
     }
 }

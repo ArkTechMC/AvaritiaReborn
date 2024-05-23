@@ -48,7 +48,7 @@ public class RecipeUtil {
                 if (symbols.containsKey(pattern[i].substring(j, j + 1)))
                     ingredients[i][j] = symbols.get(pattern[i].substring(j, j + 1));
                 else
-                    throw new IllegalArgumentException("Invalid Key: " + pattern[i].substring(j, j + 1));
+                    throw new IllegalArgumentException("Invalid Key: " + pattern[i].charAt(j));
             }
         return ingredients;
     }

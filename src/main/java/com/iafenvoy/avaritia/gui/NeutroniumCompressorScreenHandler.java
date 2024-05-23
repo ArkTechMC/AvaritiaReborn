@@ -37,8 +37,8 @@ public class NeutroniumCompressorScreenHandler extends ScreenHandler {
         //This will not render the background of the slots however, this is the Screens job
 
 
-        this.addSlot(new NeutroniumCompressorInputSlot(inventory, 0, 39, 35));
-        this.addSlot(new NeutronCollectorOutputSlot(inventory, 1, 117, 35));
+        this.addSlot(new CraftingSlot(inventory, 0, 39, 35));
+        this.addSlot(new OutputSlot(inventory, 1, 117, 35));
 
 
         //The player inventory
@@ -55,7 +55,7 @@ public class NeutroniumCompressorScreenHandler extends ScreenHandler {
         }
 
 
-        addProperties(delegate);
+        this.addProperties(delegate);
     }
 
 

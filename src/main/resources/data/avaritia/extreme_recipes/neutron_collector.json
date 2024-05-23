@@ -16,16 +16,16 @@
   ],
   "key": {
     "I": {
-      "tag": "forge:storage_blocks/iron"
+      "item": "minecraft:iron_block"
     },
     "X": {
       "item": "avaritia:crystal_matrix_ingot"
     },
     "R": {
-      "tag": "forge:storage_blocks/redstone"
+      "item": "minecraft:redstone_block"
     },
     "Q": {
-      "tag": "forge:storage_blocks/quartz"
+      "item": "minecraft:quartz_block"
     }
   }
 }

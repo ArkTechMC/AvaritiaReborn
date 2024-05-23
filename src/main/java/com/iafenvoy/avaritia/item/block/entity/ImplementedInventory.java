@@ -37,7 +37,7 @@ public interface ImplementedInventory extends Inventory {
      */
     @Override
     default int size() {
-        return getItems().size();
+        return this.getItems().size();
     }
 
     /**
@@ -47,8 +47,8 @@ public interface ImplementedInventory extends Inventory {
      */
     @Override
     default boolean isEmpty() {
-        for (int i = 0; i < size(); i++) {
-            ItemStack stack = getStack(i);
+        for (int i = 0; i < this.size(); i++) {
+            ItemStack stack = this.getStack(i);
             if (!stack.isEmpty()) {
                 return false;
             }
@@ -61,7 +61,7 @@ public interface ImplementedInventory extends Inventory {
      */
     @Override
     default ItemStack getStack(int slot) {
-        return getItems().get(slot);
+        return this.getItems().get(slot);
     }
 
     /**
@@ -73,9 +73,9 @@ public interface ImplementedInventory extends Inventory {
      */
     @Override
     default ItemStack removeStack(int slot, int count) {
-        ItemStack result = Inventories.splitStack(getItems(), slot, count);
+        ItemStack result = Inventories.splitStack(this.getItems(), slot, count);
         if (!result.isEmpty()) {
-            markDirty();
+            this.markDirty();
         }
         return result;
     }
@@ -87,7 +87,7 @@ public interface ImplementedInventory extends Inventory {
      */
     @Override
     default ItemStack removeStack(int slot) {
-        return Inventories.removeStack(getItems(), slot);
+        return Inventories.removeStack(this.getItems(), slot);
     }
 
     /**
@@ -100,7 +100,7 @@ public interface ImplementedInventory extends Inventory {
      */
     @Override
     default void setStack(int slot, ItemStack stack) {
-        getItems().set(slot, stack);
+        this.getItems().set(slot, stack);
         if (stack.getCount() > stack.getMaxCount()) {
             stack.setCount(stack.getMaxCount());
         }
@@ -111,7 +111,7 @@ public interface ImplementedInventory extends Inventory {
      */
     @Override
     default void clear() {
-        getItems().clear();
+        this.getItems().clear();
     }
 
     /**

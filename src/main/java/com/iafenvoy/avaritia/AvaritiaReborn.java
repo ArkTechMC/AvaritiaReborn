@@ -1,6 +1,6 @@
 package com.iafenvoy.avaritia;
 
-import com.iafenvoy.avaritia.registry.ModRecipes;
+import com.iafenvoy.avaritia.recipe.ExtremeRecipeResourceManager;
 import com.iafenvoy.avaritia.singularity.SingularityResourceManager;
 import com.mojang.logging.LogUtils;
 import net.fabricmc.api.ModInitializer;
@@ -14,7 +14,7 @@ public class AvaritiaReborn implements ModInitializer {
 
     @Override
     public void onInitialize() {
-        ModRecipes.register();
+        ResourceManagerHelper.get(ResourceType.SERVER_DATA).registerReloadListener(new ExtremeRecipeResourceManager());
         ResourceManagerHelper.get(ResourceType.SERVER_DATA).registerReloadListener(new SingularityResourceManager());
     }
 }

@@ -39,7 +39,7 @@ public class NeutronCollectorScreenHandler extends ScreenHandler {
         int m;
         int l;
 
-        this.addSlot(new NeutronCollectorOutputSlot(inventory, 0, 80, 35));
+        this.addSlot(new OutputSlot(inventory, 0, 80, 35));
         //The player inventory
         for (m = 0; m < 3; ++m) {
             for (l = 0; l < 9; ++l) {
@@ -52,7 +52,7 @@ public class NeutronCollectorScreenHandler extends ScreenHandler {
         }
 
 
-        addProperties(delegate);
+        this.addProperties(delegate);
     }
 
 

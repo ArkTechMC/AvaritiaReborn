@@ -63,12 +63,12 @@ public class NeutronCollectorBlockEntity extends BlockEntity implements NamedScr
 
     @Override
     public DefaultedList<ItemStack> getItems() {
-        return inventory;
+        return this.inventory;
     }
 
     @Override
     public Text getDisplayName() {
-        return Text.translatable(getCachedState().getBlock().getTranslationKey());
+        return Text.translatable(this.getCachedState().getBlock().getTranslationKey());
         //return new TranslatableText(getCachedState().getBlock().getTranslationKey());
     }
     // For versions 1.18.2 and below, please use return new TranslatableText(getCachedState().getBlock().getTranslationKey());
@@ -83,15 +83,15 @@ public class NeutronCollectorBlockEntity extends BlockEntity implements NamedScr
     @Override//adicionar isto para quando sair do mundo progresso estar guardado
     protected void writeNbt(NbtCompound nbt) {
         super.writeNbt(nbt);
-        Inventories.writeNbt(nbt, inventory);
-        nbt.putInt("neutron_collector.progress", progress);
+        Inventories.writeNbt(nbt, this.inventory);
+        nbt.putInt("neutron_collector.progress", this.progress);
     }
 
     @Override
     public void readNbt(NbtCompound nbt) {
-        Inventories.readNbt(nbt, inventory);
+        Inventories.readNbt(nbt, this.inventory);
         super.readNbt(nbt);
-        progress = nbt.getInt("neutron_collector.progress");
+        this.progress = nbt.getInt("neutron_collector.progress");
     }
 
     private void resetProgress() {

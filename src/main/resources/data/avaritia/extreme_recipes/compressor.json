@@ -22,7 +22,7 @@
       "item": "minecraft:hopper"
     },
     "I": {
-      "tag": "c:iron_blocks"
+      "item": "minecraft:iron_block"
     },
     "O": {
       "item": "avaritia:neutronium_block"
@@ -31,7 +31,7 @@
       "item": "avaritia:crystal_matrix_ingot"
     },
     "R": {
-      "tag": "c:redstone_blocks"
+      "item": "minecraft:redstone_block"
     }
   }
 }

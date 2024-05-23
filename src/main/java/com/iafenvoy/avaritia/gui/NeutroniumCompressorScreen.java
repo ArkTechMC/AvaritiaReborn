@@ -23,32 +23,32 @@ public class NeutroniumCompressorScreen extends HandledScreen<NeutroniumCompress
         RenderSystem.setShader(GameRenderer::getPositionProgram);
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
         RenderSystem.setShaderTexture(0, TEXTURE);
-        int x = (width - backgroundWidth) / 2;
-        int y = (height - backgroundHeight) / 2;
-        context.drawTexture(TEXTURE, x, y, 0, 0, backgroundWidth, backgroundHeight);
+        int x = (this.width - this.backgroundWidth) / 2;
+        int y = (this.height - this.backgroundHeight) / 2;
+        context.drawTexture(TEXTURE, x, y, 0, 0, this.backgroundWidth, this.backgroundHeight);
 
-        renderProgressArrow(context, x, y);
+        this.renderProgressArrow(context, x, y);
         context.getMatrices().push();
         context.getMatrices().translate(x, y, 0);
         //textRenderer.draw(matrices, "Progress: " + String.valueOf(handler.getScaledProgress()) + "%",50,60,0);
-        context.drawText(textRenderer, (int) handler.getCurrentProgress() + " / " + (int) handler.getMaxProgress(), 65, 60, 0, false);
+        context.drawText(this.textRenderer, (int) this.handler.getCurrentProgress() + " / " + (int) this.handler.getMaxProgress(), 65, 60, 0, false);
         context.getMatrices().pop();
 
     }
 
     private void renderProgressArrow(DrawContext context, int x, int y) {
-        if (handler.getCurrentProgress() > 0) {
-            context.drawTexture(TEXTURE, x + 90, y + 35, 176, 16, 18, handler.getScaledProgressSingularity());
-            context.drawTexture(TEXTURE, x + 62, y + 34, 176, 0, (int) handler.getScaledProgressArrow(), 16);
+        if (this.handler.getCurrentProgress() > 0) {
+            context.drawTexture(TEXTURE, x + 90, y + 35, 176, 16, 18, this.handler.getScaledProgressSingularity());
+            context.drawTexture(TEXTURE, x + 62, y + 34, 176, 0, this.handler.getScaledProgressArrow(), 16);
         }
     }
 
 
     @Override
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
-        renderBackground(context);
+        this.renderBackground(context);
         super.render(context, mouseX, mouseY, delta);
-        drawMouseoverTooltip(context, mouseX, mouseY);
+        this.drawMouseoverTooltip(context, mouseX, mouseY);
     }
 
 
@@ -56,6 +56,6 @@ public class NeutroniumCompressorScreen extends HandledScreen<NeutroniumCompress
     protected void init() {
         super.init();
         // Center the title
-        titleX = (backgroundWidth - textRenderer.getWidth(title)) / 2;
+        this.titleX = (this.backgroundWidth - this.textRenderer.getWidth(this.title)) / 2;
     }
 }

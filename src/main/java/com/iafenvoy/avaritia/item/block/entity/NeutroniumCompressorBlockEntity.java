@@ -58,12 +58,12 @@ public class NeutroniumCompressorBlockEntity extends BlockEntity implements Name
 
     @Override
     public DefaultedList<ItemStack> getItems() {
-        return inventory;
+        return this.inventory;
     }
 
     @Override
     public Text getDisplayName() {
-        return Text.translatable(getCachedState().getBlock().getTranslationKey());
+        return Text.translatable(this.getCachedState().getBlock().getTranslationKey());
     }
 
     @Nullable
@@ -75,16 +75,16 @@ public class NeutroniumCompressorBlockEntity extends BlockEntity implements Name
     @Override
     protected void writeNbt(NbtCompound nbt) {
         super.writeNbt(nbt);
-        nbt.putInt("neutronium_compressor.progress", progress);
-        nbt.putString("neutronium_compressor.material", material.getId());
-        Inventories.writeNbt(nbt, inventory);
+        nbt.putInt("neutronium_compressor.progress", this.progress);
+        nbt.putString("neutronium_compressor.material", this.material.getId());
+        Inventories.writeNbt(nbt, this.inventory);
     }
 
     @Override
     public void readNbt(NbtCompound nbt) {
-        Inventories.readNbt(nbt, inventory);
-        progress = nbt.getInt("neutronium_compressor.progress");
-        material = Singularity.MATERIALS.getOrDefault(nbt.getString("neutronium_compressor.material"), Singularity.EMPTY);
+        Inventories.readNbt(nbt, this.inventory);
+        this.progress = nbt.getInt("neutronium_compressor.progress");
+        this.material = Singularity.MATERIALS.getOrDefault(nbt.getString("neutronium_compressor.material"), Singularity.EMPTY);
         super.readNbt(nbt);
     }
 

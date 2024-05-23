@@ -1,8 +1,8 @@
 package com.iafenvoy.avaritia.compat.emi;
 
 import com.iafenvoy.avaritia.AvaritiaReborn;
-import com.iafenvoy.avaritia.gui.ExtremeCraftingTableScreenHandler;
 import com.iafenvoy.avaritia.recipe.ExtremeCraftingShapedRecipe;
+import com.iafenvoy.avaritia.recipe.ReadOnlyInventoryHolder;
 import com.iafenvoy.avaritia.registry.ModBlocks;
 import dev.emi.emi.api.EmiPlugin;
 import dev.emi.emi.api.EmiRegistry;
@@ -24,7 +24,7 @@ import java.util.List;
 
 @Environment(EnvType.CLIENT)
 public class ExtremeCraftingRecipePlugin implements EmiPlugin {
-    private static final Identifier EXTREME_CRAFTING = new Identifier(AvaritiaReborn.MOD_ID, ExtremeCraftingShapedRecipe.Serializer.ID);
+    private static final Identifier EXTREME_CRAFTING = new Identifier(AvaritiaReborn.MOD_ID, "extreme_crafting");
     private static final EmiTexture TEXTURE = new EmiTexture(new Identifier(AvaritiaReborn.MOD_ID, "textures/gui/extreme_crafting_jei.png"), 0, 0, 188, 162);
     private static final EmiStack WORKSTATION = EmiStack.of(ModBlocks.EXTREME_CRAFTING_TABLE);
     private static final EmiRecipeCategory EXTREME_CRAFTING_CATEGORY = new EmiRecipeCategory(EXTREME_CRAFTING, WORKSTATION, TEXTURE);
@@ -33,14 +33,14 @@ public class ExtremeCraftingRecipePlugin implements EmiPlugin {
     public void register(EmiRegistry registry) {
         registry.addCategory(EXTREME_CRAFTING_CATEGORY);
         registry.addWorkstation(EXTREME_CRAFTING_CATEGORY, WORKSTATION);
-        for (ExtremeCraftingShapedRecipe recipe : registry.getRecipeManager().listAllOfType(ExtremeCraftingShapedRecipe.Type.INSTANCE))
+        for (ExtremeCraftingShapedRecipe recipe : ExtremeCraftingShapedRecipe.recipes.values())
             registry.addRecipe(new EmiExtremeCraftingShapedRecipe(recipe));
     }
 
-    public record EmiExtremeCraftingShapedRecipe(Identifier id, Ingredient[][] inputs,
+    public record EmiExtremeCraftingShapedRecipe(Identifier id, ReadOnlyInventoryHolder<Ingredient> inputs,
                                                  ItemStack output) implements EmiRecipe {
         public EmiExtremeCraftingShapedRecipe(ExtremeCraftingShapedRecipe recipe) {
-            this(recipe.getId(), recipe.getRecipeItems(), recipe.getOutput());
+            this(recipe.id(), recipe.recipeItems(), recipe.output());
         }
 
         @Override
@@ -56,8 +56,8 @@ public class ExtremeCraftingRecipePlugin implements EmiPlugin {
         @Override
         public List<EmiIngredient> getInputs() {
             List<EmiIngredient> ingredients = new ArrayList<>();
-            for (Ingredient[] input : this.inputs)
-                for (Ingredient ingredient : input) ingredients.add(EmiIngredient.of(ingredient));
+            for (Ingredient ingredient : this.inputs.getObjects())
+                ingredients.add(EmiIngredient.of(ingredient));
             return ingredients;
         }
 
@@ -79,9 +79,9 @@ public class ExtremeCraftingRecipePlugin implements EmiPlugin {
         @Override
         public void addWidgets(WidgetHolder widgets) {
             widgets.addTexture(TEXTURE, 0, 0);
-            for (int i = 0; i < this.inputs.length; i++)
-                for (int j = 0; j < this.inputs[i].length; j++)
-                    widgets.addSlot(EmiIngredient.of(this.inputs[i][j]), j * 18+1, i * 18+1);
+            for (int i = 0; i < this.inputs.getHeight(); i++)
+                for (int j = 0; j < this.inputs.getWidth(); j++)
+                    widgets.addSlot(EmiIngredient.of(this.inputs.get(i * 9 + j)), j * 18 + 1, i * 18 + 1);
             widgets.addSlot(this.getOutputs().get(0), 163, 69).recipeContext(this);
         }
     }
