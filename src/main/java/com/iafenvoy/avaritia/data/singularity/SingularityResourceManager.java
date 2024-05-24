@@ -22,7 +22,7 @@ public class SingularityResourceManager implements SimpleSynchronousResourceRelo
     @Override
     public void reload(ResourceManager manager) {
         Singularity.MATERIALS.clear();
-        for (Map.Entry<Identifier, Resource> entry : manager.findResources("singularity", p -> p.getPath().endsWith(".json")).entrySet()) {
+        for (Map.Entry<Identifier, Resource> entry : manager.findResources(AvaritiaReborn.MOD_ID + "/singularity", p -> p.getPath().endsWith(".json")).entrySet()) {
             try (InputStream stream = entry.getValue().getInputStream()) {
                 Singularity singularity = GSON.fromJson(new InputStreamReader(stream), Singularity.class);
                 Singularity.MATERIALS.put(singularity.getId(), singularity);
@@ -30,7 +30,7 @@ public class SingularityResourceManager implements SimpleSynchronousResourceRelo
                 AvaritiaReborn.LOGGER.error("Error occurred while loading resource json " + entry.getKey().toString(), e);
             }
         }
-        for (Map.Entry<Identifier, Resource> entry : manager.findResources("singularity_recipes", p -> p.getPath().endsWith(".json")).entrySet()) {
+        for (Map.Entry<Identifier, Resource> entry : manager.findResources(AvaritiaReborn.MOD_ID + "/singularity_recipes", p -> p.getPath().endsWith(".json")).entrySet()) {
             try (InputStream stream = entry.getValue().getInputStream()) {
                 Singularity.SingularityRecipe recipe = GSON.fromJson(new InputStreamReader(stream), Singularity.SingularityRecipe.class);
                 if (Singularity.MATERIALS.containsKey(recipe.result()))

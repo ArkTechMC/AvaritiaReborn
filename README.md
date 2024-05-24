@@ -6,7 +6,7 @@ Avaritia Mod for Fabric. (Unofficial)
 
 This mod aims at adding all things in original Avaritia Mod.
 
-Known issues: Rendering problem with EMI. Bugs on crafting system.
+Known issues: Rendering problem with EMI. Incomplete dynamic recipes.
 
 ## FAQ
 
@@ -18,3 +18,6 @@ No.
 
 #### APIs?
 This mod will try to make a data driven system.
+
+#### Integration?
+Will use items in `Botania`, `Item Alchemy`, `Tech Reborn`, `Applied Energistics 2` and so on. Of course running like in the original mod.

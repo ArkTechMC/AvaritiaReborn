@@ -5,16 +5,24 @@ import net.minecraft.recipe.Ingredient;
 import net.minecraft.util.Identifier;
 
 import java.util.HashMap;
+import java.util.List;
 
-public record ExtremeCraftingShapedRecipe(Identifier id, ItemStack output,
-                                          ReadOnlyInventoryHolder<Ingredient> recipeItems) {
+public record ExtremeCraftingShapedRecipe(Identifier id, ItemStack output, List<List<Ingredient>> recipeItems) {
     public static final HashMap<Identifier, ExtremeCraftingShapedRecipe> recipes = new HashMap<>();
 
-    public boolean matches(ReadOnlyInventoryHolder<ItemStack> inventory) {
-        if (!this.recipeItems.sameSize(inventory)) return false;
-        for (int i = 0; i < this.recipeItems.size(); i++)
-            if (!this.recipeItems.get(i).test(inventory.get(i)))
-                return false;
+    public boolean matches(List<List<ItemStack>> inventory) {
+        if (!sameSize(inventory, this.recipeItems)) return false;
+        for (int i = 0; i < this.recipeItems.size(); i++) {
+            List<Ingredient> ing = this.recipeItems.get(i);
+            List<ItemStack> inv = inventory.get(i);
+            for (int j = 0; j < ing.size(); j++)
+                if (!ing.get(j).test(inv.get(j)))
+                    return false;
+        }
         return true;
+    }
+
+    private static <T, M> boolean sameSize(List<List<T>> first, List<List<M>> second) {
+        return first.size() == second.size() && first.get(0).size() == second.get(0).size();
     }
 }

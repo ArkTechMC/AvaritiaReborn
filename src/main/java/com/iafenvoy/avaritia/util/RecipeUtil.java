@@ -8,6 +8,8 @@ import com.google.gson.JsonSyntaxException;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.util.JsonHelper;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class RecipeUtil {
@@ -51,5 +53,19 @@ public class RecipeUtil {
                     throw new IllegalArgumentException("Invalid Key: " + pattern[i].charAt(j));
             }
         return ingredients;
+    }
+
+    public static <T> List<List<T>> toTable(T[][] array) {
+        List<List<T>> table = new ArrayList<>();
+        for (T[] ts : array) table.add(List.of(ts));
+        return table;
+    }
+
+    public static <T> List<List<T>> toTable(List<T> array, int width, int height) {
+        List<List<T>> table = new ArrayList<>();
+        for (int i = 0; i < height; i++) {
+            table.add(array.subList(i * width, (i + 1) * width));
+        }
+        return table;
     }
 }

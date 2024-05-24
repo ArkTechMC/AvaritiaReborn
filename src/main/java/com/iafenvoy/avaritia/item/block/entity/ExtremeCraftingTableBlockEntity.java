@@ -1,9 +1,9 @@
 package com.iafenvoy.avaritia.item.block.entity;
 
-import com.iafenvoy.avaritia.gui.ExtremeCraftingTableScreenHandler;
 import com.iafenvoy.avaritia.data.recipe.ExtremeCraftingShapedRecipe;
-import com.iafenvoy.avaritia.data.recipe.ReadOnlyInventoryHolder;
+import com.iafenvoy.avaritia.gui.ExtremeCraftingTableScreenHandler;
 import com.iafenvoy.avaritia.registry.ModBlockEntities;
+import com.iafenvoy.avaritia.util.RecipeUtil;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -18,6 +18,8 @@ import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 public class ExtremeCraftingTableBlockEntity extends BlockEntity implements NamedScreenHandlerFactory, ImplementedInventory {
     private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(82, ItemStack.EMPTY);
@@ -57,13 +59,12 @@ public class ExtremeCraftingTableBlockEntity extends BlockEntity implements Name
 
     public static void tick(World world, BlockPos pos, BlockState state, ExtremeCraftingTableBlockEntity entity) {
         entity.inventory.set(81, ItemStack.EMPTY);
-        ReadOnlyInventoryHolder<ItemStack> holder = new ReadOnlyInventoryHolder<>(entity.inventory, 9, 9) ;
-        for (ExtremeCraftingShapedRecipe recipe : ExtremeCraftingShapedRecipe.recipes.values()) {
-            if (recipe.matches(holder)) {
+        List<List<ItemStack>> table = RecipeUtil.toTable(entity.inventory, 9, 9);
+        for (ExtremeCraftingShapedRecipe recipe : ExtremeCraftingShapedRecipe.recipes.values())
+            if (recipe.matches(table)) {
                 entity.inventory.set(81, recipe.output());
                 break;
             }
-        }
         entity.markDirty();
     }
 }

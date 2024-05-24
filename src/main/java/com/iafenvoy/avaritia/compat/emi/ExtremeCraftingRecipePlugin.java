@@ -2,7 +2,6 @@ package com.iafenvoy.avaritia.compat.emi;
 
 import com.iafenvoy.avaritia.AvaritiaReborn;
 import com.iafenvoy.avaritia.data.recipe.ExtremeCraftingShapedRecipe;
-import com.iafenvoy.avaritia.data.recipe.ReadOnlyInventoryHolder;
 import com.iafenvoy.avaritia.registry.ModBlocks;
 import dev.emi.emi.api.EmiPlugin;
 import dev.emi.emi.api.EmiRegistry;
@@ -37,7 +36,7 @@ public class ExtremeCraftingRecipePlugin implements EmiPlugin {
             registry.addRecipe(new EmiExtremeCraftingShapedRecipe(recipe));
     }
 
-    public record EmiExtremeCraftingShapedRecipe(Identifier id, ReadOnlyInventoryHolder<Ingredient> inputs,
+    public record EmiExtremeCraftingShapedRecipe(Identifier id, List<List<Ingredient>> inputs,
                                                  ItemStack output) implements EmiRecipe {
         public EmiExtremeCraftingShapedRecipe(ExtremeCraftingShapedRecipe recipe) {
             this(recipe.id(), recipe.recipeItems(), recipe.output());
@@ -56,8 +55,9 @@ public class ExtremeCraftingRecipePlugin implements EmiPlugin {
         @Override
         public List<EmiIngredient> getInputs() {
             List<EmiIngredient> ingredients = new ArrayList<>();
-            for (Ingredient ingredient : this.inputs.getObjects())
-                ingredients.add(EmiIngredient.of(ingredient));
+            for (List<Ingredient> ingredient : this.inputs)
+                for (Ingredient i : ingredient)
+                    ingredients.add(EmiIngredient.of(i));
             return ingredients;
         }
 
@@ -79,9 +79,11 @@ public class ExtremeCraftingRecipePlugin implements EmiPlugin {
         @Override
         public void addWidgets(WidgetHolder widgets) {
             widgets.addTexture(TEXTURE, 0, 0);
-            for (int i = 0; i < this.inputs.getHeight(); i++)
-                for (int j = 0; j < this.inputs.getWidth(); j++)
-                    widgets.addSlot(EmiIngredient.of(this.inputs.get(i * 9 + j)), j * 18 + 1, i * 18 + 1);
+            for (int i = 0; i < this.inputs.size(); i++) {
+                List<Ingredient> ingredients = this.inputs.get(i);
+                for (int j = 0; j < ingredients.size(); j++)
+                    widgets.addSlot(EmiIngredient.of(ingredients.get(j)), j * 18 + 1, i * 18 + 1);
+            }
             widgets.addSlot(this.getOutputs().get(0), 163, 69).recipeContext(this);
         }
     }

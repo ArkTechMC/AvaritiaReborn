@@ -1,6 +1,9 @@
 package com.iafenvoy.avaritia.data.recipe;
 
-import com.google.gson.*;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.JsonSyntaxException;
 import com.iafenvoy.avaritia.AvaritiaReborn;
 import com.iafenvoy.avaritia.util.RecipeUtil;
 import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
@@ -17,8 +20,6 @@ import java.io.InputStreamReader;
 import java.util.Map;
 
 public class ExtremeRecipeResourceManager implements SimpleSynchronousResourceReloadListener {
-    private static final Gson GSON = new Gson();
-
     @Override
     public Identifier getFabricId() {
         return new Identifier(AvaritiaReborn.MOD_ID, "extreme_recipe");
@@ -27,7 +28,7 @@ public class ExtremeRecipeResourceManager implements SimpleSynchronousResourceRe
     @Override
     public void reload(ResourceManager manager) {
         ExtremeCraftingShapedRecipe.recipes.clear();
-        for (Map.Entry<Identifier, Resource> entry : manager.findResources("extreme_recipes", p -> p.getPath().endsWith(".json")).entrySet()) {
+        for (Map.Entry<Identifier, Resource> entry : manager.findResources(AvaritiaReborn.MOD_ID + "/extreme_recipes", p -> p.getPath().endsWith(".json")).entrySet()) {
             try (InputStream stream = entry.getValue().getInputStream()) {
                 JsonElement element = JsonParser.parseReader(new InputStreamReader(stream));
                 if (!element.isJsonObject())
@@ -46,6 +47,6 @@ public class ExtremeRecipeResourceManager implements SimpleSynchronousResourceRe
         Map<String, Ingredient> map = RecipeUtil.readSymbols(JsonHelper.getObject(json, "key"));
         String[] strings = RecipeUtil.getPattern(JsonHelper.getArray(json, "pattern"), 9, 9);
         Ingredient[][] inputs = RecipeUtil.replacePattern(strings, map);
-        return new ExtremeCraftingShapedRecipe(id, output, new ReadOnlyInventoryHolder<>(inputs));
+        return new ExtremeCraftingShapedRecipe(id, output, RecipeUtil.toTable(inputs));
     }
 }
