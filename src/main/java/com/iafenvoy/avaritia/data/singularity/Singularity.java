@@ -13,29 +13,24 @@ import java.util.HashMap;
 import java.util.List;
 
 public class Singularity {
-    public static final Singularity EMPTY = new Singularity("", -1, 0);
+    public static final Singularity EMPTY = new Singularity("", 0);
     public static final HashMap<String, Singularity> MATERIALS = new HashMap<>();
     private final String id;
-    private final int color;
     private final int cost;
     private List<SingularityRecipe> recipes = new ArrayList<>();
 
-    public Singularity(String id, int color, int cost) {
+    public Singularity(String id, int cost) {
         this.id = id;
-        this.color = color;
         this.cost = cost;
     }
 
     public List<SingularityRecipe> getRecipes() {
+        if (this.recipes == null) this.recipes = new ArrayList<>();
         return this.recipes;
     }
 
     public String getId() {
         return this.id;
-    }
-
-    public int getColor() {
-        return this.color;
     }
 
     public int getCost() {

@@ -1,6 +1,8 @@
 package com.iafenvoy.avaritia.data.singularity;
 
 import com.iafenvoy.avaritia.registry.ModItems;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -12,8 +14,10 @@ import java.util.Map;
 public class SingularityHelper {
     private static final String TYPE_KEY = "singularity_type";
 
+    @Environment(EnvType.CLIENT)
     public static int getColorFromStack(ItemStack stack) {
-        return getFromStack(stack).getColor();
+        String type = stack.getOrCreateNbt().getString(TYPE_KEY);
+        return SingularityColor.COLOR_MAP.getOrDefault(type, SingularityColor.EMPTY).color().get();
     }
 
     public static boolean same(ItemStack stack, Singularity singularity) {

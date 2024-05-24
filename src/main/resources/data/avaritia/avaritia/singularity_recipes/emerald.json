@@ -1,0 +1,17 @@
+{
+  "result": "emerald",
+  "ingredients": [
+    {
+      "type": "item",
+      "value": "minecraft:emerald",
+      "amount": 1
+    },
+    {
+      "type": "block",
+      "value": "minecraft:emerald_block",
+      "amount": 9
+    }
+  ],
+  "dependency": [
+  ]
+}

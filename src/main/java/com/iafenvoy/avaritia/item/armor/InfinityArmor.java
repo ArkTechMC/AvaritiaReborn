@@ -26,8 +26,6 @@ public class InfinityArmor extends ArmorItem {
         return false;
     }
 
-
-
     @Override
     public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
         if (world.isClient) {
@@ -48,9 +46,6 @@ public class InfinityArmor extends ArmorItem {
             if (entity instanceof PlayerEntity player) {
 
                 if (this.hasFullSuitOfArmorOn(player)) {
-                    //player.sendMessage(Text.literal("tas com o set de armadura"),true);
-
-
                     if (player.getStatusEffect(StatusEffects.NIGHT_VISION) == null || Objects.requireNonNull(player.getStatusEffect(StatusEffects.NIGHT_VISION)).getDuration() < 250) {
                         player.addStatusEffect(new StatusEffectInstance(StatusEffects.NIGHT_VISION, 300, 4));
                     }
@@ -58,70 +53,46 @@ public class InfinityArmor extends ArmorItem {
                     if (player.getStatusEffect(StatusEffects.REGENERATION) == null || Objects.requireNonNull(player.getStatusEffect(StatusEffects.REGENERATION)).getDuration() < 250) {
                         player.addStatusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 300, 4));
                     }
-
-
                 } else {
-                    //player.sendMessage(Text.literal("nao estas com o set"),true);
-
                     //player.removeStatusEffect(StatusEffects.FIRE_RESISTANCE);
                     //player.removeStatusEffect(StatusEffects.NIGHT_VISION);
                     //player.removeStatusEffect(StatusEffects.SPEED);
                     //player.removeStatusEffect(StatusEffects.JUMP_BOOST);
                     //player.removeStatusEffect(StatusEffects.FIRE_RESISTANCE);
-
                 }
 
-                if (player.getInventory().getArmorStack(3).getItem().equals(ModItems.INFINITY_HELMET)) {
-                    //efeitos do capacete
-                    if (player.getHungerManager().getFoodLevel() != 20) {
+                if (player.getInventory().getArmorStack(3).getItem().equals(ModItems.INFINITY_HELMET))
+                    if (player.getHungerManager().getFoodLevel() != 20)
                         player.getHungerManager().setFoodLevel(20);
-                    }
-                }
 
                 if (player.getInventory().getArmorStack(2).getItem().equals(ModItems.INFINITY_CHESTPLATE)) {
-                    //efeitos da chestplate
-                    if (player.getStatusEffect(StatusEffects.POISON) != null) {
+                    if (player.getStatusEffect(StatusEffects.POISON) != null)
                         player.removeStatusEffect(StatusEffects.POISON);
-                    }
-                    if (player.getStatusEffect(StatusEffects.WEAKNESS) != null) {
+                    if (player.getStatusEffect(StatusEffects.WEAKNESS) != null)
                         player.removeStatusEffect(StatusEffects.WEAKNESS);
-                    }
-                    if (player.getStatusEffect(StatusEffects.SLOWNESS) != null) {
+                    if (player.getStatusEffect(StatusEffects.SLOWNESS) != null)
                         player.removeStatusEffect(StatusEffects.SLOWNESS);
-                    }
-                    if (player.getStatusEffect(StatusEffects.BLINDNESS) != null) {
+                    if (player.getStatusEffect(StatusEffects.BLINDNESS) != null)
                         player.removeStatusEffect(StatusEffects.BLINDNESS);
-                    }
-                    if (player.getStatusEffect(StatusEffects.HUNGER) != null) {
+                    if (player.getStatusEffect(StatusEffects.HUNGER) != null)
                         player.removeStatusEffect(StatusEffects.HUNGER);
-                    }
-                    if (player.getStatusEffect(StatusEffects.NAUSEA) != null) {
+                    if (player.getStatusEffect(StatusEffects.NAUSEA) != null)
                         player.removeStatusEffect(StatusEffects.NAUSEA);
-                    }
-                    if (player.getStatusEffect(StatusEffects.MINING_FATIGUE) != null) {
+                    if (player.getStatusEffect(StatusEffects.MINING_FATIGUE) != null)
                         player.removeStatusEffect(StatusEffects.MINING_FATIGUE);
-                    }
-                    if (player.getStatusEffect(StatusEffects.WITHER) != null) {
+                    if (player.getStatusEffect(StatusEffects.WITHER) != null)
                         player.removeStatusEffect(StatusEffects.WITHER);
-                    }
                 }
 
-                if (player.getInventory().getArmorStack(1).getItem().equals(ModItems.INFINITY_LEGS)) {
-                    //efeitos das leggings
-                    if (player.getStatusEffect(StatusEffects.FIRE_RESISTANCE) == null || Objects.requireNonNull(player.getStatusEffect(StatusEffects.FIRE_RESISTANCE)).getDuration() < 250) {
+                if (player.getInventory().getArmorStack(1).getItem().equals(ModItems.INFINITY_LEGS))
+                    if (player.getStatusEffect(StatusEffects.FIRE_RESISTANCE) == null || Objects.requireNonNull(player.getStatusEffect(StatusEffects.FIRE_RESISTANCE)).getDuration() < 250)
                         player.addStatusEffect(new StatusEffectInstance(StatusEffects.FIRE_RESISTANCE, 300, 99));
-                    }
-                }
 
                 if (player.getInventory().getArmorStack(0).getItem().equals(ModItems.INFINITY_BOOTS)) {
-                    //efeitos das botas
-                    if (player.getStatusEffect(StatusEffects.JUMP_BOOST) == null || Objects.requireNonNull(player.getStatusEffect(StatusEffects.JUMP_BOOST)).getDuration() < 250) {
+                    if (player.getStatusEffect(StatusEffects.JUMP_BOOST) == null || Objects.requireNonNull(player.getStatusEffect(StatusEffects.JUMP_BOOST)).getDuration() < 250)
                         player.addStatusEffect(new StatusEffectInstance(StatusEffects.JUMP_BOOST, 300, 4));
-                        //corrigir fall damage
-                    }
-                    if (player.getStatusEffect(StatusEffects.SPEED) == null || Objects.requireNonNull(player.getStatusEffect(StatusEffects.SPEED)).getDuration() < 250) {
+                    if (player.getStatusEffect(StatusEffects.SPEED) == null || Objects.requireNonNull(player.getStatusEffect(StatusEffects.SPEED)).getDuration() < 250)
                         player.addStatusEffect(new StatusEffectInstance(StatusEffects.SPEED, 300, 4));
-                    }
                 }
 
             }

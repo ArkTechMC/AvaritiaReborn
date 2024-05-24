@@ -20,14 +20,10 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 public class NeutronCollectorBlockEntity extends BlockEntity implements NamedScreenHandlerFactory, ImplementedInventory {
-    private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(1, ItemStack.EMPTY);
-    //private static int tickCounter;
-
     protected final PropertyDelegate propertyDelegate;
+    private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(1, ItemStack.EMPTY);
     private int progress = 0;
-    //private int maxProgress = 500;//7111 METER ESTE VALOR
     private int maxProgress = 7111;
-
 
     public NeutronCollectorBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.NEUTRON_COLLECTOR, pos, state);
@@ -60,6 +56,22 @@ public class NeutronCollectorBlockEntity extends BlockEntity implements NamedScr
         };
     }
 
+    public static void tick(World world, BlockPos pos, BlockState state, NeutronCollectorBlockEntity entity) {
+        if (world.isClient()) {
+            return;
+        }
+        entity.propertyDelegate.set(0, entity.propertyDelegate.get(0) + 1);
+        entity.progress++;
+        if (entity.progress >= entity.maxProgress) {
+            craftItem(entity);
+            entity.resetProgress();
+        }
+    }
+
+    private static void craftItem(NeutronCollectorBlockEntity entity) {
+        entity.inventory.set(0, new ItemStack(ModItems.NEUTRON_PILE, 1 + entity.inventory.get(0).getCount()));
+        entity.resetProgress();
+    }
 
     @Override
     public DefaultedList<ItemStack> getItems() {
@@ -69,9 +81,7 @@ public class NeutronCollectorBlockEntity extends BlockEntity implements NamedScr
     @Override
     public Text getDisplayName() {
         return Text.translatable(this.getCachedState().getBlock().getTranslationKey());
-        //return new TranslatableText(getCachedState().getBlock().getTranslationKey());
     }
-    // For versions 1.18.2 and below, please use return new TranslatableText(getCachedState().getBlock().getTranslationKey());
 
     @Nullable
     @Override
@@ -79,8 +89,7 @@ public class NeutronCollectorBlockEntity extends BlockEntity implements NamedScr
         return new NeutronCollectorScreenHandler(syncId, inv, this, this.propertyDelegate);
     }
 
-
-    @Override//adicionar isto para quando sair do mundo progresso estar guardado
+    @Override
     protected void writeNbt(NbtCompound nbt) {
         super.writeNbt(nbt);
         Inventories.writeNbt(nbt, this.inventory);
@@ -97,36 +106,4 @@ public class NeutronCollectorBlockEntity extends BlockEntity implements NamedScr
     private void resetProgress() {
         this.progress = 0;
     }
-
-    public static void tick(World world, BlockPos pos, BlockState state, NeutronCollectorBlockEntity entity) {
-        if (world.isClient()) {
-            return;
-        }
-        entity.propertyDelegate.set(0, entity.propertyDelegate.get(0) + 1);
-        entity.progress++;
-        //markDirty(world, pos,state);
-        if (entity.progress >= entity.maxProgress) {
-            craftItem(entity);
-            entity.resetProgress();
-            //markDirty(world, pos, state);
-        }
-
-
-        //trabalhar na funcao percentagem para gerar o nuggetzitos
-        /*++tickCounter;
-        if(tickCounter > 80){//7111 METER ESTE VALOR
-            //METER ITEM PILE OF NEUTRONS
-            be.inventory.set(0,new ItemStack(Items.DIAMOND, 1 + be.inventory.get(0).getCount()));
-            tickCounter = 0;
-
-
-
-        }*/
-    }
-
-    private static void craftItem(NeutronCollectorBlockEntity entity) {
-        entity.inventory.set(0, new ItemStack(ModItems.NEUTRON_PILE, 1 + entity.inventory.get(0).getCount()));
-        entity.resetProgress();
-    }
-
 }

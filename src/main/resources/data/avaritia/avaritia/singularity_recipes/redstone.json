@@ -1,0 +1,17 @@
+{
+  "result": "redstone",
+  "ingredients": [
+    {
+      "type": "item",
+      "value": "minecraft:redstone",
+      "amount": 1
+    },
+    {
+      "type": "block",
+      "value": "minecraft:redstone_block",
+      "amount": 9
+    }
+  ],
+  "dependency": [
+  ]
+}

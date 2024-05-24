@@ -10,6 +10,10 @@ import java.util.List;
 public record ExtremeCraftingShapedRecipe(Identifier id, ItemStack output, List<List<Ingredient>> recipeItems) {
     public static final HashMap<Identifier, ExtremeCraftingShapedRecipe> recipes = new HashMap<>();
 
+    private static <T, M> boolean sameSize(List<List<T>> first, List<List<M>> second) {
+        return first.size() == second.size() && first.get(0).size() == second.get(0).size();
+    }
+
     public boolean matches(List<List<ItemStack>> inventory) {
         if (!sameSize(inventory, this.recipeItems)) return false;
         for (int i = 0; i < this.recipeItems.size(); i++) {
@@ -20,9 +24,5 @@ public record ExtremeCraftingShapedRecipe(Identifier id, ItemStack output, List<
                     return false;
         }
         return true;
-    }
-
-    private static <T, M> boolean sameSize(List<List<T>> first, List<List<M>> second) {
-        return first.size() == second.size() && first.get(0).size() == second.get(0).size();
     }
 }

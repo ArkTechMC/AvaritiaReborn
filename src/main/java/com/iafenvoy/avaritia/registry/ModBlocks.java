@@ -21,6 +21,6 @@ public class ModBlocks implements IAnnotatedRegistryEntry {
     public static final Block NEUTRONIUM_BLOCK = new NeutroniumCompressorBlock(FabricBlockSettings.create());
     public static final Block COMPRESSED_CRAFTING_TABLE = new CraftingTableBlock(FabricBlockSettings.create());
     public static final Block DOUBLE_COMPRESSED_CRAFTING_TABLE = new CraftingTableBlock(FabricBlockSettings.create());
-    public static final Block CRYSTAL_MATRIX_BLOCK=new Block(FabricBlockSettings.create());
-    public static final Block INFINITY_BLOCK=new Block(FabricBlockSettings.create());
+    public static final Block CRYSTAL_MATRIX_BLOCK = new Block(FabricBlockSettings.create());
+    public static final Block INFINITY_BLOCK = new Block(FabricBlockSettings.create());
 }

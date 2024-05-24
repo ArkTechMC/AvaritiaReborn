@@ -73,7 +73,7 @@ public class ExtremeCraftingRecipePlugin implements EmiPlugin {
 
         @Override
         public int getDisplayHeight() {
-            return 400;
+            return 165;
         }
 
         @Override
@@ -84,7 +84,7 @@ public class ExtremeCraftingRecipePlugin implements EmiPlugin {
                 for (int j = 0; j < ingredients.size(); j++)
                     widgets.addSlot(EmiIngredient.of(ingredients.get(j)), j * 18 + 1, i * 18 + 1);
             }
-            widgets.addSlot(this.getOutputs().get(0), 163, 69).recipeContext(this);
+            widgets.addSlot(this.getOutputs().get(0), 167, 73).recipeContext(this);
         }
     }
 }

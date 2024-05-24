@@ -2,6 +2,8 @@ package com.iafenvoy.avaritia.gui;
 
 import com.iafenvoy.avaritia.AvaritiaReborn;
 import com.mojang.blaze3d.systems.RenderSystem;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.render.GameRenderer;
@@ -9,10 +11,9 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
+@Environment(EnvType.CLIENT)
 public class NeutronCollectorScreen extends HandledScreen<NeutronCollectorScreenHandler> {
-    //A path to the gui texture. In this example we use the texture from the dispenser
     private static final Identifier TEXTURE = new Identifier(AvaritiaReborn.MOD_ID, "textures/gui/neutron_collector.png");
-
 
     public NeutronCollectorScreen(NeutronCollectorScreenHandler handler, PlayerInventory inventory, Text title) {
         super(handler, inventory, title);
@@ -21,7 +22,6 @@ public class NeutronCollectorScreen extends HandledScreen<NeutronCollectorScreen
     @Override
     protected void drawBackground(DrawContext context, float delta, int mouseX, int mouseY) {
         String formattedString = String.format("%.02f", this.handler.getScaledProgress());
-
         RenderSystem.setShader(GameRenderer::getPositionProgram);
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
         RenderSystem.setShaderTexture(0, TEXTURE);
@@ -43,11 +43,9 @@ public class NeutronCollectorScreen extends HandledScreen<NeutronCollectorScreen
         this.drawMouseoverTooltip(context, mouseX, mouseY);
     }
 
-
     @Override
     protected void init() {
         super.init();
-        // Center the title
         this.titleX = (this.backgroundWidth - this.textRenderer.getWidth(this.title)) / 2;
     }
 }

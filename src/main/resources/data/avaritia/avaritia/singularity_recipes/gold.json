@@ -1,0 +1,17 @@
+{
+  "result": "gold",
+  "ingredients": [
+    {
+      "type": "item",
+      "value": "minecraft:gold_ingot",
+      "amount": 1
+    },
+    {
+      "type": "block",
+      "value": "minecraft:gold_block",
+      "amount": 9
+    }
+  ],
+  "dependency": [
+  ]
+}

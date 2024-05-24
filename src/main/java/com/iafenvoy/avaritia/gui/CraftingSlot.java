@@ -13,5 +13,4 @@ public class CraftingSlot extends Slot {
     public boolean canInsert(ItemStack stack) {
         return true;
     }
-
 }

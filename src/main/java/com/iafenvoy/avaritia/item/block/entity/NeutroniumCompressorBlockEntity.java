@@ -1,10 +1,10 @@
 package com.iafenvoy.avaritia.item.block.entity;
 
+import com.iafenvoy.avaritia.data.singularity.Singularity;
+import com.iafenvoy.avaritia.data.singularity.SingularityHelper;
 import com.iafenvoy.avaritia.gui.NeutroniumCompressorScreenHandler;
 import com.iafenvoy.avaritia.item.block.NeutroniumCompressorBlock;
 import com.iafenvoy.avaritia.registry.ModBlockEntities;
-import com.iafenvoy.avaritia.data.singularity.Singularity;
-import com.iafenvoy.avaritia.data.singularity.SingularityHelper;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -23,8 +23,8 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 public class NeutroniumCompressorBlockEntity extends BlockEntity implements NamedScreenHandlerFactory, ImplementedInventory {
-    private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(2, ItemStack.EMPTY);
     protected final PropertyDelegate propertyDelegate;
+    private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(2, ItemStack.EMPTY);
     private int progress = 0;
     private Singularity material = Singularity.EMPTY;
 
@@ -54,42 +54,6 @@ public class NeutroniumCompressorBlockEntity extends BlockEntity implements Name
                 return 2;
             }
         };
-    }
-
-    @Override
-    public DefaultedList<ItemStack> getItems() {
-        return this.inventory;
-    }
-
-    @Override
-    public Text getDisplayName() {
-        return Text.translatable(this.getCachedState().getBlock().getTranslationKey());
-    }
-
-    @Nullable
-    @Override
-    public ScreenHandler createMenu(int syncId, PlayerInventory inv, PlayerEntity player) {
-        return new NeutroniumCompressorScreenHandler(syncId, inv, this, this.propertyDelegate);
-    }
-
-    @Override
-    protected void writeNbt(NbtCompound nbt) {
-        super.writeNbt(nbt);
-        nbt.putInt("neutronium_compressor.progress", this.progress);
-        nbt.putString("neutronium_compressor.material", this.material.getId());
-        Inventories.writeNbt(nbt, this.inventory);
-    }
-
-    @Override
-    public void readNbt(NbtCompound nbt) {
-        Inventories.readNbt(nbt, this.inventory);
-        this.progress = nbt.getInt("neutronium_compressor.progress");
-        this.material = Singularity.MATERIALS.getOrDefault(nbt.getString("neutronium_compressor.material"), Singularity.EMPTY);
-        super.readNbt(nbt);
-    }
-
-    private void resetProgress() {
-        this.progress = 0;
     }
 
     private static void consumeItem(NeutroniumCompressorBlockEntity entity) {
@@ -135,5 +99,41 @@ public class NeutroniumCompressorBlockEntity extends BlockEntity implements Name
             entity.resetProgress();
             entity.material = Singularity.EMPTY;
         }
+    }
+
+    @Override
+    public DefaultedList<ItemStack> getItems() {
+        return this.inventory;
+    }
+
+    @Override
+    public Text getDisplayName() {
+        return Text.translatable(this.getCachedState().getBlock().getTranslationKey());
+    }
+
+    @Nullable
+    @Override
+    public ScreenHandler createMenu(int syncId, PlayerInventory inv, PlayerEntity player) {
+        return new NeutroniumCompressorScreenHandler(syncId, inv, this, this.propertyDelegate);
+    }
+
+    @Override
+    protected void writeNbt(NbtCompound nbt) {
+        super.writeNbt(nbt);
+        nbt.putInt("neutronium_compressor.progress", this.progress);
+        nbt.putString("neutronium_compressor.material", this.material.getId());
+        Inventories.writeNbt(nbt, this.inventory);
+    }
+
+    @Override
+    public void readNbt(NbtCompound nbt) {
+        Inventories.readNbt(nbt, this.inventory);
+        this.progress = nbt.getInt("neutronium_compressor.progress");
+        this.material = Singularity.MATERIALS.getOrDefault(nbt.getString("neutronium_compressor.material"), Singularity.EMPTY);
+        super.readNbt(nbt);
+    }
+
+    private void resetProgress() {
+        this.progress = 0;
     }
 }

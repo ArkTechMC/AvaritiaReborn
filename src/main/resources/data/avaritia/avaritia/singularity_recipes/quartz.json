@@ -1,0 +1,17 @@
+{
+  "result": "quartz",
+  "ingredients": [
+    {
+      "type": "item",
+      "value": "minecraft:quartz",
+      "amount": 1
+    },
+    {
+      "type": "block",
+      "value": "minecraft:quartz_block",
+      "amount": 9
+    }
+  ],
+  "dependency": [
+  ]
+}

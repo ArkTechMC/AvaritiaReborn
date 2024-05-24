@@ -25,14 +25,9 @@ public class ExtremeCraftingTableBlock extends BlockWithEntity {
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         if (!world.isClient) {
-            //This will call the createScreenHandlerFactory method from BlockWithEntity, which will return our blockEntity casted to
-            //a namedScreenHandlerFactory. If your block class does not extend BlockWithEntity, it needs to implement createScreenHandlerFactory.
             NamedScreenHandlerFactory screenHandlerFactory = state.createScreenHandlerFactory(world, pos);
-
-            if (screenHandlerFactory != null) {
-                //With this call the server will request the client to open the appropriate Screenhandler
+            if (screenHandlerFactory != null)
                 player.openHandledScreen(screenHandlerFactory);
-            }
         }
         return ActionResult.SUCCESS;
     }
@@ -40,12 +35,12 @@ public class ExtremeCraftingTableBlock extends BlockWithEntity {
     @Nullable
     @Override
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
-        return new ExtremeCraftingTableBlockEntity(pos,state);
+        return new ExtremeCraftingTableBlockEntity(pos, state);
     }
 
 
     public BlockRenderType getRenderType(BlockState state) {
-        return BlockRenderType.MODEL;//With inheriting from BlockWithEntity this defaults to INVISIBLE, so we need to change that!
+        return BlockRenderType.MODEL;
     }
 
     @Nullable
@@ -66,7 +61,6 @@ public class ExtremeCraftingTableBlock extends BlockWithEntity {
                 }
             }
         }*/
-
         super.onBreak(world, pos, state, player);
     }
 }

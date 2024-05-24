@@ -29,6 +29,17 @@ public class ExtremeCraftingTableBlockEntity extends BlockEntity implements Name
         super(ModBlockEntities.EXTREME_CRAFTING_TABLE, pos, state);
     }
 
+    public static void tick(World world, BlockPos pos, BlockState state, ExtremeCraftingTableBlockEntity entity) {
+        entity.inventory.set(81, ItemStack.EMPTY);
+        List<List<ItemStack>> table = RecipeUtil.toTable(entity.inventory, 9, 9);
+        for (ExtremeCraftingShapedRecipe recipe : ExtremeCraftingShapedRecipe.recipes.values())
+            if (recipe.matches(table)) {
+                entity.inventory.set(81, recipe.output());
+                break;
+            }
+        entity.markDirty();
+    }
+
     @Override
     public DefaultedList<ItemStack> getItems() {
         return this.inventory;
@@ -55,16 +66,5 @@ public class ExtremeCraftingTableBlockEntity extends BlockEntity implements Name
     @Override
     public ScreenHandler createMenu(int syncId, PlayerInventory inv, PlayerEntity player) {
         return new ExtremeCraftingTableScreenHandler(syncId, inv, this);
-    }
-
-    public static void tick(World world, BlockPos pos, BlockState state, ExtremeCraftingTableBlockEntity entity) {
-        entity.inventory.set(81, ItemStack.EMPTY);
-        List<List<ItemStack>> table = RecipeUtil.toTable(entity.inventory, 9, 9);
-        for (ExtremeCraftingShapedRecipe recipe : ExtremeCraftingShapedRecipe.recipes.values())
-            if (recipe.matches(table)) {
-                entity.inventory.set(81, recipe.output());
-                break;
-            }
-        entity.markDirty();
     }
 }

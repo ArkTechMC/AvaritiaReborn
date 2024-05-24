@@ -3,30 +3,21 @@ package com.iafenvoy.avaritia.gui;
 import com.iafenvoy.avaritia.registry.ModScreenHandlers;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.Inventories;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.PacketByteBuf;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.slot.Slot;
 import net.minecraft.screen.slot.SlotActionType;
-import net.minecraft.text.Text;
-import net.minecraft.util.collection.DefaultedList;
 
 
 public class ExtremeCraftingTableScreenHandler extends ScreenHandler {
     private final Inventory inventory;
 
-    //This constructor gets called on the client when the server wants it to open the screenHandler,
-    //The client will call the other constructor with an empty Inventory and the screenHandler will automatically
-    //sync this empty inventory with the inventory on the server.
     public ExtremeCraftingTableScreenHandler(int syncId, PlayerInventory playerInventory) {
         this(syncId, playerInventory, new SimpleInventory(82));
     }
 
-    //This constructor gets called from the BlockEntity on the server without calling the other constructor first, the server knows the inventory of the container
-    //and can therefore directly provide it as an argument. This inventory will then be synced to the client.
     public ExtremeCraftingTableScreenHandler(int syncId, PlayerInventory playerInventory, Inventory inventory) {
         super(ModScreenHandlers.EXTREME_CRAFTING_TABLE_SCREEN_HANDLER, syncId);
         checkSize(inventory, 1);
@@ -41,46 +32,28 @@ public class ExtremeCraftingTableScreenHandler extends ScreenHandler {
 
     @Override
     public ItemStack quickMove(PlayerEntity player, int invSlot) {
-        player.sendMessage(Text.of(String.valueOf(invSlot)), false);
-
         ItemStack newStack = ItemStack.EMPTY;
         Slot slot = this.slots.get(invSlot);
         if (slot.hasStack()) {
             ItemStack originalStack = slot.getStack();
             newStack = originalStack.copy();
-
             if (80 < invSlot && invSlot < 117) {
-                //player.sendMessage(Text.of("shift no inventario"), false);
-                if (!this.insertItem(originalStack, 0, 80, false)) {
+                if (!this.insertItem(originalStack, 0, 80, false))
                     return ItemStack.EMPTY;
-                }
             } else if (invSlot == 117) {
-                //player.sendMessage(Text.of("shift no output slot"), false);
-
-                if (!this.insertItem(originalStack, 81, 116, false)) {
+                if (!this.insertItem(originalStack, 81, 116, false))
                     return ItemStack.EMPTY;
-                } else {
-                    for (int i = 0; i < 81; ++i) {
-                        if (this.getSlot(i).getStack().getCount() != 0) {
+                else
+                    for (int i = 0; i < 81; ++i)
+                        if (this.getSlot(i).getStack().getCount() != 0)
                             this.getSlot(i).getStack().setCount(this.getSlot(i).getStack().getCount() - 1);
-                        }
-                    }
-                }
-
-            } else {
-                //player.sendMessage(Text.of("shift na crafting"), false);
-                if (!this.insertItem(originalStack, 81, 116, false)) {
-                    return ItemStack.EMPTY;
-                }
-            }
-
-            if (originalStack.isEmpty()) {
+            } else if (!this.insertItem(originalStack, 81, 116, false))
+                return ItemStack.EMPTY;
+            if (originalStack.isEmpty())
                 slot.setStack(ItemStack.EMPTY);
-            } else {
+            else
                 slot.markDirty();
-            }
         }
-
         return newStack;
     }
 

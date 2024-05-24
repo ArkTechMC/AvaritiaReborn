@@ -2,6 +2,8 @@ package com.iafenvoy.avaritia.gui;
 
 import com.iafenvoy.avaritia.AvaritiaReborn;
 import com.mojang.blaze3d.systems.RenderSystem;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.render.GameRenderer;
@@ -9,10 +11,9 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
+@Environment(EnvType.CLIENT)
 public class NeutroniumCompressorScreen extends HandledScreen<NeutroniumCompressorScreenHandler> {
-    //A path to the gui texture. In this example we use the texture from the dispenser
     private static final Identifier TEXTURE = new Identifier(AvaritiaReborn.MOD_ID, "textures/gui/compressor.png");
-
 
     public NeutroniumCompressorScreen(NeutroniumCompressorScreenHandler handler, PlayerInventory inventory, Text title) {
         super(handler, inventory, title);
@@ -30,7 +31,6 @@ public class NeutroniumCompressorScreen extends HandledScreen<NeutroniumCompress
         this.renderProgressArrow(context, x, y);
         context.getMatrices().push();
         context.getMatrices().translate(x, y, 0);
-        //textRenderer.draw(matrices, "Progress: " + String.valueOf(handler.getScaledProgress()) + "%",50,60,0);
         context.drawText(this.textRenderer, (int) this.handler.getCurrentProgress() + " / " + (int) this.handler.getMaxProgress(), 65, 60, 0, false);
         context.getMatrices().pop();
 
@@ -43,7 +43,6 @@ public class NeutroniumCompressorScreen extends HandledScreen<NeutroniumCompress
         }
     }
 
-
     @Override
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
         this.renderBackground(context);
@@ -51,11 +50,9 @@ public class NeutroniumCompressorScreen extends HandledScreen<NeutroniumCompress
         this.drawMouseoverTooltip(context, mouseX, mouseY);
     }
 
-
     @Override
     protected void init() {
         super.init();
-        // Center the title
         this.titleX = (this.backgroundWidth - this.textRenderer.getWidth(this.title)) / 2;
     }
 }

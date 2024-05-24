@@ -41,6 +41,6 @@ public class SingularityResourceManager implements SimpleSynchronousResourceRelo
                 AvaritiaReborn.LOGGER.error("Error occurred while loading resource json " + entry.getKey().toString(), e);
             }
         }
-        AvaritiaReborn.LOGGER.info(Singularity.MATERIALS.size() + " singularities loaded.");
+        AvaritiaReborn.LOGGER.info(Singularity.MATERIALS.size() + " singularities data loaded.");
     }
 }
