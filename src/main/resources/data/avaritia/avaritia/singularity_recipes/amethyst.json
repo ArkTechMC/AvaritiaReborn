@@ -1,0 +1,19 @@
+{
+  "result": "amethyst",
+  "ingredients": [
+    {
+      "ingredient": {
+        "item":"minecraft:amethyst_shard"
+      },
+      "amount": 1
+    },
+    {
+      "ingredient": {
+        "item":"minecraft:amethyst_block"
+      },
+      "amount": 9
+    }
+  ],
+  "dependency": [
+  ]
+}

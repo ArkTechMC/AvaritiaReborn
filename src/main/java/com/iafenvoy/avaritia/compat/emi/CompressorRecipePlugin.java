@@ -72,7 +72,7 @@ public class CompressorRecipePlugin implements EmiPlugin {
         public void addWidgets(WidgetHolder widgets) {
             widgets.addTexture(TEXTURE, 0, 0);
             widgets.addSlot(this.getInputs().get(0), 24, 14);
-            widgets.addSlot(this.getOutputs().get(0), 102, 14).recipeContext(this);
+            widgets.addSlot(this.getOutputs().get(0), 98, 10).large(true).recipeContext(this);
         }
     }
 }

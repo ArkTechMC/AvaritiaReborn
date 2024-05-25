@@ -1,0 +1,31 @@
+{
+  "result": "netherite",
+  "ingredients": [
+    {
+      "ingredient": {
+        "item":"minecraft:ancient_debris"
+      },
+      "amount": 1
+    },
+    {
+      "ingredient": {
+        "item":"minecraft:netherite_scrap"
+      },
+      "amount": 1
+    },
+    {
+      "ingredient": {
+        "item":"minecraft:netherite_ingot"
+      },
+      "amount": 4
+    },
+    {
+      "ingredient": {
+        "item":"minecraft:netherite_block"
+      },
+      "amount": 36
+    }
+  ],
+  "dependency": [
+  ]
+}

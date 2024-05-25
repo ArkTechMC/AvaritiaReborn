@@ -1,0 +1,32 @@
+{
+  "result": "enderite",
+  "ingredients": [
+    {
+      "ingredient": {
+        "item":"enderitemod:cracked_enderite_ore"
+      },
+      "amount": 1
+    },
+    {
+      "ingredient": {
+        "item":"enderitemod:enderite_scrap"
+      },
+      "amount": 1
+    },
+    {
+      "ingredient": {
+        "item":"enderitemod:enderite_ingot"
+      },
+      "amount": 4
+    },
+    {
+      "ingredient": {
+        "item":"enderitemod:enderite_block"
+      },
+      "amount": 36
+    }
+  ],
+  "dependency": [
+    "enderitemod"
+  ]
+}

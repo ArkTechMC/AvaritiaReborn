@@ -1,10 +1,15 @@
 {
   "dependency": [
-    "appliedenergistics2"
+    "ae2"
   ],
   "recipe": {
     "catalyst": [
-
+      {
+        "item": "ae2:singularity"
+      },
+      {
+        "item": "ae2:cell_component_64k"
+      }
     ]
   },
   "singularity": {

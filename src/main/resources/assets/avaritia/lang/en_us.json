@@ -14,6 +14,8 @@
   "block.avaritia.neutron_collector": "Neutron Collector",
   "block.avaritia.neutronium_block": "Neutronium Block",
   "desc.avaritia.skullfire_sword": "Beheads skeletons and scorches them black.",
+  "emi.category.avaritia.compressor": "Compressor",
+  "emi.category.avaritia.extreme_crafting": "Extreme Crafting",
   "item.avaritia.cosmic_meatballs": "Cosmic Meatballs",
   "item.avaritia.crystal_matrix_ingot": "Crystal Matrix Ingot",
   "item.avaritia.diamond_lattice": "Diamond Lattice",
@@ -40,6 +42,7 @@
   "item.avaritia.singularity.copper": "Copper Singularity",
   "item.avaritia.singularity.diamond": "Diamond Singularity",
   "item.avaritia.singularity.emerald": "Emerald Singularity",
+  "item.avaritia.singularity.enderite": "Enderite Singularity",
   "item.avaritia.singularity.fluxed": "Fluxed Singularity",
   "item.avaritia.singularity.gold": "Gold Singularity",
   "item.avaritia.singularity.iridium": "Iridium Singularity",
@@ -55,7 +58,5 @@
   "item.avaritia.singularity.tin": "Tin Singularity",
   "item.avaritia.skullfire_sword": "Skullfire Sword",
   "item.avaritia.ultimate_stew": "Ultimate Stew",
-  "itemGroup.avaritia": "Avaritia",
-  "emi.category.avaritia.extreme_crafting": "Extreme Crafting",
-  "emi.category.avaritia.compressor": "Compressor"
+  "itemGroup.avaritia": "Avaritia"
 }
