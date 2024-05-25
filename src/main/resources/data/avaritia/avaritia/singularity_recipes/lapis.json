@@ -2,13 +2,15 @@
   "result": "lapis",
   "ingredients": [
     {
-      "type": "item",
-      "value": "minecraft:lapis_lazuli",
+      "ingredient": {
+        "item":"minecraft:lapis_lazuli"
+      },
       "amount": 1
     },
     {
-      "type": "block",
-      "value": "minecraft:lapis_block",
+      "ingredient": {
+        "item":"minecraft:lapis_block"
+      },
       "amount": 9
     }
   ],

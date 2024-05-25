@@ -57,7 +57,7 @@ public class NeutroniumCompressorBlockEntity extends BlockEntity implements Name
     }
 
     private static void consumeItem(NeutroniumCompressorBlockEntity entity) {
-        Singularity singularity = SingularityHelper.get(entity.inventory.get(0).getItem());
+        Singularity singularity = SingularityHelper.get(entity.inventory.get(0));
         if (entity.propertyDelegate.get(0) == 0) {
             if (singularity != Singularity.EMPTY) {
                 entity.material = singularity;
@@ -75,7 +75,7 @@ public class NeutroniumCompressorBlockEntity extends BlockEntity implements Name
     private static void addToProgress(NeutroniumCompressorBlockEntity entity) {
         if (entity.inventory.get(0).getItem() == null)
             return;
-        Singularity.SingularityIngredient ingredient = SingularityHelper.getIngredient(entity.inventory.get(0).getItem(), entity.material);
+        Singularity.SingularityIngredient ingredient = SingularityHelper.getIngredient(entity.inventory.get(0), entity.material);
         entity.propertyDelegate.set(0, entity.propertyDelegate.get(0) + ingredient.amount());
     }
 

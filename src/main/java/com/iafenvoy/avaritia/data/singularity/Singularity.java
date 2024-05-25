@@ -4,6 +4,8 @@ import com.iafenvoy.avaritia.util.IdUtil;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.recipe.Ingredient;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
@@ -42,37 +44,12 @@ public class Singularity {
         this.recipes.add(recipe);
     }
 
-    public SingularityIngredient checkBlock(Block block) {
+    public SingularityIngredient test(ItemStack stack) {
         if (this.recipes == null) this.recipes = new ArrayList<>();
-        for (SingularityRecipe recipe : this.recipes.stream().filter(SingularityRecipe::canUse).toList()) {
-            for (SingularityIngredient ingredient : recipe.ingredients) {
-                if (ingredient.type.equals("block")) {
-                    if (IdUtil.getId(block).equals(new Identifier(ingredient.value)))
-                        return ingredient;
-                } else if (ingredient.type.equals("block_tag")) {
-                    TagKey<Block> tagKey = TagKey.of(RegistryKeys.BLOCK, new Identifier(ingredient.value));
-                    if (block.getDefaultState().isIn(tagKey))
-                        return ingredient;
-                }
-            }
-        }
-        return null;
-    }
-
-    public SingularityIngredient checkItem(Item item) {
-        if (this.recipes == null) this.recipes = new ArrayList<>();
-        for (SingularityRecipe recipe : this.recipes.stream().filter(SingularityRecipe::canUse).toList()) {
-            for (SingularityIngredient ingredient : recipe.ingredients) {
-                if (ingredient.type.equals("item")) {
-                    if (IdUtil.getId(item).equals(new Identifier(ingredient.value)))
-                        return ingredient;
-                } else if (ingredient.type.equals("item_tag")) {
-                    TagKey<Item> tagKey = TagKey.of(RegistryKeys.ITEM, new Identifier(ingredient.value));
-                    if (item.getDefaultStack().isIn(tagKey))
-                        return ingredient;
-                }
-            }
-        }
+        for (SingularityRecipe recipe : this.recipes.stream().filter(SingularityRecipe::canUse).toList())
+            for (SingularityIngredient ingredient : recipe.ingredients)
+                if (ingredient.ingredient.test(stack))
+                    return ingredient;
         return null;
     }
 
@@ -86,7 +63,7 @@ public class Singularity {
         }
     }
 
-    public record SingularityIngredient(String type, String value, int amount) {
-        public static final SingularityIngredient EMPTY = new SingularityIngredient("", "", 0);
+    public record SingularityIngredient(Ingredient ingredient, int amount) {
+        public static final SingularityIngredient EMPTY = new SingularityIngredient(Ingredient.EMPTY, 0);
     }
 }

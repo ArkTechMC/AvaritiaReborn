@@ -3,13 +3,7 @@ package com.iafenvoy.avaritia.data.singularity;
 import com.iafenvoy.avaritia.registry.ModItems;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.block.Block;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemStack;
-
-import java.util.Map;
 
 public class SingularityHelper {
     private static final String TYPE_KEY = "singularity_type";
@@ -36,37 +30,17 @@ public class SingularityHelper {
         return stack;
     }
 
-    public static Singularity get(ItemConvertible itemConvertible) {
-        for (Map.Entry<String, Singularity> material : Singularity.MATERIALS.entrySet()) {
-            if (itemConvertible instanceof Block block)
-                if (material.getValue().checkBlock(block) != null)
-                    return material.getValue();
-            if (itemConvertible instanceof BlockItem item)
-                if (material.getValue().checkBlock(item.getBlock()) != null)
-                    return material.getValue();
-            if (itemConvertible instanceof Item item)
-                if (material.getValue().checkItem(item) != null)
-                    return material.getValue();
-        }
+    public static Singularity get(ItemStack stack) {
+        for (Singularity material : Singularity.MATERIALS.values())
+            if (material.test(stack) != null)
+                return material;
         return Singularity.EMPTY;
     }
 
-    public static Singularity.SingularityIngredient getIngredient(ItemConvertible itemConvertible, Singularity singularity) {
-        if (itemConvertible instanceof Block block) {
-            Singularity.SingularityIngredient ingredient = singularity.checkBlock(block);
-            if (ingredient != null)
-                return ingredient;
-        }
-        if (itemConvertible instanceof BlockItem item) {
-            Singularity.SingularityIngredient ingredient = singularity.checkBlock(item.getBlock());
-            if (ingredient != null)
-                return ingredient;
-        }
-        if (itemConvertible instanceof Item item) {
-            Singularity.SingularityIngredient ingredient = singularity.checkItem(item);
-            if (ingredient != null)
-                return ingredient;
-        }
+    public static Singularity.SingularityIngredient getIngredient(ItemStack stack, Singularity singularity) {
+        Singularity.SingularityIngredient ingredient = singularity.test(stack);
+        if (ingredient != null)
+            return ingredient;
         return Singularity.SingularityIngredient.EMPTY;
     }
 }

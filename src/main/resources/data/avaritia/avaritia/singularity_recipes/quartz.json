@@ -2,13 +2,15 @@
   "result": "quartz",
   "ingredients": [
     {
-      "type": "item",
-      "value": "minecraft:quartz",
+      "ingredient": {
+        "item":"minecraft:quartz"
+      },
       "amount": 1
     },
     {
-      "type": "block",
-      "value": "minecraft:quartz_block",
+      "ingredient": {
+        "item":"minecraft:quartz_block"
+      },
       "amount": 9
     }
   ],

@@ -2,13 +2,15 @@
   "result": "iron",
   "ingredients": [
     {
-      "type": "item",
-      "value": "minecraft:iron_ingot",
+      "ingredient": {
+        "item":"minecraft:iron_ingot"
+      },
       "amount": 1
     },
     {
-      "type": "block",
-      "value": "minecraft:iron_block",
+      "ingredient": {
+        "item":"minecraft:iron_block"
+      },
       "amount": 9
     }
   ],

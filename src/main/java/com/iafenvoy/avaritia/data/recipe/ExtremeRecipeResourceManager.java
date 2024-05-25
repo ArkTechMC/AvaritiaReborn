@@ -27,19 +27,28 @@ public class ExtremeRecipeResourceManager implements SimpleSynchronousResourceRe
 
     @Override
     public void reload(ResourceManager manager) {
-        ExtremeCraftingShapedRecipe.recipes.clear();
+        ExtremeCraftingShapedRecipe.RECIPES.clear();
         for (Map.Entry<Identifier, Resource> entry : manager.findResources(AvaritiaReborn.MOD_ID + "/extreme_recipes", p -> p.getPath().endsWith(".json")).entrySet()) {
             try (InputStream stream = entry.getValue().getInputStream()) {
                 JsonElement element = JsonParser.parseReader(new InputStreamReader(stream));
                 if (!element.isJsonObject())
                     throw new JsonSyntaxException("Extreme recipe should be a json object: " + entry.getKey());
                 ExtremeCraftingShapedRecipe recipe = this.read(entry.getKey(), element.getAsJsonObject());
-                ExtremeCraftingShapedRecipe.recipes.put(entry.getKey(), recipe);
+                ExtremeCraftingShapedRecipe.RECIPES.put(entry.getKey(), recipe);
             } catch (Exception e) {
                 AvaritiaReborn.LOGGER.error("Error occurred while loading resource json " + entry.getKey().toString(), e);
             }
         }
-        AvaritiaReborn.LOGGER.info(ExtremeCraftingShapedRecipe.recipes.size() + " extreme recipes loaded.");
+        AvaritiaReborn.LOGGER.info(ExtremeCraftingShapedRecipe.RECIPES.size() + " extreme recipes loaded.");
+
+        ExtremeCraftingShapelessRecipe.reloadAll();
+        for (Map.Entry<Identifier, Resource> entry : manager.findResources(AvaritiaReborn.MOD_ID + "/dynamic", p -> p.getPath().endsWith(".json")).entrySet()) {
+            try (InputStream stream = entry.getValue().getInputStream()) {
+                //TODO: Data driven compat
+            } catch (Exception e) {
+                AvaritiaReborn.LOGGER.error("Error occurred while loading resource json " + entry.getKey().toString(), e);
+            }
+        }
     }
 
     private ExtremeCraftingShapedRecipe read(Identifier id, JsonObject json) {

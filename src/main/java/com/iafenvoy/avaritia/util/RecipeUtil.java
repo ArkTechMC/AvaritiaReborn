@@ -63,8 +63,14 @@ public class RecipeUtil {
 
     public static <T> List<List<T>> toTable(List<T> array, int width, int height) {
         List<List<T>> table = new ArrayList<>();
-        for (int i = 0; i < height; i++) {
-            table.add(array.subList(i * width, (i + 1) * width));
+        int flag = 0;
+        while (table.size() <= height) {
+            if (array.size() - flag < width) {
+                table.add(array.subList(flag, array.size()));
+                break;
+            }
+            table.add(array.subList(flag, flag + width));
+            flag += width;
         }
         return table;
     }

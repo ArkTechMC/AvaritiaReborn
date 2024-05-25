@@ -2,13 +2,15 @@
   "result": "copper",
   "ingredients": [
     {
-      "type": "item",
-      "value": "minecraft:copper_ingot",
+      "ingredient": {
+        "item":"minecraft:copper_ingot"
+      },
       "amount": 1
     },
     {
-      "type": "block",
-      "value": "minecraft:copper_block",
+      "ingredient": {
+        "item":"minecraft:copper_block"
+      },
       "amount": 9
     }
   ],

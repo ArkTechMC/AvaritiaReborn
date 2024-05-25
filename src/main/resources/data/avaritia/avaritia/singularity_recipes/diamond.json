@@ -2,13 +2,15 @@
   "result": "diamond",
   "ingredients": [
     {
-      "type": "item",
-      "value": "minecraft:diamond",
+      "ingredient": {
+        "item":"minecraft:diamond"
+      },
       "amount": 1
     },
     {
-      "type": "block",
-      "value": "minecraft:diamond_block",
+      "ingredient": {
+        "item":"minecraft:diamond_block"
+      },
       "amount": 9
     }
   ],

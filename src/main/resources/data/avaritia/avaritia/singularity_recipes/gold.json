@@ -2,13 +2,15 @@
   "result": "gold",
   "ingredients": [
     {
-      "type": "item",
-      "value": "minecraft:gold_ingot",
+      "ingredient": {
+        "item":"minecraft:gold_ingot"
+      },
       "amount": 1
     },
     {
-      "type": "block",
-      "value": "minecraft:gold_block",
+      "ingredient": {
+        "item":"minecraft:gold_block"
+      },
       "amount": 9
     }
   ],

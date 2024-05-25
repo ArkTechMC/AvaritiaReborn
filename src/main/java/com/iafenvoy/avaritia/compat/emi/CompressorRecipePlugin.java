@@ -14,10 +14,6 @@ import dev.emi.emi.api.stack.EmiStack;
 import dev.emi.emi.api.widget.WidgetHolder;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.recipe.Ingredient;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.NotNull;
 
@@ -25,12 +21,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-@Environment(EnvType.CLIENT)
 public class CompressorRecipePlugin implements EmiPlugin {
     private static final Identifier COMPRESSOR = new Identifier(AvaritiaReborn.MOD_ID, "compressor");
     private static final EmiTexture TEXTURE = new EmiTexture(new Identifier(AvaritiaReborn.MOD_ID, "textures/gui/compressor.png"), 14, 20, 136, 45);
     private static final EmiStack WORKSTATION = EmiStack.of(ModBlocks.COMPRESSOR);
-    private static final EmiRecipeCategory COMPRESSOR_CATEGORY = new EmiRecipeCategory(COMPRESSOR, WORKSTATION, TEXTURE);
+    private static final EmiRecipeCategory COMPRESSOR_CATEGORY = new EmiRecipeCategory(COMPRESSOR, WORKSTATION);
 
     @Override
     public void register(EmiRegistry registry) {
@@ -54,20 +49,9 @@ public class CompressorRecipePlugin implements EmiPlugin {
         @Override
         public List<EmiIngredient> getInputs() {
             List<EmiIngredient> ingredients = new ArrayList<>();
-            for (Singularity.SingularityRecipe recipe : this.singularity.getRecipes()) {
-                for (Singularity.SingularityIngredient ingredient : recipe.ingredients()) {
-                    switch (ingredient.type()) {
-                        case "item" ->
-                                ingredients.add(EmiIngredient.of(Ingredient.ofItems(Registries.ITEM.get(new Identifier(ingredient.value())))));
-                        case "block" ->
-                                ingredients.add(EmiIngredient.of(Ingredient.ofItems(Registries.BLOCK.get(new Identifier(ingredient.value())))));
-                        case "item_tag" ->
-                                ingredients.add(EmiIngredient.of(TagKey.of(RegistryKeys.ITEM, new Identifier(ingredient.value()))));
-                        case "block_tag" ->
-                                ingredients.add(EmiIngredient.of(TagKey.of(RegistryKeys.BLOCK, new Identifier(ingredient.value()))));
-                    }
-                }
-            }
+            for (Singularity.SingularityRecipe recipe : this.singularity.getRecipes())
+                for (Singularity.SingularityIngredient ingredient : recipe.ingredients())
+                    ingredients.add(EmiIngredient.of(ingredient.ingredient(), (int) Math.ceil((double) this.singularity.getCost() / ingredient.amount())));
             return List.of(EmiIngredient.of(ingredients, this.singularity.getCost()));
         }
 

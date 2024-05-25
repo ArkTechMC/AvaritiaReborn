@@ -1,6 +1,7 @@
 package com.iafenvoy.avaritia.item.block.entity;
 
 import com.iafenvoy.avaritia.data.recipe.ExtremeCraftingShapedRecipe;
+import com.iafenvoy.avaritia.data.recipe.ExtremeCraftingShapelessRecipe;
 import com.iafenvoy.avaritia.gui.ExtremeCraftingTableScreenHandler;
 import com.iafenvoy.avaritia.registry.ModBlockEntities;
 import com.iafenvoy.avaritia.util.RecipeUtil;
@@ -24,20 +25,27 @@ import java.util.List;
 public class ExtremeCraftingTableBlockEntity extends BlockEntity implements NamedScreenHandlerFactory, ImplementedInventory {
     private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(82, ItemStack.EMPTY);
 
-
     public ExtremeCraftingTableBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.EXTREME_CRAFTING_TABLE, pos, state);
     }
 
     public static void tick(World world, BlockPos pos, BlockState state, ExtremeCraftingTableBlockEntity entity) {
-        entity.inventory.set(81, ItemStack.EMPTY);
+        ItemStack previous = entity.inventory.get(81).copy(), current = ItemStack.EMPTY;
         List<List<ItemStack>> table = RecipeUtil.toTable(entity.inventory, 9, 9);
-        for (ExtremeCraftingShapedRecipe recipe : ExtremeCraftingShapedRecipe.recipes.values())
+        for (ExtremeCraftingShapedRecipe recipe : ExtremeCraftingShapedRecipe.RECIPES.values())
             if (recipe.matches(table)) {
-                entity.inventory.set(81, recipe.output());
+                current = recipe.output().copy();
                 break;
             }
-        entity.markDirty();
+        for (ExtremeCraftingShapelessRecipe recipe : ExtremeCraftingShapelessRecipe.RECIPES.values())
+            if (recipe.match(entity.inventory.subList(0, 81))) {
+                current = recipe.getOutput().copy();
+                break;
+            }
+        if (previous.isEmpty() != current.isEmpty() || previous.getItem() != current.getItem() || previous.getCount() != current.getCount()) {
+            entity.inventory.set(81, current);
+            entity.markDirty();
+        }
     }
 
     @Override

@@ -2,13 +2,15 @@
   "result": "emerald",
   "ingredients": [
     {
-      "type": "item",
-      "value": "minecraft:emerald",
+      "ingredient": {
+        "item":"minecraft:emerald"
+      },
       "amount": 1
     },
     {
-      "type": "block",
-      "value": "minecraft:emerald_block",
+      "ingredient": {
+        "item":"minecraft:emerald_block"
+      },
       "amount": 9
     }
   ],
