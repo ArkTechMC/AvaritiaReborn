@@ -11,6 +11,7 @@ import java.util.List;
 public class Singularity {
     public static final Singularity EMPTY = new Singularity("", 0);
     public static final HashMap<String, Singularity> MATERIALS = new HashMap<>();
+    private static int add = 0, mul = 1;
     private final String id;
     private final int cost;
     private List<SingularityRecipe> recipes = new ArrayList<>();
@@ -30,7 +31,7 @@ public class Singularity {
     }
 
     public int getCost() {
-        return this.cost;
+        return (this.cost + add) * mul;
     }
 
     public void addRecipe(SingularityRecipe recipe) {
@@ -49,6 +50,16 @@ public class Singularity {
 
     public boolean hasAvailable() {
         return this.recipes.stream().anyMatch(SingularityRecipe::canUse);
+    }
+
+    public static void reload() {
+        add = 0;
+        mul = 1;
+    }
+
+    public static void pushData(int add_, int mul_) {
+        add += add_;
+        mul += mul_;
     }
 
     public record SingularityRecipe(List<String> dependency, String result, List<SingularityIngredient> ingredients) {

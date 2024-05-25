@@ -1,0 +1,14 @@
+{
+  "dependency": [
+    "appliedenergistics2"
+  ],
+  "recipe": {
+    "catalyst": [
+
+    ]
+  },
+  "singularity": {
+    "add": 200,
+    "mul": 0
+  }
+}

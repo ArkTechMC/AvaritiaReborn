@@ -1,0 +1,14 @@
+{
+  "dependency": [
+    "botania"
+  ],
+  "recipe": {
+    "catalyst": [
+
+    ]
+  },
+  "singularity": {
+    "add": 50,
+    "mul": 0
+  }
+}

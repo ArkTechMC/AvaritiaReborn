@@ -1,0 +1,16 @@
+{
+  "dependency": [
+    "itemalchemy"
+  ],
+  "recipe": {
+    "catalyst": [
+      {
+        "item": "itemalchemy:red_matter_block"
+      }
+    ]
+  },
+  "singularity": {
+    "add": 0,
+    "mul": 3
+  }
+}

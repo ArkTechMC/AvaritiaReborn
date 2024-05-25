@@ -6,7 +6,7 @@ Avaritia Mod for Fabric. (Unofficial)
 
 This mod aims at adding all things in original Avaritia Mod.
 
-Known issues: Rendering problem with EMI. Incomplete dynamic recipes.
+Known issues: Incomplete item abilities.
 
 ## FAQ
 

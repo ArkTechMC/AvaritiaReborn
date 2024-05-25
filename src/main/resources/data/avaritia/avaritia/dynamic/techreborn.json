@@ -1,0 +1,14 @@
+{
+  "dependency": [
+    "techreborn"
+  ],
+  "recipe": {
+    "catalyst": [
+
+    ]
+  },
+  "singularity": {
+    "add": 300,
+    "mul": 0
+  }
+}

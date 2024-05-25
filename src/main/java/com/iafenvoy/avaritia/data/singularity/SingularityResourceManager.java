@@ -1,8 +1,10 @@
 package com.iafenvoy.avaritia.data.singularity;
 
-import com.google.gson.*;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.JsonSyntaxException;
 import com.iafenvoy.avaritia.AvaritiaReborn;
-import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.resource.Resource;
 import net.minecraft.resource.ResourceManager;
@@ -14,15 +16,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class SingularityResourceManager implements SimpleSynchronousResourceReloadListener {
-    @Override
-    public Identifier getFabricId() {
-        return new Identifier(AvaritiaReborn.MOD_ID, "singularity");
-    }
-
-    @Override
-    public void reload(ResourceManager manager) {
+public class SingularityResourceManager {
+    public static void reload(ResourceManager manager) {
         Singularity.MATERIALS.clear();
+        Singularity.reload();
         for (Map.Entry<Identifier, Resource> entry : manager.findResources(AvaritiaReborn.MOD_ID + "/singularity", p -> p.getPath().endsWith(".json")).entrySet()) {
             try (InputStream stream = entry.getValue().getInputStream()) {
                 JsonObject object = JsonParser.parseReader(new InputStreamReader(stream)).getAsJsonObject();

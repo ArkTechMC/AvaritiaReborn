@@ -21,7 +21,7 @@ public class ExtremeCraftingHandler implements EmiRecipeHandler<ExtremeCraftingT
 
     @Override
     public boolean canCraft(EmiRecipe recipe, EmiCraftContext context) {
-        return recipe instanceof ExtremeCraftingRecipePlugin.EmiExtremeCraftingRecipe;
+        return false;
     }
 
     @Override
