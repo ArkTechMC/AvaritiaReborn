@@ -15,8 +15,6 @@ import java.util.List;
 import java.util.Map;
 
 public class SingularityResourceManager implements SimpleSynchronousResourceReloadListener {
-    private static final Gson GSON = new Gson();
-
     @Override
     public Identifier getFabricId() {
         return new Identifier(AvaritiaReborn.MOD_ID, "singularity");

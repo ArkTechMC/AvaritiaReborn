@@ -34,18 +34,19 @@ public class ExtremeCraftingRecipePlugin implements EmiPlugin {
         registry.addWorkstation(EXTREME_CRAFTING_CATEGORY, WORKSTATION);
         for (ExtremeCraftingShapedRecipe recipe : ExtremeCraftingShapedRecipe.RECIPES.values())
             registry.addRecipe(new EmiExtremeCraftingRecipe(recipe));
-        registry.addRecipe(new EmiExtremeCraftingRecipe(ExtremeCraftingShapelessRecipe.INFINITY_CATALYST));
+        for (ExtremeCraftingShapelessRecipe recipe : ExtremeCraftingShapelessRecipe.RECIPES.values())
+            registry.addRecipe(new EmiExtremeCraftingRecipe(recipe));
         registry.addRecipeHandler(ModScreenHandlers.EXTREME_CRAFTING_TABLE_SCREEN_HANDLER, new ExtremeCraftingHandler());
     }
 
-    public record EmiExtremeCraftingRecipe(Identifier id, List<List<Ingredient>> inputs,
-                                            ItemStack output) implements EmiRecipe {
+    public record EmiExtremeCraftingRecipe(Identifier id, boolean shapeless, List<List<Ingredient>> inputs,
+                                           ItemStack output) implements EmiRecipe {
         public EmiExtremeCraftingRecipe(ExtremeCraftingShapedRecipe recipe) {
-            this(recipe.id(), recipe.recipeItems(), recipe.output().copy());
+            this(recipe.id(), false, recipe.recipeItems(), recipe.output().copy());
         }
 
         public EmiExtremeCraftingRecipe(ExtremeCraftingShapelessRecipe recipe) {
-            this(recipe.getId(), RecipeUtil.toTable(recipe.getAllIngredients(), 9, 9), recipe.getOutput().copy());
+            this(recipe.getId(), true, RecipeUtil.toTable(recipe.getAllIngredients(), 9, 9), recipe.getOutput().copy());
         }
 
         @Override
@@ -74,7 +75,7 @@ public class ExtremeCraftingRecipePlugin implements EmiPlugin {
 
         @Override
         public int getDisplayWidth() {
-            return 200;
+            return 190;
         }
 
         @Override
@@ -85,6 +86,8 @@ public class ExtremeCraftingRecipePlugin implements EmiPlugin {
         @Override
         public void addWidgets(WidgetHolder widgets) {
             widgets.addTexture(TEXTURE, 0, 0);
+            if (this.shapeless)
+                widgets.addTexture(EmiTexture.SHAPELESS, 167, 2);
             for (int i = 0; i < this.inputs.size(); i++) {
                 List<Ingredient> ingredients = this.inputs.get(i);
                 for (int j = 0; j < ingredients.size(); j++)
