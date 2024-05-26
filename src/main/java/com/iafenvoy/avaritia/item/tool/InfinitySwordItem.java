@@ -1,7 +1,6 @@
 package com.iafenvoy.avaritia.item.tool;
 
 import com.iafenvoy.avaritia.registry.ModDamageType;
-import com.iafenvoy.avaritia.util.ToolMaterialUtil;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.damage.DamageType;

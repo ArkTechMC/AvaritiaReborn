@@ -28,7 +28,6 @@ public class DynamicResourceManager implements SimpleSynchronousResourceReloadLi
         ExtremeRecipeResourceManager.reload(manager);
 
         ExtremeCraftingShapelessRecipe.reloadAll();
-        DynamicManager.reload();
         for (Map.Entry<Identifier, Resource> entry : manager.findResources(AvaritiaReborn.MOD_ID + "/dynamic", p -> p.getPath().endsWith(".json")).entrySet()) {
             try (InputStream stream = entry.getValue().getInputStream()) {
                 DynamicManager.DynamicData data = GSON.fromJson(new InputStreamReader(stream), DynamicManager.DynamicData.class);

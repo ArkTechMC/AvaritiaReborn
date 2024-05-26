@@ -40,7 +40,6 @@ public class InfinityArmor extends ArmorItem {
                 player.getHungerManager().setFoodLevel(20);
                 player.addStatusEffect(new StatusEffectInstance(StatusEffects.NIGHT_VISION, 300, 0, false, false));
             } else if (player.getInventory().getArmorStack(2).isOf(ModItems.INFINITY_CHESTPLATE)) {
-                player.getAbilities().allowFlying = true;
                 List<StatusEffectInstance> effects = Lists.newArrayList(player.getStatusEffects());
                 for (StatusEffectInstance effectInstance : Collections2.filter(effects, e -> e.getEffectType().getCategory() == StatusEffectCategory.HARMFUL))
                     player.removeStatusEffect(effectInstance.getEffectType());

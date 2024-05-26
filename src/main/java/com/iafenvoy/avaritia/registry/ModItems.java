@@ -11,10 +11,7 @@ import com.iafenvoy.avaritia.AvaritiaReborn;
 import com.iafenvoy.avaritia.item.MatterClusterItem;
 import com.iafenvoy.avaritia.item.SingularityItem;
 import com.iafenvoy.avaritia.item.armor.InfinityArmor;
-import com.iafenvoy.avaritia.item.tool.InfinityPickaxeItem;
-import com.iafenvoy.avaritia.item.tool.InfinityShovelItem;
-import com.iafenvoy.avaritia.item.tool.InfinitySwordItem;
-import com.iafenvoy.avaritia.item.tool.InfinityTools;
+import com.iafenvoy.avaritia.item.tool.*;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
@@ -60,13 +57,13 @@ public class ModItems implements IAnnotatedRegistryEntry {
     @ItemReg(group = @TargetId("main"))
     public static final Item INFINITY_SWORD = new InfinitySwordItem();
     @ItemReg(group = @TargetId("main"))
-    public static final Item INFINITY_AXE = new InfinityTools.Axe();
+    public static final Item INFINITY_AXE = new InfinityAxeItem();
     @ItemReg(group = @TargetId("main"))
     public static final Item INFINITY_PICKAXE = new InfinityPickaxeItem();
     @ItemReg(group = @TargetId("main"))
     public static final Item INFINITY_SHOVEL = new InfinityShovelItem();
     @ItemReg(group = @TargetId("main"))
-    public static final Item INFINITY_HOE = new InfinityTools.Hoe();
+    public static final Item INFINITY_HOE = new InfinityHoeItem();
     @ItemReg(group = @TargetId("main"))
     public static final Item INFINITY_BOW = new InfinityTools.Bow();
     @ItemReg(group = @TargetId("main"))//TODO

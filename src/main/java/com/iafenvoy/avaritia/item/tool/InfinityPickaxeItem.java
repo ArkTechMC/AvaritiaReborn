@@ -2,7 +2,6 @@ package com.iafenvoy.avaritia.item.tool;
 
 import com.iafenvoy.avaritia.AvaritiaReborn;
 import com.iafenvoy.avaritia.item.MatterClusterItem;
-import com.iafenvoy.avaritia.util.ToolMaterialUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;

@@ -29,24 +29,17 @@ public class NeutronCollectorBlockEntity extends BlockEntity implements NamedScr
         super(ModBlockEntities.NEUTRON_COLLECTOR, pos, state);
         this.propertyDelegate = new PropertyDelegate() {
             public int get(int index) {
-                switch (index) {
-                    case 0:
-                        return NeutronCollectorBlockEntity.this.progress;
-                    case 1:
-                        return NeutronCollectorBlockEntity.this.maxProgress;
-                    default:
-                        return 0;
-                }
+                return switch (index) {
+                    case 0 -> NeutronCollectorBlockEntity.this.progress;
+                    case 1 -> NeutronCollectorBlockEntity.this.maxProgress;
+                    default -> 0;
+                };
             }
 
             public void set(int index, int value) {
                 switch (index) {
-                    case 0:
-                        NeutronCollectorBlockEntity.this.progress = value;
-                        break;
-                    case 1:
-                        NeutronCollectorBlockEntity.this.maxProgress = value;
-                        break;
+                    case 0 -> NeutronCollectorBlockEntity.this.progress = value;
+                    case 1 -> NeutronCollectorBlockEntity.this.maxProgress = value;
                 }
             }
 

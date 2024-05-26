@@ -88,16 +88,8 @@ public class ExtremeCraftingShapelessRecipe {
         this.filled = false;
     }
 
-    public void addIngredient(Ingredient ingredient) {
-        this.ingredients.add(ingredient);
-    }
-
     public void addIngredients(List<Ingredient> ingredient) {
         this.ingredients.addAll(ingredient);
-    }
-
-    public void addItems(List<ItemConvertible> items) {
-        this.addIngredients(items.stream().map(Ingredient::ofItems).toList());
     }
 
     public boolean match(List<ItemStack> stacks) {

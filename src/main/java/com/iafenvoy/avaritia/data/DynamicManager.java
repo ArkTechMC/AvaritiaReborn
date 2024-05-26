@@ -12,19 +12,12 @@ import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class DynamicManager {
-    private static final List<DynamicData> DATA = new ArrayList<>();
-
-    public static void reload() {
-        DATA.clear();
-    }
 
     public static void process(DynamicData data) {
         if (!data.available()) return;
-        DATA.add(data);
         if (data.recipe() != null)
             data.recipe().addToRecipes();
         if (data.singularity() != null)
