@@ -3,7 +3,9 @@ package com.iafenvoy.avaritia.compat.emi;
 import com.iafenvoy.avaritia.AvaritiaReborn;
 import com.iafenvoy.avaritia.data.recipe.ExtremeCraftingShapedRecipe;
 import com.iafenvoy.avaritia.data.recipe.ExtremeCraftingShapelessRecipe;
+import com.iafenvoy.avaritia.data.singularity.SingularityHelper;
 import com.iafenvoy.avaritia.registry.ModBlocks;
+import com.iafenvoy.avaritia.registry.ModItems;
 import com.iafenvoy.avaritia.registry.ModScreenHandlers;
 import com.iafenvoy.avaritia.util.RecipeUtil;
 import dev.emi.emi.api.EmiPlugin;
@@ -11,6 +13,7 @@ import dev.emi.emi.api.EmiRegistry;
 import dev.emi.emi.api.recipe.EmiRecipe;
 import dev.emi.emi.api.recipe.EmiRecipeCategory;
 import dev.emi.emi.api.render.EmiTexture;
+import dev.emi.emi.api.stack.Comparison;
 import dev.emi.emi.api.stack.EmiIngredient;
 import dev.emi.emi.api.stack.EmiStack;
 import dev.emi.emi.api.widget.WidgetHolder;
@@ -37,6 +40,7 @@ public class ExtremeCraftingRecipePlugin implements EmiPlugin {
         for (ExtremeCraftingShapelessRecipe recipe : ExtremeCraftingShapelessRecipe.RECIPES.values())
             registry.addRecipe(new EmiExtremeCraftingRecipe(recipe));
         registry.addRecipeHandler(ModScreenHandlers.EXTREME_CRAFTING_TABLE_SCREEN_HANDLER, new ExtremeCraftingHandler());
+        registry.setDefaultComparison(ModItems.SINGULARITY, Comparison.of((a, b) -> SingularityHelper.compare(a.getItemStack(), b.getItemStack())));
     }
 
     public record EmiExtremeCraftingRecipe(Identifier id, boolean shapeless, List<List<Ingredient>> inputs,

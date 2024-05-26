@@ -1,8 +1,12 @@
 package com.iafenvoy.avaritia.item.armor;
 
+import com.google.common.collect.Collections2;
+import com.google.common.collect.Lists;
 import com.iafenvoy.avaritia.registry.ModItems;
 import com.iafenvoy.avaritia.util.ArmorMaterialUtil;
+import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
@@ -10,15 +14,16 @@ import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.util.Rarity;
 import net.minecraft.world.World;
 
-import java.util.Objects;
+import java.util.List;
 
 public class InfinityArmor extends ArmorItem {
     private static final ArmorMaterial MATERIAL = ArmorMaterialUtil.of("infinity", new int[]{999, 999, 999, 999}, 999, new int[]{999, 999, 999, 999}, 1000, SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE, 999, 999, ModItems.INFINITY_INGOT);
 
-    public InfinityArmor(Type slot, Settings settings) {
-        super(MATERIAL, slot, settings);
+    public InfinityArmor(Type slot) {
+        super(MATERIAL, slot, new FabricItemSettings().fireproof().rarity(Rarity.EPIC));
     }
 
     @Override
@@ -28,79 +33,29 @@ public class InfinityArmor extends ArmorItem {
 
     @Override
     public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
-        if (world.isClient) {
-            if (entity instanceof PlayerEntity player) {
-                if (this.hasFullSuitOfArmorOn(player)) {
-                    player.getAbilities().allowFlying = true;
-                    //player.setHealth(20);
-                } else {
-                    if (!player.getAbilities().creativeMode) {
-                        player.getAbilities().allowFlying = false;
-                    }
+        if (entity instanceof PlayerEntity player) {
+            this.setFlying(player.getInventory().getArmorStack(2).isOf(ModItems.INFINITY_CHESTPLATE), player);
+            if (player.getInventory().getArmorStack(3).isOf(ModItems.INFINITY_HELMET)) {
+                player.setAir(player.getMaxAir());
+                player.getHungerManager().setFoodLevel(20);
+                player.addStatusEffect(new StatusEffectInstance(StatusEffects.NIGHT_VISION, 300, 0, false, false));
+            } else if (player.getInventory().getArmorStack(2).isOf(ModItems.INFINITY_CHESTPLATE)) {
+                player.getAbilities().allowFlying = true;
+                List<StatusEffectInstance> effects = Lists.newArrayList(player.getStatusEffects());
+                for (StatusEffectInstance effectInstance : Collections2.filter(effects, e -> e.getEffectType().getCategory() == StatusEffectCategory.HARMFUL))
+                    player.removeStatusEffect(effectInstance.getEffectType());
 
-                }
-            }
+            } else if (player.getInventory().getArmorStack(1).isOf(ModItems.INFINITY_LEGS) && player.isOnFire())
+                player.extinguish();
         }
-
-        if (!world.isClient()) {
-            if (entity instanceof PlayerEntity player) {
-
-                if (this.hasFullSuitOfArmorOn(player)) {
-                    if (player.getStatusEffect(StatusEffects.NIGHT_VISION) == null || Objects.requireNonNull(player.getStatusEffect(StatusEffects.NIGHT_VISION)).getDuration() < 250) {
-                        player.addStatusEffect(new StatusEffectInstance(StatusEffects.NIGHT_VISION, 300, 4));
-                    }
-
-                    if (player.getStatusEffect(StatusEffects.REGENERATION) == null || Objects.requireNonNull(player.getStatusEffect(StatusEffects.REGENERATION)).getDuration() < 250) {
-                        player.addStatusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 300, 4));
-                    }
-                } else {
-                    //player.removeStatusEffect(StatusEffects.FIRE_RESISTANCE);
-                    //player.removeStatusEffect(StatusEffects.NIGHT_VISION);
-                    //player.removeStatusEffect(StatusEffects.SPEED);
-                    //player.removeStatusEffect(StatusEffects.JUMP_BOOST);
-                    //player.removeStatusEffect(StatusEffects.FIRE_RESISTANCE);
-                }
-
-                if (player.getInventory().getArmorStack(3).getItem().equals(ModItems.INFINITY_HELMET))
-                    if (player.getHungerManager().getFoodLevel() != 20)
-                        player.getHungerManager().setFoodLevel(20);
-
-                if (player.getInventory().getArmorStack(2).getItem().equals(ModItems.INFINITY_CHESTPLATE)) {
-                    if (player.getStatusEffect(StatusEffects.POISON) != null)
-                        player.removeStatusEffect(StatusEffects.POISON);
-                    if (player.getStatusEffect(StatusEffects.WEAKNESS) != null)
-                        player.removeStatusEffect(StatusEffects.WEAKNESS);
-                    if (player.getStatusEffect(StatusEffects.SLOWNESS) != null)
-                        player.removeStatusEffect(StatusEffects.SLOWNESS);
-                    if (player.getStatusEffect(StatusEffects.BLINDNESS) != null)
-                        player.removeStatusEffect(StatusEffects.BLINDNESS);
-                    if (player.getStatusEffect(StatusEffects.HUNGER) != null)
-                        player.removeStatusEffect(StatusEffects.HUNGER);
-                    if (player.getStatusEffect(StatusEffects.NAUSEA) != null)
-                        player.removeStatusEffect(StatusEffects.NAUSEA);
-                    if (player.getStatusEffect(StatusEffects.MINING_FATIGUE) != null)
-                        player.removeStatusEffect(StatusEffects.MINING_FATIGUE);
-                    if (player.getStatusEffect(StatusEffects.WITHER) != null)
-                        player.removeStatusEffect(StatusEffects.WITHER);
-                }
-
-                if (player.getInventory().getArmorStack(1).getItem().equals(ModItems.INFINITY_LEGS))
-                    if (player.getStatusEffect(StatusEffects.FIRE_RESISTANCE) == null || Objects.requireNonNull(player.getStatusEffect(StatusEffects.FIRE_RESISTANCE)).getDuration() < 250)
-                        player.addStatusEffect(new StatusEffectInstance(StatusEffects.FIRE_RESISTANCE, 300, 99));
-
-                if (player.getInventory().getArmorStack(0).getItem().equals(ModItems.INFINITY_BOOTS)) {
-                    if (player.getStatusEffect(StatusEffects.JUMP_BOOST) == null || Objects.requireNonNull(player.getStatusEffect(StatusEffects.JUMP_BOOST)).getDuration() < 250)
-                        player.addStatusEffect(new StatusEffectInstance(StatusEffects.JUMP_BOOST, 300, 4));
-                    if (player.getStatusEffect(StatusEffects.SPEED) == null || Objects.requireNonNull(player.getStatusEffect(StatusEffects.SPEED)).getDuration() < 250)
-                        player.addStatusEffect(new StatusEffectInstance(StatusEffects.SPEED, 300, 4));
-                }
-
-            }
-        }
-
-        super.inventoryTick(stack, world, entity, slot, selected);
     }
 
+    private void setFlying(boolean flying, PlayerEntity player) {
+        if (player.isCreative()) return;
+        player.getAbilities().allowFlying = flying;
+        if (!flying)
+            player.getAbilities().flying = false;
+    }
 
     private boolean hasFullSuitOfArmorOn(PlayerEntity player) {
         ItemStack boots = player.getInventory().getArmorStack(0);

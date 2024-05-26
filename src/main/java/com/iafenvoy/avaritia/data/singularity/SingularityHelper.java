@@ -14,6 +14,10 @@ public class SingularityHelper {
         return SingularityColor.COLOR_MAP.getOrDefault(type, SingularityColor.EMPTY).color().get();
     }
 
+    public static boolean compare(ItemStack a, ItemStack b) {
+        return getFromStack(a) == getFromStack(b);
+    }
+
     public static boolean same(ItemStack stack, Singularity singularity) {
         String type = stack.getOrCreateNbt().getString(TYPE_KEY);
         return singularity.getId().equals(type);

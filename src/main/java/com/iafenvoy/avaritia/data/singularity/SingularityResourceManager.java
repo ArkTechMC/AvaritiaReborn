@@ -38,11 +38,14 @@ public class SingularityResourceManager {
                 if (Singularity.MATERIALS.containsKey(result)) {
                     List<String> dependency = root.get("dependency").getAsJsonArray().asList().stream().map(JsonElement::getAsString).toList();
                     Singularity.SingularityRecipe recipe = new Singularity.SingularityRecipe(dependency, result, new ArrayList<>());
-                    for (JsonElement ingredient : root.get("ingredients").getAsJsonArray()) {
-                        JsonObject object = ingredient.getAsJsonObject();
-                        Singularity.SingularityIngredient i = new Singularity.SingularityIngredient(Ingredient.fromJson(object.get("ingredient")), object.get("amount").getAsInt());
-                        recipe.ingredients().add(i);
-                    }
+                    if (recipe.canUse())
+                        for (JsonElement ingredient : root.get("ingredients").getAsJsonArray()) {
+                            JsonObject object = ingredient.getAsJsonObject();
+                            Singularity.SingularityIngredient i = new Singularity.SingularityIngredient(Ingredient.fromJson(object.get("ingredient")), object.get("amount").getAsInt());
+                            recipe.ingredients().add(i);
+                        }
+                    else
+                        AvaritiaReborn.LOGGER.warn("Cannot load " + entry.getKey() + " since dependency mod not found.");
                     Singularity.MATERIALS.get(result).addRecipe(recipe);
                 } else {
                     AvaritiaReborn.LOGGER.warn("Unknown singularity: " + result);

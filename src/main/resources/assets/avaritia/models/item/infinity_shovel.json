@@ -6,7 +6,7 @@
   "overrides": [
     {
       "predicate": {
-        "avaritia:destroyer": 1.0
+        "avaritia:destroyer": 1
       },
       "model": "avaritia:item/infinity_shovel_destroyer"
     }

@@ -49,7 +49,7 @@ public class CompressorRecipePlugin implements EmiPlugin {
             List<EmiIngredient> ingredients = new ArrayList<>();
             for (Singularity.SingularityRecipe recipe : this.singularity.getRecipes())
                 for (Singularity.SingularityIngredient ingredient : recipe.ingredients())
-                    ingredients.add(EmiIngredient.of(ingredient.ingredient(), (int) Math.ceil((double) this.singularity.getCost() / ingredient.amount())));
+                    ingredients.add(EmiIngredient.of(ingredient.ingredient()));//, (int) Math.ceil((double) this.singularity.getCost() / ingredient.amount())
             return List.of(EmiIngredient.of(ingredients, this.singularity.getCost()));
         }
 

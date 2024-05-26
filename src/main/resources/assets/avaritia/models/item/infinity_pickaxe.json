@@ -6,7 +6,7 @@
   "overrides": [
     {
       "predicate": {
-        "avaritia:hammer": 1.0
+        "avaritia:hammer": 1
       },
       "model": "avaritia:item/infinity_pickaxe_hammer"
     }
