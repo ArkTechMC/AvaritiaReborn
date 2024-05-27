@@ -1,5 +1,6 @@
 package com.iafenvoy.avaritia;
 
+import com.iafenvoy.avaritia.registry.ModGameRules;
 import com.iafenvoy.avaritia.registry.ModResourceManagers;
 import com.mojang.logging.LogUtils;
 import net.fabricmc.api.ModInitializer;
@@ -11,6 +12,7 @@ public class AvaritiaReborn implements ModInitializer {
 
     @Override
     public void onInitialize() {
+        ModGameRules.init();
         ModResourceManagers.register();
     }
 }

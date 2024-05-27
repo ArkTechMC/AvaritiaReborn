@@ -19,10 +19,10 @@ import net.minecraft.world.World;
 
 import java.util.List;
 
-public class InfinityArmor extends ArmorItem {
+public class InfinityArmorItem extends ArmorItem {
     private static final ArmorMaterial MATERIAL = ArmorMaterialUtil.of("infinity", new int[]{999, 999, 999, 999}, 999, new int[]{999, 999, 999, 999}, 1000, SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE, 999, 999, ModItems.INFINITY_INGOT);
 
-    public InfinityArmor(Type slot) {
+    public InfinityArmorItem(Type slot) {
         super(MATERIAL, slot, new FabricItemSettings().fireproof().rarity(Rarity.EPIC));
     }
 

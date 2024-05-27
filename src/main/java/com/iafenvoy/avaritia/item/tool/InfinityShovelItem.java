@@ -2,6 +2,7 @@ package com.iafenvoy.avaritia.item.tool;
 
 import com.iafenvoy.avaritia.AvaritiaReborn;
 import com.iafenvoy.avaritia.item.MatterClusterItem;
+import com.iafenvoy.avaritia.registry.ModGameRules;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
@@ -53,14 +54,13 @@ public class InfinityShovelItem extends ShovelItem {
         tooltip.add(Text.literal(stack.getOrCreateNbt().getBoolean(DESTROYER_NBT) ? "Destroyer Mode" : "Shovel Mode"));
     }
 
-
     @Override
     public boolean postMine(ItemStack stack, World world, BlockState state, BlockPos pos, LivingEntity miner) {
         if (stack.isOf(this) && world instanceof ServerWorld serverWorld) {
             boolean isDestroyer = stack.getOrCreateNbt().getBoolean(DESTROYER_NBT);
             if (isDestroyer) {
                 new Thread(() -> {
-                    final int r = 8;
+                    final int r = serverWorld.getGameRules().getInt(ModGameRules.INFINITY_SHOVEL_RANGE);
                     List<ItemStack> packed = new ArrayList<>();
                     for (int i = pos.getX() - r; i <= pos.getX() + r; i++)
                         for (int j = pos.getZ() - r; j <= pos.getZ() + r; j++)

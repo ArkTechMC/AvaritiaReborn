@@ -2,6 +2,7 @@ package com.iafenvoy.avaritia.item.tool;
 
 import com.iafenvoy.avaritia.AvaritiaReborn;
 import com.iafenvoy.avaritia.item.MatterClusterItem;
+import com.iafenvoy.avaritia.registry.ModGameRules;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
@@ -64,22 +65,21 @@ public class InfinityPickaxeItem extends PickaxeItem {
         tooltip.add(Text.literal(stack.getOrCreateNbt().getBoolean(HAMMER_NBT) ? "Hammer Mode" : "Pickaxe Mode"));
     }
 
-
     @Override
     public boolean postMine(ItemStack stack, World world, BlockState state, BlockPos pos, LivingEntity miner) {
         if (stack.isOf(this) && world instanceof ServerWorld serverWorld) {
             boolean isHammer = stack.getOrCreateNbt().getBoolean(HAMMER_NBT);
             if (isHammer) {
                 new Thread(() -> {
-                    final int r = 8;
+                    final int r = serverWorld.getGameRules().getInt(ModGameRules.INFINITY_PICKAXE_RANGE);
                     List<ItemStack> packed = new ArrayList<>();
                     for (int i = pos.getX() - r; i <= pos.getX() + r; i++)
                         for (int j = pos.getZ() - r; j <= pos.getZ() + r; j++)
-                            for (int k = pos.getY(); k >= pos.getY() - r * 2 && k >= world.getBottomY(); k--) {
+                            for (int k = pos.getY(); k >= pos.getY() - r * 2 && k >= serverWorld.getBottomY(); k--) {
                                 BlockPos blockPos = new BlockPos(i, k, j);
-                                BlockState block = world.getBlockState(blockPos);
-                                if(!block.isIn(BlockTags.PICKAXE_MINEABLE)) continue;
-                                BlockEntity blockEntity = world.getBlockEntity(blockPos);
+                                BlockState block = serverWorld.getBlockState(blockPos);
+                                if (!block.isIn(BlockTags.PICKAXE_MINEABLE)) continue;
+                                BlockEntity blockEntity = serverWorld.getBlockEntity(blockPos);
                                 List<ItemStack> drops = Block.getDroppedStacks(block, serverWorld, pos, blockEntity);
                                 for (ItemStack drop : drops) {
                                     boolean inserted = false;

@@ -10,7 +10,7 @@ import com.iafenvoy.annotationlib.util.TargetType;
 import com.iafenvoy.avaritia.AvaritiaReborn;
 import com.iafenvoy.avaritia.item.MatterClusterItem;
 import com.iafenvoy.avaritia.item.SingularityItem;
-import com.iafenvoy.avaritia.item.armor.InfinityArmor;
+import com.iafenvoy.avaritia.item.armor.InfinityArmorItem;
 import com.iafenvoy.avaritia.item.tool.*;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -34,26 +34,26 @@ public class ModItems implements IAnnotatedRegistryEntry {
     public static final Item NEUTRONIUM_INGOT = new Item(new FabricItemSettings());
     @ItemReg(group = @TargetId("main"))//TODO
     public static final Item ENDEST_PEARL = new Item(new FabricItemSettings());
-    @ItemReg(group = @TargetId("main"))//TODO
+    @ItemReg(group = @TargetId("main"))
     public static final Item SINGULARITY = new SingularityItem(new FabricItemSettings().rarity(Rarity.UNCOMMON));
     @ItemReg(group = @TargetId("main"))
     public static final Item RECORD_FRAGMENT = new Item(new FabricItemSettings().fireproof());
     @ItemReg(group = @TargetId("main"))
-    public static final Item COSMIC_MEATBALLS = new Item(new FabricItemSettings().rarity(Rarity.UNCOMMON).food(new FoodComponent.Builder().hunger(100).alwaysEdible().statusEffect(new StatusEffectInstance(StatusEffects.STRENGTH, 5 * 60, 1), 1).build()));
+    public static final Item COSMIC_MEATBALLS = new Item(new FabricItemSettings().rarity(Rarity.UNCOMMON).food(new FoodComponent.Builder().hunger(100).alwaysEdible().statusEffect(new StatusEffectInstance(StatusEffects.STRENGTH, 5 * 60 * 20, 1), 1).build()));
     @ItemReg(group = @TargetId("main"))
-    public static final Item ULTIMATE_STEW = new Item(new FabricItemSettings().rarity(Rarity.UNCOMMON).food(new FoodComponent.Builder().hunger(100).statusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 5 * 60, 1), 1).build()));
+    public static final Item ULTIMATE_STEW = new Item(new FabricItemSettings().rarity(Rarity.UNCOMMON).food(new FoodComponent.Builder().hunger(100).statusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 5 * 60 * 20, 1), 1).build()));
     @ItemReg(group = @TargetId("main"))
     public static final Item INFINITY_CATALYST = new Item(new FabricItemSettings().fireproof().rarity(Rarity.RARE));
     @ItemReg(group = @TargetId("main"))
     public static final Item INFINITY_INGOT = new Item(new FabricItemSettings().fireproof().rarity(Rarity.RARE));
     @ItemReg(group = @TargetId("main"))
-    public static final Item INFINITY_HELMET = new InfinityArmor(ArmorItem.Type.HELMET);
+    public static final Item INFINITY_HELMET = new InfinityArmorItem(ArmorItem.Type.HELMET);
     @ItemReg(group = @TargetId("main"))
-    public static final Item INFINITY_CHESTPLATE = new InfinityArmor(ArmorItem.Type.CHESTPLATE);
+    public static final Item INFINITY_CHESTPLATE = new InfinityArmorItem(ArmorItem.Type.CHESTPLATE);
     @ItemReg(group = @TargetId("main"))
-    public static final Item INFINITY_LEGS = new InfinityArmor(ArmorItem.Type.LEGGINGS);
+    public static final Item INFINITY_LEGS = new InfinityArmorItem(ArmorItem.Type.LEGGINGS);
     @ItemReg(group = @TargetId("main"))
-    public static final Item INFINITY_BOOTS = new InfinityArmor(ArmorItem.Type.BOOTS);
+    public static final Item INFINITY_BOOTS = new InfinityArmorItem(ArmorItem.Type.BOOTS);
     @ItemReg(group = @TargetId("main"))
     public static final Item INFINITY_SWORD = new InfinitySwordItem();
     @ItemReg(group = @TargetId("main"))
@@ -65,8 +65,8 @@ public class ModItems implements IAnnotatedRegistryEntry {
     @ItemReg(group = @TargetId("main"))
     public static final Item INFINITY_HOE = new InfinityHoeItem();
     @ItemReg(group = @TargetId("main"))
-    public static final Item INFINITY_BOW = new InfinityTools.Bow();
-    @ItemReg(group = @TargetId("main"))//TODO
+    public static final Item INFINITY_BOW = new InfinityBowItem();
+    @ItemReg(group = @TargetId("main"))
     public static final Item SKULLFIRE_SWORD = new InfinitySwordItem();
     @Group(@TargetId("main"))
     @Link(type = TargetType.BLOCK, target = @TargetId("compressed_crafting_table"))
@@ -92,6 +92,6 @@ public class ModItems implements IAnnotatedRegistryEntry {
     @Group(@TargetId("main"))
     @Link(type = TargetType.BLOCK, target = @TargetId("infinity_block"))
     public static Item INFINITY_BLOCK = null;
-    @ItemReg(group = @TargetId("main"))//TODO
+    @ItemReg(group = @TargetId("main"))
     public static final Item MATTER_CLUSTER = new MatterClusterItem();
 }
