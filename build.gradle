@@ -81,6 +81,7 @@ jar {
     from("LICENSE") {
         rename { "${it}_${project.archivesBaseName}" }
     }
+    from("LICENSE_Avaritia_Origin") {}
 }
 
 // configure the maven publication
