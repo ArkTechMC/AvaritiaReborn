@@ -94,8 +94,7 @@ public class InfinityPickaxeItem extends PickaxeItem {
                                 }
                                 serverWorld.breakBlock(blockPos, false);
                             }
-                    ItemStack result = MatterClusterItem.create(packed);
-                    miner.dropStack(result);
+                    miner.dropStack(MatterClusterItem.create(packed));
                 }).start();
             }
         }
