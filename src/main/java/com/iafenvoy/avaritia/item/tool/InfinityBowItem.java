@@ -31,7 +31,7 @@ public class InfinityBowItem extends BowItem {
     @Override
     public void onStoppedUsing(ItemStack stack, World world, LivingEntity user, int remainingUseTicks) {
         if (user instanceof PlayerEntity playerEntity) {
-            InfinityArrowEntity arrow = new InfinityArrowEntity(world);
+            InfinityArrowEntity arrow = new InfinityArrowEntity(world, user);
             int i = this.getMaxUseTime(stack) - remainingUseTicks;
             float f = getPullProgress(i);
             arrow.setPosition(user.getPos());

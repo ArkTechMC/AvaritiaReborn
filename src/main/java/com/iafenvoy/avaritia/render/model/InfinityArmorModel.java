@@ -23,7 +23,7 @@ public class InfinityArmorModel<T extends LivingEntity> extends EntityModel<T> {
                 ModelTransform.of(0, 0, 0, 0, 1.57f, 0));
         partdefinition.addChild("rightWing",
                 ModelPartBuilder.create().uv(0, 0).mirrored().cuboid(3.5f, -12, -3, 0, 32, 32),
-                ModelTransform.of(0, 0, 0,0, -1.57f,0));
+                ModelTransform.of(0, 0, 0, 0, -1.57f, 0));
         return TexturedModelData.of(meshdefinition, 64, 64);
     }
 
@@ -34,7 +34,7 @@ public class InfinityArmorModel<T extends LivingEntity> extends EntityModel<T> {
 
     @Override
     public void render(MatrixStack matrices, VertexConsumer vertices, int light, int overlay, float red, float green, float blue, float alpha) {
-        this.leftWing.render(matrices, vertices, light, overlay);
-        this.rightWing.render(matrices, vertices, light, overlay);
+        this.leftWing.render(matrices, vertices, light, overlay, red, green, blue, alpha);
+        this.rightWing.render(matrices, vertices, light, overlay, red, green, blue, alpha);
     }
 }

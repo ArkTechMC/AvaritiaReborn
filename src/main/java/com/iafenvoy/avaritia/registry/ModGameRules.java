@@ -12,8 +12,10 @@ public class ModGameRules {
     public static final GameRules.Key<GameRules.IntRule> INFINITY_HOE_RANGE = register("tool.hoe.range", GameRules.Category.PLAYER, GameRuleFactory.createIntRule(8, 0));
     public static final GameRules.Key<GameRules.IntRule> INFINITY_PICKAXE_RANGE = register("tool.pickaxe.range", GameRules.Category.PLAYER, GameRuleFactory.createIntRule(8, 0));
     public static final GameRules.Key<GameRules.IntRule> INFINITY_SHOVEL_RANGE = register("tool.shovel.range", GameRules.Category.PLAYER, GameRuleFactory.createIntRule(8, 0));
-    public static final GameRules.Key<EnumRule<InfinityArrowEntity.HitBlockBehaviour>> INFINITY_BOW_BEHAVIOUR = register("weapon.bow.arror.hitBlockBehaviour", GameRules.Category.PLAYER, GameRuleFactory.createEnumRule(InfinityArrowEntity.HitBlockBehaviour.Explode));
+    public static final GameRules.Key<EnumRule<InfinityArrowEntity.HitBlockBehaviour>> INFINITY_BOW_BEHAVIOUR = register("weapon.bow.arrow.hitBlockBehaviour", GameRules.Category.PLAYER, GameRuleFactory.createEnumRule(InfinityArrowEntity.HitBlockBehaviour.Explode));
     public static final GameRules.Key<GameRules.BooleanRule> INFINITY_KILL_CREATIVE = register("weapon.kill.creative", GameRules.Category.PLAYER, GameRuleFactory.createBooleanRule(false));
+    public static final GameRules.Key<GameRules.BooleanRule> INFINITY_BOW_TRACKING = register("weapon.bow.tracking", GameRules.Category.PLAYER, GameRuleFactory.createBooleanRule(false));
+    public static final GameRules.Key<GameRules.IntRule> INFINITY_BOW_RANGE = register("weapon.bow.tracking.range", GameRules.Category.PLAYER, GameRuleFactory.createIntRule(64, 1));
 
     public static void init() {
     }
