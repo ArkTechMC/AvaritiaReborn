@@ -1,8 +1,10 @@
 package com.iafenvoy.avaritia.registry;
 
 import com.iafenvoy.avaritia.AvaritiaReborn;
+import com.iafenvoy.avaritia.entity.InfinityArrowEntity;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleFactory;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleRegistry;
+import net.fabricmc.fabric.api.gamerule.v1.rule.EnumRule;
 import net.minecraft.world.GameRules;
 
 public class ModGameRules {
@@ -10,6 +12,8 @@ public class ModGameRules {
     public static final GameRules.Key<GameRules.IntRule> INFINITY_HOE_RANGE = register("tool.hoe.range", GameRules.Category.PLAYER, GameRuleFactory.createIntRule(8, 0));
     public static final GameRules.Key<GameRules.IntRule> INFINITY_PICKAXE_RANGE = register("tool.pickaxe.range", GameRules.Category.PLAYER, GameRuleFactory.createIntRule(8, 0));
     public static final GameRules.Key<GameRules.IntRule> INFINITY_SHOVEL_RANGE = register("tool.shovel.range", GameRules.Category.PLAYER, GameRuleFactory.createIntRule(8, 0));
+    public static final GameRules.Key<EnumRule<InfinityArrowEntity.HitBlockBehaviour>> INFINITY_BOW_BEHAVIOUR = register("weapon.bow.arror.hitBlockBehaviour", GameRules.Category.PLAYER, GameRuleFactory.createEnumRule(InfinityArrowEntity.HitBlockBehaviour.Explode));
+    public static final GameRules.Key<GameRules.BooleanRule> INFINITY_KILL_CREATIVE = register("weapon.kill.creative", GameRules.Category.PLAYER, GameRuleFactory.createBooleanRule(false));
 
     public static void init() {
     }

@@ -33,6 +33,7 @@
     "annotation_lib": [
       "com.iafenvoy.avaritia.registry.ModBlockEntities",
       "com.iafenvoy.avaritia.registry.ModBlocks",
+      "com.iafenvoy.avaritia.registry.ModEntities",
       "com.iafenvoy.avaritia.registry.ModItemGroups",
       "com.iafenvoy.avaritia.registry.ModItems"
     ]
