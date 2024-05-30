@@ -25,8 +25,8 @@ public class DynamicResourceManager implements SimpleSynchronousResourceReloadLi
     @Override
     public void reload(ResourceManager manager) {
         SingularityResourceManager.reload(manager);
-        ExtremeRecipeResourceManager.reload(manager);
-
+        //This will be completed by RecipeManagerMixin
+//        ExtremeRecipeResourceManager.reload(manager);
         ExtremeCraftingShapelessRecipe.reloadAll();
         for (Map.Entry<Identifier, Resource> entry : manager.findResources(AvaritiaReborn.MOD_ID + "/dynamic", p -> p.getPath().endsWith(".json")).entrySet()) {
             try (InputStream stream = entry.getValue().getInputStream()) {
