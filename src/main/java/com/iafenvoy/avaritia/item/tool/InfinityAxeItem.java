@@ -34,7 +34,7 @@ public class InfinityAxeItem extends AxeItem {
 
     @Override
     public boolean postMine(ItemStack stack, World world, BlockState state, BlockPos pos, LivingEntity miner) {
-        if (world instanceof ServerWorld serverWorld)
+        if (world instanceof ServerWorld serverWorld && !miner.isSneaking())
             new Thread(() -> {
                 List<ItemStack> packed = new ArrayList<>();
                 final LinkedList<Pair<BlockPos, Integer>> queue = new LinkedList<>();
