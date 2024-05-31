@@ -35,6 +35,8 @@ public class ModItems implements IAnnotatedRegistryEntry {
     @ItemReg(group = @TargetId("main"))//TODO
     public static final Item ENDEST_PEARL = new Item(new FabricItemSettings());
     @ItemReg(group = @TargetId("main"))
+    public static final Item SKULLFIRE_SWORD = new InfinitySwordItem();
+    @ItemReg(group = @TargetId("main"))
     public static final Item SINGULARITY = new SingularityItem(new FabricItemSettings().rarity(Rarity.UNCOMMON));
     @ItemReg(group = @TargetId("main"))
     public static final Item RECORD_FRAGMENT = new Item(new FabricItemSettings().fireproof());
@@ -67,7 +69,7 @@ public class ModItems implements IAnnotatedRegistryEntry {
     @ItemReg(group = @TargetId("main"))
     public static final Item INFINITY_BOW = new InfinityBowItem();
     @ItemReg(group = @TargetId("main"))
-    public static final Item SKULLFIRE_SWORD = new InfinitySwordItem();
+    public static final Item INFINITY_TOTEM = new Item(new FabricItemSettings().maxCount(1).rarity(Rarity.EPIC));
     @Group(@TargetId("main"))
     @Link(type = TargetType.BLOCK, target = @TargetId("compressed_crafting_table"))
     public static Item COMPRESSED_CRAFTING_TABLE = null;

@@ -3,7 +3,6 @@ package com.iafenvoy.avaritia.data;
 import com.google.gson.Gson;
 import com.iafenvoy.avaritia.AvaritiaReborn;
 import com.iafenvoy.avaritia.data.recipe.ExtremeCraftingShapelessRecipe;
-import com.iafenvoy.avaritia.data.recipe.ExtremeRecipeResourceManager;
 import com.iafenvoy.avaritia.data.singularity.SingularityResourceManager;
 import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
 import net.minecraft.resource.Resource;
@@ -27,7 +26,6 @@ public class DynamicResourceManager implements SimpleSynchronousResourceReloadLi
         SingularityResourceManager.reload(manager);
         //This will be completed by RecipeManagerMixin
 //        ExtremeRecipeResourceManager.reload(manager);
-        ExtremeCraftingShapelessRecipe.reloadAll();
         for (Map.Entry<Identifier, Resource> entry : manager.findResources(AvaritiaReborn.MOD_ID + "/dynamic", p -> p.getPath().endsWith(".json")).entrySet()) {
             try (InputStream stream = entry.getValue().getInputStream()) {
                 DynamicManager.DynamicData data = GSON.fromJson(new InputStreamReader(stream), DynamicManager.DynamicData.class);

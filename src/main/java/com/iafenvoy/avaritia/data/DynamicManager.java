@@ -2,9 +2,9 @@ package com.iafenvoy.avaritia.data;
 
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonSyntaxException;
+import com.iafenvoy.avaritia.AvaritiaReborn;
 import com.iafenvoy.avaritia.data.recipe.ExtremeCraftingShapelessRecipe;
 import com.iafenvoy.avaritia.data.singularity.Singularity;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.item.Item;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.registry.Registries;
@@ -15,7 +15,6 @@ import net.minecraft.util.Identifier;
 import java.util.List;
 
 public class DynamicManager {
-
     public static void process(DynamicData data) {
         if (!data.available()) return;
         if (data.recipe() != null)
@@ -26,7 +25,7 @@ public class DynamicManager {
 
     public record DynamicData(List<String> dependency, DynamicRecipe recipe, SingularityPlus singularity) {
         public boolean available() {
-            return this.dependency.isEmpty() || this.dependency.stream().anyMatch(FabricLoader.getInstance()::isModLoaded);
+            return new DependencyHolder(this.dependency).anyLoaded();
         }
     }
 
@@ -34,11 +33,11 @@ public class DynamicManager {
                                 List<DynamicIngredient> meatballs) {
         public void addToRecipes() {
             if (this.catalyst != null)
-                ExtremeCraftingShapelessRecipe.INFINITY_CATALYST.addIngredients(toIngredientList(this.catalyst));
+                ExtremeCraftingShapelessRecipe.findAndAdd(new Identifier(AvaritiaReborn.MOD_ID, "infinity_catalyst"), toIngredientList(this.catalyst));
             if (this.stew != null)
-                ExtremeCraftingShapelessRecipe.ULTIMATE_STEW.addIngredients(toIngredientList(this.stew));
+                ExtremeCraftingShapelessRecipe.findAndAdd(new Identifier(AvaritiaReborn.MOD_ID, "ultimate_stew"), toIngredientList(this.stew));
             if (this.meatballs != null)
-                ExtremeCraftingShapelessRecipe.COSMIC_MEATBALLS.addIngredients(toIngredientList(this.meatballs));
+                ExtremeCraftingShapelessRecipe.findAndAdd(new Identifier(AvaritiaReborn.MOD_ID, "cosmic_meatballs"), toIngredientList(this.meatballs));
         }
     }
 

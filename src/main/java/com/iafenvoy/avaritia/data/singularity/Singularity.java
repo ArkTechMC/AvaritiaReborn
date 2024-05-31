@@ -1,6 +1,6 @@
 package com.iafenvoy.avaritia.data.singularity;
 
-import net.fabricmc.loader.api.FabricLoader;
+import com.iafenvoy.avaritia.data.DependencyHolder;
 import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.Ingredient;
 
@@ -41,7 +41,7 @@ public class Singularity {
 
     public SingularityIngredient test(ItemStack stack) {
         if (this.recipes == null) this.recipes = new ArrayList<>();
-        for (SingularityRecipe recipe : this.recipes.stream().filter(SingularityRecipe::canUse).toList())
+        for (SingularityRecipe recipe : this.recipes.stream().filter(x -> x.dependency.anyLoaded()).toList())
             for (SingularityIngredient ingredient : recipe.ingredients)
                 if (ingredient.ingredient.test(stack))
                     return ingredient;
@@ -49,7 +49,7 @@ public class Singularity {
     }
 
     public boolean hasAvailable() {
-        return this.recipes.stream().anyMatch(SingularityRecipe::canUse);
+        return this.recipes.stream().anyMatch(x -> x.dependency.anyLoaded());
     }
 
     public static void reload() {
@@ -62,9 +62,10 @@ public class Singularity {
         mul += mul_;
     }
 
-    public record SingularityRecipe(List<String> dependency, String result, List<SingularityIngredient> ingredients) {
-        public boolean canUse() {
-            return this.dependency.isEmpty() || this.dependency.stream().anyMatch(FabricLoader.getInstance()::isModLoaded);
+    public record SingularityRecipe(DependencyHolder dependency, String result,
+                                    List<SingularityIngredient> ingredients) {
+        public SingularityRecipe(List<String> dependency, String result, List<SingularityIngredient> ingredients) {
+            this(new DependencyHolder(dependency), result, ingredients);
         }
     }
 

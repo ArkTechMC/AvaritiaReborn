@@ -11,6 +11,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -24,7 +25,12 @@ public abstract class MobEntityMixin extends Entity {
     @Inject(method = "dropLoot", at = @At("HEAD"))
     public void dropHandler(DamageSource damageSource, boolean causedByPlayer, CallbackInfo ci) {
         if (causedByPlayer && damageSource.getSource() instanceof PlayerEntity player)
-            if (AbstractSkeletonEntity.class.isAssignableFrom(this.getClass()) && player.getInventory().getMainHandStack().isOf(ModItems.SKULLFIRE_SWORD))
+            if (isSkeleton(this) && player.getInventory().getMainHandStack().isOf(ModItems.SKULLFIRE_SWORD))
                 this.dropStack(new ItemStack(Items.WITHER_SKELETON_SKULL));
+    }
+
+    @Unique
+    private static boolean isSkeleton(Entity entity) {
+        return AbstractSkeletonEntity.class.isAssignableFrom(entity.getClass());
     }
 }

@@ -1,0 +1,35 @@
+{
+  "type": "avaritia:extreme_shapeless",
+  "result": {
+    "item": "avaritia:cosmic_meatballs"
+  },
+  "ingredients": [
+    {
+      "item": "avaritia:neutron_pile"
+    },
+    {
+      "item": "minecraft:beef"
+    },
+    {
+      "item": "minecraft:chicken"
+    },
+    {
+      "item": "minecraft:porkchop"
+    },
+    {
+      "item": "minecraft:mutton"
+    },
+    {
+      "item": "minecraft:tropical_fish"
+    },
+    {
+      "item": "minecraft:salmon"
+    },
+    {
+      "item": "minecraft:cod"
+    },
+    {
+      "item": "minecraft:pufferfish"
+    }
+  ]
+}

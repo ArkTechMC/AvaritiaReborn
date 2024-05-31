@@ -38,7 +38,7 @@ public class SingularityResourceManager {
                 if (Singularity.MATERIALS.containsKey(result)) {
                     List<String> dependency = root.get("dependency").getAsJsonArray().asList().stream().map(JsonElement::getAsString).toList();
                     Singularity.SingularityRecipe recipe = new Singularity.SingularityRecipe(dependency, result, new ArrayList<>());
-                    if (recipe.canUse())
+                    if (recipe.dependency().anyLoaded())
                         for (JsonElement ingredient : root.get("ingredients").getAsJsonArray()) {
                             JsonObject object = ingredient.getAsJsonObject();
                             Singularity.SingularityIngredient i = new Singularity.SingularityIngredient(Ingredient.fromJson(object.get("ingredient")), object.get("amount").getAsInt());

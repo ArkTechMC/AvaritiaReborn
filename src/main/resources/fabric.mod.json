@@ -41,6 +41,7 @@
   "mixins": [
     "avaritia.mixins.json"
   ],
+  "accessWidener": "avaritia.accesswidener",
   "depends": {
     "fabricloader": ">=${loader_version}",
     "fabric": "*",

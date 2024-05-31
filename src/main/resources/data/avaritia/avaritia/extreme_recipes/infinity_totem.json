@@ -1,0 +1,31 @@
+{
+  "type": "avaritia:extreme_shaped",
+  "result": {
+    "item": "avaritia:infinity_totem"
+  },
+  "pattern": [
+    "   NNN   ",
+    "  NIIIN  ",
+    "  NTITN  ",
+    "CCCIIICCC",
+    " CCIIICC ",
+    "  NIIIN  ",
+    "  NNNNN  ",
+    "   CCC   ",
+    "    C    "
+  ],
+  "key": {
+    "N": {
+      "item": "avaritia:neutronium_ingot"
+    },
+    "T": {
+      "item": "minecraft:totem_of_undying"
+    },
+    "I": {
+      "item": "avaritia:infinity_ingot"
+    },
+    "C": {
+      "item": "avaritia:crystal_matrix_ingot"
+    }
+  }
+}
