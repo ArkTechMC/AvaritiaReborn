@@ -23,8 +23,11 @@
   "item.avaritia.infinity_axe": "Nature's Ruin",
   "item.avaritia.infinity_boots": "Infinity Boots",
   "item.avaritia.infinity_bow": "Longbow of the Heavens",
+  "item.avaritia.infinity_bucket": "Infinity Bucket",
+  "item.avaritia.infinity_bucket.message": "Current Fluid: %s | Amount: %smL",
   "item.avaritia.infinity_catalyst": "Infinity Catalyst",
   "item.avaritia.infinity_chestplate": "Infinity Breastplate",
+  "item.avaritia.infinity_crossbow": "Crossbow of the Inferno",
   "item.avaritia.infinity_helmet": "Infinity Helmet",
   "item.avaritia.infinity_hoe": "Hoe of the Green Earth",
   "item.avaritia.infinity_ingot": "Infinity Ingot",
@@ -32,6 +35,7 @@
   "item.avaritia.infinity_pickaxe": "World Breaker",
   "item.avaritia.infinity_shovel": "Planet Eater",
   "item.avaritia.infinity_sword": "Sword of the Cosmos",
+  "item.avaritia.infinity_totem": "Infinity Totem",
   "item.avaritia.matter_cluster": "Matter Cluster",
   "item.avaritia.neutron_nugget": "Neutronium Nugget",
   "item.avaritia.neutron_pile": "Pile of Neutrons",
@@ -58,6 +62,5 @@
   "item.avaritia.singularity.tin": "Tin Singularity",
   "item.avaritia.skullfire_sword": "Skullfire Sword",
   "item.avaritia.ultimate_stew": "Ultimate Stew",
-  "item.avaritia.infinity_totem": "Infinity Totem",
   "itemGroup.avaritia": "Avaritia"
 }

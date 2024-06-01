@@ -3,6 +3,7 @@ package com.iafenvoy.avaritia.item;
 import com.iafenvoy.avaritia.registry.ModItems;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.client.item.TooltipContext;
+import net.minecraft.client.resource.language.I18n;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -21,14 +22,19 @@ public class MatterClusterItem extends Item {
     public static final String ITEMS_NBT = "Items";
 
     public MatterClusterItem() {
-        super(new FabricItemSettings());
+        super(new FabricItemSettings().maxCount(1));
     }
 
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
         super.appendTooltip(stack, world, tooltip, context);
         NbtList items = stack.getOrCreateNbt().getList(ITEMS_NBT, NbtElement.COMPOUND_TYPE);
-        tooltip.add(Text.literal("Remain Stack(s): " + items.size()));
+        for (int i = 0; i < items.size(); i++) {
+            NbtCompound compound = items.getCompound(i);
+            ItemStack s = ItemStack.fromNbt(compound);
+            String s1 = String.format("%s %s", I18n.translate(s.getTranslationKey()), s.getCount());
+            tooltip.add(Text.literal(s1));
+        }
     }
 
     @Override

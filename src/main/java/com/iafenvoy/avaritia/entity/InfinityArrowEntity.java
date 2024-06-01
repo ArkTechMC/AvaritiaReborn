@@ -1,5 +1,6 @@
 package com.iafenvoy.avaritia.entity;
 
+import com.iafenvoy.avaritia.item.armor.InfinityArmorItem;
 import com.iafenvoy.avaritia.registry.ModDamageType;
 import com.iafenvoy.avaritia.registry.ModEntities;
 import com.iafenvoy.avaritia.registry.ModGameRules;
@@ -37,8 +38,12 @@ public class InfinityArrowEntity extends PersistentProjectileEntity {
     protected void onEntityHit(EntityHitResult entityHitResult) {
         super.onEntityHit(entityHitResult);
         Entity entity = entityHitResult.getEntity();
-        if (entity instanceof PlayerEntity player && player.isCreative() && !entity.getWorld().getGameRules().getBoolean(ModGameRules.INFINITY_KILL_CREATIVE))
-            return;
+        if (entity instanceof PlayerEntity player) {
+            if (player.isCreative() && !entity.getWorld().getGameRules().getBoolean(ModGameRules.INFINITY_KILL_CREATIVE))
+                return;
+            if (InfinityArmorItem.fullyEquipped(player))
+                return;
+        }
         if (this.getOwner() != entity && entity instanceof LivingEntity livingEntity) {
             Registry<DamageType> registry = livingEntity.getDamageSources().registry;
             DamageSource source = new DamageSource(registry.getEntry(registry.get(ModDamageType.INFINITY)), this, this);

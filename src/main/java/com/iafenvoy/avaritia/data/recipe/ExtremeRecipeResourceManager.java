@@ -5,6 +5,7 @@ import com.iafenvoy.avaritia.AvaritiaReborn;
 import com.iafenvoy.avaritia.data.DependencyHolder;
 import com.iafenvoy.avaritia.data.singularity.Singularity;
 import com.iafenvoy.avaritia.data.singularity.SingularityHelper;
+import com.iafenvoy.avaritia.data.singularity.SingularityResourceManager;
 import com.iafenvoy.avaritia.util.RecipeUtil;
 import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.Ingredient;
@@ -22,6 +23,7 @@ import java.util.Map;
 
 public class ExtremeRecipeResourceManager {
     public static void reload(ResourceManager manager, List<Identifier> needToRemove) {
+        SingularityResourceManager.reload(manager);
         ExtremeCraftingShapedRecipe.RECIPES.clear();
         ExtremeCraftingShapelessRecipe.RECIPES.clear();
         for (Map.Entry<Identifier, Resource> entry : manager.findResources(AvaritiaReborn.MOD_ID + "/extreme_recipes", p -> p.getPath().endsWith(".json")).entrySet()) {

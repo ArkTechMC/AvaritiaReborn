@@ -8,6 +8,7 @@ import com.iafenvoy.annotationlib.annotation.registration.Link;
 import com.iafenvoy.annotationlib.api.IAnnotatedRegistryEntry;
 import com.iafenvoy.annotationlib.util.TargetType;
 import com.iafenvoy.avaritia.AvaritiaReborn;
+import com.iafenvoy.avaritia.item.InfinityBucketItem;
 import com.iafenvoy.avaritia.item.MatterClusterItem;
 import com.iafenvoy.avaritia.item.SingularityItem;
 import com.iafenvoy.avaritia.item.armor.InfinityArmorItem;
@@ -37,7 +38,7 @@ public class ModItems implements IAnnotatedRegistryEntry {
     @ItemReg(group = @TargetId("main"))
     public static final Item SKULLFIRE_SWORD = new InfinitySwordItem();
     @ItemReg(group = @TargetId("main"))
-    public static final Item SINGULARITY = new SingularityItem(new FabricItemSettings().rarity(Rarity.UNCOMMON));
+    public static final Item SINGULARITY = new SingularityItem();
     @ItemReg(group = @TargetId("main"))
     public static final Item RECORD_FRAGMENT = new Item(new FabricItemSettings().fireproof());
     @ItemReg(group = @TargetId("main"))
@@ -48,6 +49,8 @@ public class ModItems implements IAnnotatedRegistryEntry {
     public static final Item INFINITY_CATALYST = new Item(new FabricItemSettings().fireproof().rarity(Rarity.RARE));
     @ItemReg(group = @TargetId("main"))
     public static final Item INFINITY_INGOT = new Item(new FabricItemSettings().fireproof().rarity(Rarity.RARE));
+    @ItemReg(group = @TargetId("main"))
+    public static final Item INFINITY_BUCKET = new InfinityBucketItem();
     @ItemReg(group = @TargetId("main"))
     public static final Item INFINITY_HELMET = new InfinityArmorItem(ArmorItem.Type.HELMET);
     @ItemReg(group = @TargetId("main"))
@@ -68,6 +71,8 @@ public class ModItems implements IAnnotatedRegistryEntry {
     public static final Item INFINITY_HOE = new InfinityHoeItem();
     @ItemReg(group = @TargetId("main"))
     public static final Item INFINITY_BOW = new InfinityBowItem();
+    @ItemReg(group = @TargetId("main"))
+    public static final Item INFINITY_CROSSBOW = new InfinityCrossbowItem();
     @ItemReg(group = @TargetId("main"))
     public static final Item INFINITY_TOTEM = new Item(new FabricItemSettings().maxCount(1).rarity(Rarity.EPIC));
     @Group(@TargetId("main"))

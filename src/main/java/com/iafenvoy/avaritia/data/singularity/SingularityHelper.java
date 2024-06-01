@@ -34,6 +34,13 @@ public class SingularityHelper {
         return stack;
     }
 
+    public static Singularity get(String id) {
+        for (Singularity material : Singularity.MATERIALS.values())
+            if (material.getId().equals(id))
+                return material;
+        return Singularity.EMPTY;
+    }
+
     public static Singularity get(ItemStack stack) {
         for (Singularity material : Singularity.MATERIALS.values())
             if (material.test(stack) != null)

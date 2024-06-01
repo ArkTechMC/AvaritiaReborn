@@ -1,5 +1,6 @@
 package com.iafenvoy.avaritia.item.tool;
 
+import com.iafenvoy.avaritia.item.armor.InfinityArmorItem;
 import com.iafenvoy.avaritia.registry.ModDamageType;
 import com.iafenvoy.avaritia.registry.ModGameRules;
 import net.minecraft.entity.LivingEntity;
@@ -18,8 +19,12 @@ public class InfinitySwordItem extends SwordItem {
 
     @Override
     public boolean postHit(ItemStack itemtack, LivingEntity entity, LivingEntity sourceentity) {
-        if (entity instanceof PlayerEntity player && player.isCreative() && !entity.getWorld().getGameRules().getBoolean(ModGameRules.INFINITY_KILL_CREATIVE))
-            return false;
+        if (entity instanceof PlayerEntity player) {
+            if (player.isCreative() && !entity.getWorld().getGameRules().getBoolean(ModGameRules.INFINITY_KILL_CREATIVE))
+                return false;
+            if (InfinityArmorItem.fullyEquipped(player))
+                return false;
+        }
         Registry<DamageType> registry = entity.getDamageSources().registry;
         DamageSource source = new DamageSource(registry.getEntry(registry.get(ModDamageType.INFINITY)), sourceentity, sourceentity);
         entity.setInvulnerable(false);

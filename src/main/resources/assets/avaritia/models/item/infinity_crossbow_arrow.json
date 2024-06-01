@@ -1,0 +1,6 @@
+{
+    "parent": "item/crossbow",
+    "textures": {
+        "layer0": "avaritia:item/tools/crossbow/infinity_crossbow_arrow"
+    }
+}

@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(LivingEntity.class)
-public class LivingEntityMixin {
+public abstract class LivingEntityMixin {
     @Inject(method = "tryUseTotem", at = @At("HEAD"), cancellable = true)
     private void onTryUseTotem(DamageSource source, CallbackInfoReturnable<Boolean> cir) {
         if (!source.isIn(DamageTypeTags.BYPASSES_INVULNERABILITY))

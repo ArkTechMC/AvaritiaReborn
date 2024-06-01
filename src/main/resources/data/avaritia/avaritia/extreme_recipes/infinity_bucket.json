@@ -1,0 +1,31 @@
+{
+  "type": "avaritia:extreme_shaped",
+  "result": {
+    "item": "avaritia:infinity_axe"
+  },
+  "pattern": [
+    "NN     NN",
+    "NNC   CNN",
+    "NBBC CBBN",
+    "NBBI IBBN",
+    "NBBI IBBN",
+    "NBBIIIBBN",
+    "NNBBBBBNN",
+    " NNBBBNN ",
+    "  NNNNN  "
+  ],
+  "key": {
+    "N": {
+      "item": "avaritia:neutronium_ingot"
+    },
+    "I": {
+      "item": "avaritia:infinity_ingot"
+    },
+    "B": {
+      "item": "minecraft:bucket"
+    },
+    "C": {
+      "item": "avaritia:infinity_catalyst"
+    }
+  }
+}

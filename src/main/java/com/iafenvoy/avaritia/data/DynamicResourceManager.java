@@ -2,8 +2,6 @@ package com.iafenvoy.avaritia.data;
 
 import com.google.gson.Gson;
 import com.iafenvoy.avaritia.AvaritiaReborn;
-import com.iafenvoy.avaritia.data.recipe.ExtremeCraftingShapelessRecipe;
-import com.iafenvoy.avaritia.data.singularity.SingularityResourceManager;
 import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
 import net.minecraft.resource.Resource;
 import net.minecraft.resource.ResourceManager;
@@ -23,8 +21,8 @@ public class DynamicResourceManager implements SimpleSynchronousResourceReloadLi
 
     @Override
     public void reload(ResourceManager manager) {
-        SingularityResourceManager.reload(manager);
-        //This will be completed by RecipeManagerMixin
+        //These will be completed by RecipeManagerMixin
+//        SingularityResourceManager.reload(manager);
 //        ExtremeRecipeResourceManager.reload(manager);
         for (Map.Entry<Identifier, Resource> entry : manager.findResources(AvaritiaReborn.MOD_ID + "/dynamic", p -> p.getPath().endsWith(".json")).entrySet()) {
             try (InputStream stream = entry.getValue().getInputStream()) {

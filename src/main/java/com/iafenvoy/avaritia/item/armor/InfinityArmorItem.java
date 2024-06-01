@@ -62,15 +62,10 @@ public class InfinityArmorItem extends ArmorItem {
         }
     }
 
-    private boolean hasFullSuitOfArmorOn(PlayerEntity player) {
-        ItemStack boots = player.getInventory().getArmorStack(0);
-        ItemStack leggings = player.getInventory().getArmorStack(1);
-        ItemStack chestplate = player.getInventory().getArmorStack(2);
-        ItemStack helmet = player.getInventory().getArmorStack(3);
-
-        return (boots.getItem().equals(ModItems.INFINITY_BOOTS) &&
-                leggings.getItem().equals(ModItems.INFINITY_LEGS) &&
-                chestplate.getItem().equals(ModItems.INFINITY_CHESTPLATE) &&
-                helmet.getItem().equals(ModItems.INFINITY_HELMET));
+    public static boolean fullyEquipped(PlayerEntity player) {
+        return player.getEquippedStack(EquipmentSlot.HEAD).isOf(ModItems.INFINITY_HELMET)
+                && player.getEquippedStack(EquipmentSlot.CHEST).isOf(ModItems.INFINITY_CHESTPLATE)
+                && player.getEquippedStack(EquipmentSlot.LEGS).isOf(ModItems.INFINITY_LEGS)
+                && player.getEquippedStack(EquipmentSlot.FEET).isOf(ModItems.INFINITY_BOOTS);
     }
 }
