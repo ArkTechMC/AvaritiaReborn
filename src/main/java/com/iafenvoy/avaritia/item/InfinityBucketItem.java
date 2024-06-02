@@ -53,8 +53,7 @@ public class InfinityBucketItem extends Item {
             NbtCompound compound = items.getCompound(i);
             Identifier id = new Identifier(compound.getString(FLUID_ID_KEY));
             long amount = compound.getLong(FLUID_AMOUNT_KEY);
-            String s1 = String.format("%s %s", Text.translatable(id.toTranslationKey("block")), String.format("%,f", (double) amount));
-            tooltip.add(Text.literal(s1));
+            tooltip.add(Text.translatable(id.toTranslationKey("block")).append(Text.literal(": " + String.format("%,d", amount) + "mL")));
         }
     }
 
@@ -104,7 +103,7 @@ public class InfinityBucketItem extends Item {
             NbtCompound compound = items.getCompound(0);
             Identifier id = new Identifier(compound.getString(FLUID_ID_KEY));
             long amount = compound.getLong(FLUID_AMOUNT_KEY);
-            player.sendMessage(Text.translatable("item.avaritia.infinity_bucket.message", Text.translatable(id.toTranslationKey("block")), String.format("%,f", (double) amount)), true);
+            player.sendMessage(Text.translatable("item.avaritia.infinity_bucket.message", Text.translatable(id.toTranslationKey("block")), String.format("%,d", amount)), true);
         }
     }
 
