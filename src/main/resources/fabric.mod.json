@@ -41,6 +41,11 @@
   "mixins": [
     "avaritia.mixins.json"
   ],
+  "custom": {
+    "avaritia-disable-recipe": [
+      "minecraft:iron_door"
+    ]
+  },
   "accessWidener": "avaritia.accesswidener",
   "depends": {
     "fabricloader": ">=${loader_version}",

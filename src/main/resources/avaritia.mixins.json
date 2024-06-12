@@ -6,7 +6,8 @@
   "mixins": [
     "ItemEntityMixin",
     "LivingEntityMixin",
-    "MobEntityMixin"
+    "MobEntityMixin",
+    "RecipeManagerMixin"
   ],
   "client": [
     "ArmorFeatureRendererMixin",
