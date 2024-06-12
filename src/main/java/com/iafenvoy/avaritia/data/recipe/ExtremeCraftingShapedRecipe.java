@@ -102,8 +102,7 @@ public record ExtremeCraftingShapedRecipe(Identifier id, ItemStack output,
             for (int i = 0; i < width; i++) {
                 List<Ingredient> ingredients = new ArrayList<>();
                 for (int j = 0; j < height; j++)
-                    if (!buf.readBoolean())
-                        ingredients.add(Ingredient.fromPacket(buf));
+                    ingredients.add(Ingredient.fromPacket(buf));
                 inputs.add(ingredients);
             }
             ItemStack output = ItemStack.fromNbt(buf.readNbt());
@@ -115,11 +114,8 @@ public record ExtremeCraftingShapedRecipe(Identifier id, ItemStack output,
             buf.writeInt(recipe.recipeItems.size());
             buf.writeInt(recipe.recipeItems.get(0).size());
             for (List<Ingredient> recipeItem : recipe.recipeItems)
-                for (Ingredient ingredient : recipeItem) {
-                    buf.writeBoolean(ingredient.isEmpty());
-                    if (!ingredient.isEmpty())
-                        ingredient.write(buf);
-                }
+                for (Ingredient ingredient : recipeItem)
+                    ingredient.write(buf);
             NbtCompound compound = new NbtCompound();
             recipe.output.writeNbt(compound);
             buf.writeNbt(compound);

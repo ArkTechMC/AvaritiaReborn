@@ -20,19 +20,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Stream;
 
-public class ExtremeCraftingShapelessRecipe implements Recipe<SimpleInventory> {
+public record ExtremeCraftingShapelessRecipe(Identifier id, ItemStack output, List<Ingredient> ingredients,
+                                             List<String> specials) implements Recipe<SimpleInventory> {
     public static final HashMap<Identifier, List<Ingredient>> EXTRA_ITEM = new HashMap<>();
-    private final Identifier id;
-    private final ItemStack output;
-    private final List<Ingredient> ingredients;
-    private final List<String> specials;
-
-    public ExtremeCraftingShapelessRecipe(Identifier id, ItemStack output, List<Ingredient> defaultItems, List<String> specials) {
-        this.id = id;
-        this.output = output;
-        this.ingredients = defaultItems;
-        this.specials = specials;
-    }
 
     @Override
     public boolean matches(SimpleInventory inventory, World world) {
@@ -64,6 +54,7 @@ public class ExtremeCraftingShapelessRecipe implements Recipe<SimpleInventory> {
         return this.output.copy();
     }
 
+    @Override
     public Identifier getId() {
         return this.id;
     }
@@ -116,8 +107,7 @@ public class ExtremeCraftingShapelessRecipe implements Recipe<SimpleInventory> {
             int length = buf.readInt();
             List<Ingredient> inputs = new ArrayList<>();
             for (int i = 0; i < length; i++)
-                if (!buf.readBoolean())
-                    inputs.add(Ingredient.fromPacket(buf));
+                inputs.add(Ingredient.fromPacket(buf));
             ItemStack output = ItemStack.fromNbt(buf.readNbt());
             length = buf.readInt();
             List<String> specials = new ArrayList<>();
@@ -130,11 +120,8 @@ public class ExtremeCraftingShapelessRecipe implements Recipe<SimpleInventory> {
         public void write(PacketByteBuf buf, ExtremeCraftingShapelessRecipe recipe) {
             List<Ingredient> ingredientList = recipe.getAllIngredients();// Fill this.ingredients
             buf.writeInt(ingredientList.size());
-            for (Ingredient ingredient : ingredientList) {
-                buf.writeBoolean(ingredient.isEmpty());
-                if (!ingredient.isEmpty())
-                    ingredient.write(buf);
-            }
+            for (Ingredient ingredient : ingredientList)
+                ingredient.write(buf);
             NbtCompound compound = new NbtCompound();
             recipe.output.writeNbt(compound);
             buf.writeNbt(compound);
