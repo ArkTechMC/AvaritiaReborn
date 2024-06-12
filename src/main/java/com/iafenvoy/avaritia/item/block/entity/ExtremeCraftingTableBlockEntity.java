@@ -10,6 +10,7 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventories;
+import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.screen.NamedScreenHandlerFactory;
@@ -32,14 +33,14 @@ public class ExtremeCraftingTableBlockEntity extends BlockEntity implements Name
     public static void tick(World world, BlockPos pos, BlockState state, ExtremeCraftingTableBlockEntity entity) {
         ItemStack previous = entity.inventory.get(81).copy(), current = ItemStack.EMPTY;
         List<List<ItemStack>> table = RecipeUtil.toTable(entity.inventory, 9, 9);
-        for (ExtremeCraftingShapedRecipe recipe : ExtremeCraftingShapedRecipe.RECIPES.values())
+        for (ExtremeCraftingShapedRecipe recipe : world.getRecipeManager().listAllOfType(ExtremeCraftingShapedRecipe.Type.INSTANCE))
             if (recipe.matches(table)) {
                 current = recipe.output().copy();
                 break;
             }
-        for (ExtremeCraftingShapelessRecipe recipe : ExtremeCraftingShapelessRecipe.RECIPES.values())
-            if (recipe.match(entity.inventory.subList(0, 81))) {
-                current = recipe.getOutput().copy();
+        for (ExtremeCraftingShapelessRecipe recipe : world.getRecipeManager().listAllOfType(ExtremeCraftingShapelessRecipe.Type.INSTANCE))
+            if (recipe.matches(new SimpleInventory(entity.inventory.toArray(new ItemStack[0])), world)) {
+                current = recipe.getOutput(null).copy();
                 break;
             }
         if (previous.isEmpty() != current.isEmpty() || previous.getItem() != current.getItem() || previous.getCount() != current.getCount()) {

@@ -1,0 +1,34 @@
+{
+  "type": "avaritia:extreme_shaped",
+  "result": {
+    "item": "avaritia:infinity_crossbow"
+  },
+  "pattern": [
+    "  IIIII  ",
+    " CN  I   ",
+    "INNNI    ",
+    "I NBN    ",
+    "I INNN   ",
+    "II  NN   ",
+    "I     N  ",
+    "       N ",
+    "         "
+  ],
+  "key": {
+    "N": {
+      "item": "avaritia:neutronium_ingot"
+    },
+    "I": {
+      "item": "avaritia:infinity_ingot"
+    },
+    "X": {
+      "item": "avaritia:infinity_catalyst"
+    },
+    "C": {
+      "item": "avaritia:crystal_matrix_block"
+    },
+    "B": {
+      "item": "avaritia:neutronium_block"
+    }
+  }
+}

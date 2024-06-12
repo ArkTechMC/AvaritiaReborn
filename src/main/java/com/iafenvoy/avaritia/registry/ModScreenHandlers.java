@@ -19,6 +19,8 @@ public class ModScreenHandlers {
         return Registry.register(Registries.SCREEN_HANDLER, id, new ScreenHandlerType<>(factory, FeatureFlags.VANILLA_FEATURES));
     }
 
+    public static void init(){//For server init
+    }
 
     public static void registerAllScreenHandlers() {
         HandledScreens.register(ModScreenHandlers.NEUTRON_COLLECTOR_SCREEN_HANDLER, NeutronCollectorScreen::new);

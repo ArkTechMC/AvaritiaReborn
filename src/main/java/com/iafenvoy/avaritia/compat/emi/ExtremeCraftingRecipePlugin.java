@@ -35,9 +35,9 @@ public class ExtremeCraftingRecipePlugin implements EmiPlugin {
     public void register(EmiRegistry registry) {
         registry.addCategory(EXTREME_CRAFTING_CATEGORY);
         registry.addWorkstation(EXTREME_CRAFTING_CATEGORY, WORKSTATION);
-        for (ExtremeCraftingShapedRecipe recipe : ExtremeCraftingShapedRecipe.RECIPES.values())
+        for (ExtremeCraftingShapedRecipe recipe : registry.getRecipeManager().listAllOfType(ExtremeCraftingShapedRecipe.Type.INSTANCE))
             registry.addRecipe(new EmiExtremeCraftingRecipe(recipe));
-        for (ExtremeCraftingShapelessRecipe recipe : ExtremeCraftingShapelessRecipe.RECIPES.values())
+        for (ExtremeCraftingShapelessRecipe recipe : registry.getRecipeManager().listAllOfType(ExtremeCraftingShapelessRecipe.Type.INSTANCE))
             registry.addRecipe(new EmiExtremeCraftingRecipe(recipe));
         registry.addRecipeHandler(ModScreenHandlers.EXTREME_CRAFTING_TABLE_SCREEN_HANDLER, new ExtremeCraftingHandler());
         registry.setDefaultComparison(ModItems.SINGULARITY, Comparison.of((a, b) -> SingularityHelper.compare(a.getItemStack(), b.getItemStack())));
@@ -50,7 +50,7 @@ public class ExtremeCraftingRecipePlugin implements EmiPlugin {
         }
 
         public EmiExtremeCraftingRecipe(ExtremeCraftingShapelessRecipe recipe) {
-            this(recipe.getId(), true, RecipeUtil.toTable(recipe.getAllIngredients(), 9, 9), recipe.getOutput().copy());
+            this(recipe.getId(), true, RecipeUtil.toTable(recipe.getAllIngredients(), 9, 9), recipe.getOutput(null));
         }
 
         @Override

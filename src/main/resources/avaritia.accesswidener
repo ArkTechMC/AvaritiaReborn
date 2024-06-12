@@ -1,2 +1,4 @@
 accessWidener v2 named
 accessible field net/minecraft/item/BucketItem fluid Lnet/minecraft/fluid/Fluid;
+accessible field net/minecraft/item/CrossbowItem charged Z
+accessible field net/minecraft/item/CrossbowItem loaded Z

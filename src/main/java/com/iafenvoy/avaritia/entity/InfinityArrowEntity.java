@@ -56,7 +56,7 @@ public class InfinityArrowEntity extends PersistentProjectileEntity {
 
     @Override
     protected void onBlockHit(BlockHitResult blockHitResult) {
-        if (this.isCritical())
+        if (this.isCritical() && !this.getWorld().isClient)
             switch (this.getWorld().getGameRules().get(ModGameRules.INFINITY_BOW_BEHAVIOUR).get()) {
                 case Explode ->
                         this.getWorld().createExplosion(this, blockHitResult.getBlockPos().getX(), blockHitResult.getBlockPos().getY(), blockHitResult.getBlockPos().getZ(), 100, false, World.ExplosionSourceType.NONE);
