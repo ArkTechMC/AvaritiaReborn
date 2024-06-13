@@ -36,6 +36,9 @@
       "com.iafenvoy.avaritia.registry.ModEntities",
       "com.iafenvoy.avaritia.registry.ModItemGroups",
       "com.iafenvoy.avaritia.registry.ModItems"
+    ],
+    "annotation_lib_client": [
+      "com.iafenvoy.avaritia.network.ClientSingularityReceiver"
     ]
   },
   "mixins": [
