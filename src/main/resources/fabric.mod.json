@@ -29,31 +29,15 @@
     "emi": [
       "com.iafenvoy.avaritia.compat.emi.ExtremeCraftingRecipePlugin",
       "com.iafenvoy.avaritia.compat.emi.CompressorRecipePlugin"
-    ],
-    "annotation_lib": [
-      "com.iafenvoy.avaritia.registry.ModBlockEntities",
-      "com.iafenvoy.avaritia.registry.ModBlocks",
-      "com.iafenvoy.avaritia.registry.ModEntities",
-      "com.iafenvoy.avaritia.registry.ModItemGroups",
-      "com.iafenvoy.avaritia.registry.ModItems"
-    ],
-    "annotation_lib_client": [
-      "com.iafenvoy.avaritia.network.ClientSingularityReceiver"
     ]
   },
   "mixins": [
     "avaritia.mixins.json"
   ],
-  "custom": {
-    "avaritia-disable-recipe": [
-      "minecraft:iron_door"
-    ]
-  },
   "accessWidener": "avaritia.accesswidener",
   "depends": {
     "fabricloader": ">=${loader_version}",
     "fabric": "*",
-    "minecraft": "${minecraft_version}",
-    "annotation_lib": "*"
+    "minecraft": "${minecraft_version}"
   }
 }

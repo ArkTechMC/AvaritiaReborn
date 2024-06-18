@@ -10,10 +10,11 @@ import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 public class AvaritiaRebornClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
+        ModPredicates.register();
         ModResourceManagers.registerClient();
         ModScreenHandlers.registerAllScreenHandlers();
+
         EntityRendererRegistry.register(ModEntities.INFINITY_ARROW, InfinityArrowEntityRenderer::new);
         ColorProviderRegistry.ITEM.register((stack, tintIndex) -> SingularityHelper.getColorFromStack(stack), ModItems.SINGULARITY);
-        ModPredicates.register();
     }
 }

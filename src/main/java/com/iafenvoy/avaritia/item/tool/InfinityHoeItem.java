@@ -1,6 +1,7 @@
 package com.iafenvoy.avaritia.item.tool;
 
 import com.iafenvoy.avaritia.registry.ModGameRules;
+import com.iafenvoy.avaritia.util.ThreadUtil;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.FarmlandBlock;
@@ -22,7 +23,7 @@ public class InfinityHoeItem extends HoeItem {
         ItemStack stack = context.getStack();
         if (stack.isOf(this) && context.getWorld() instanceof ServerWorld serverWorld) {
             if (context.getPlayer() == null || !context.getPlayer().isSneaking())
-                new Thread(() -> {
+                ThreadUtil.execute(() -> {
                     final int r = serverWorld.getGameRules().getInt(ModGameRules.INFINITY_HOE_RANGE);
                     final BlockPos pos = context.getBlockPos();
                     for (int i = pos.getX() - r; i <= pos.getX() + r; i++)
@@ -39,7 +40,7 @@ public class InfinityHoeItem extends HoeItem {
                                     serverWorld.setBlockState(blockPos, Blocks.FARMLAND.getDefaultState().with(FarmlandBlock.MOISTURE, 7));
                                 }
                             }
-                }).start();
+                }, serverWorld.getGameRules().getBoolean(ModGameRules.SYNC_BREAK));
         }
         return super.useOnBlock(context);
     }

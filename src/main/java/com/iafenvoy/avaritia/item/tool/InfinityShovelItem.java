@@ -3,6 +3,7 @@ package com.iafenvoy.avaritia.item.tool;
 import com.iafenvoy.avaritia.AvaritiaReborn;
 import com.iafenvoy.avaritia.item.MatterClusterItem;
 import com.iafenvoy.avaritia.registry.ModGameRules;
+import com.iafenvoy.avaritia.util.ThreadUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
@@ -59,7 +60,7 @@ public class InfinityShovelItem extends ShovelItem {
         if (stack.isOf(this) && world instanceof ServerWorld serverWorld) {
             boolean isDestroyer = stack.getOrCreateNbt().getBoolean(DESTROYER_NBT);
             if (isDestroyer) {
-                new Thread(() -> {
+                ThreadUtil.execute(() -> {
                     final int r = serverWorld.getGameRules().getInt(ModGameRules.INFINITY_SHOVEL_RANGE);
                     List<ItemStack> packed = new ArrayList<>();
                     for (int i = pos.getX() - r; i <= pos.getX() + r; i++)
@@ -85,7 +86,7 @@ public class InfinityShovelItem extends ShovelItem {
                             }
                     ItemStack result = MatterClusterItem.create(packed);
                     miner.dropStack(result);
-                }).start();
+                }, serverWorld.getGameRules().getBoolean(ModGameRules.SYNC_BREAK));
             }
         }
         return super.postMine(stack, world, state, pos, miner);

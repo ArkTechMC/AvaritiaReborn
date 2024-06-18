@@ -16,6 +16,7 @@ public class ModGameRules {
     public static final GameRules.Key<GameRules.BooleanRule> INFINITY_KILL_CREATIVE = register("weapon.kill.creative", GameRules.Category.PLAYER, GameRuleFactory.createBooleanRule(false));
     public static final GameRules.Key<GameRules.BooleanRule> INFINITY_BOW_TRACKING = register("weapon.bow.tracking", GameRules.Category.PLAYER, GameRuleFactory.createBooleanRule(false));
     public static final GameRules.Key<GameRules.IntRule> INFINITY_BOW_RANGE = register("weapon.bow.tracking.range", GameRules.Category.PLAYER, GameRuleFactory.createIntRule(64, 1));
+    public static final GameRules.Key<GameRules.BooleanRule> SYNC_BREAK = register("sync_break", GameRules.Category.PLAYER, GameRuleFactory.createBooleanRule(false));
 
     public static void init() {
     }

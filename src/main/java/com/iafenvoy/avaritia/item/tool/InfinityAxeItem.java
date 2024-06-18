@@ -4,6 +4,7 @@ import com.iafenvoy.avaritia.item.MatterClusterItem;
 import com.iafenvoy.avaritia.registry.ModGameRules;
 import com.iafenvoy.avaritia.util.Consumer2;
 import com.iafenvoy.avaritia.util.Pair;
+import com.iafenvoy.avaritia.util.ThreadUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
@@ -34,8 +35,8 @@ public class InfinityAxeItem extends AxeItem {
 
     @Override
     public boolean postMine(ItemStack stack, World world, BlockState state, BlockPos pos, LivingEntity miner) {
-        if (world instanceof ServerWorld serverWorld && !miner.isSneaking())
-            new Thread(() -> {
+        if (world instanceof ServerWorld serverWorld && !miner.isSneaking()) {
+            ThreadUtil.execute(() -> {
                 List<ItemStack> packed = new ArrayList<>();
                 final LinkedList<Pair<BlockPos, Integer>> queue = new LinkedList<>();
                 final Consumer2<BlockPos, Integer> allPos = (p, l) -> {
@@ -69,7 +70,8 @@ public class InfinityAxeItem extends AxeItem {
                     allPos.accept(p.first(), p.second() - 1);
                 }
                 miner.dropStack(MatterClusterItem.create(packed));
-            }).start();
+            }, serverWorld.getGameRules().getBoolean(ModGameRules.SYNC_BREAK));
+        }
         return super.postMine(stack, world, state, pos, miner);
     }
 

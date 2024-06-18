@@ -2,10 +2,7 @@ package com.iafenvoy.avaritia;
 
 import com.iafenvoy.avaritia.data.singularity.SingularityCommand;
 import com.iafenvoy.avaritia.item.armor.InfinityArmorItem;
-import com.iafenvoy.avaritia.registry.ModGameRules;
-import com.iafenvoy.avaritia.registry.ModRecipes;
-import com.iafenvoy.avaritia.registry.ModResourceManagers;
-import com.iafenvoy.avaritia.registry.ModScreenHandlers;
+import com.iafenvoy.avaritia.registry.*;
 import com.mojang.logging.LogUtils;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
@@ -18,11 +15,17 @@ public class AvaritiaReborn implements ModInitializer {
 
     @Override
     public void onInitialize() {
+        ModBlockEntities.init();
+        ModBlocks.init();
+        ModEntities.init();
         ModGameRules.init();
+        ModItemGroups.init();
+        ModItems.init();
+        ModRecipes.init();
         ModResourceManagers.register();
-        SingularityCommand.register();
         ModScreenHandlers.init();
-        ModRecipes.register();
+
+        SingularityCommand.register();
 
         ServerLivingEntityEvents.ALLOW_DAMAGE.register((entity, source, amount) -> !(entity instanceof PlayerEntity player) || !InfinityArmorItem.fullyEquipped(player));//For inifinity armor
         ServerLivingEntityEvents.ALLOW_DEATH.register((entity, source, amount) -> !(entity instanceof PlayerEntity player) || !InfinityArmorItem.fullyEquipped(player));
