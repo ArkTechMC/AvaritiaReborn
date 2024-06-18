@@ -1,8 +1,8 @@
 package com.iafenvoy.avaritia.item.block.entity;
 
 import com.iafenvoy.avaritia.gui.NeutronCollectorScreenHandler;
-import com.iafenvoy.avaritia.registry.ModBlockEntities;
-import com.iafenvoy.avaritia.registry.ModItems;
+import com.iafenvoy.avaritia.registry.AvaritiaBlockEntities;
+import com.iafenvoy.avaritia.registry.AvaritiaItems;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -26,7 +26,7 @@ public class NeutronCollectorBlockEntity extends BlockEntity implements NamedScr
     private int maxProgress = 7111;
 
     public NeutronCollectorBlockEntity(BlockPos pos, BlockState state) {
-        super(ModBlockEntities.NEUTRON_COLLECTOR, pos, state);
+        super(AvaritiaBlockEntities.NEUTRON_COLLECTOR, pos, state);
         this.propertyDelegate = new PropertyDelegate() {
             public int get(int index) {
                 return switch (index) {
@@ -62,7 +62,7 @@ public class NeutronCollectorBlockEntity extends BlockEntity implements NamedScr
     }
 
     private static void craftItem(NeutronCollectorBlockEntity entity) {
-        entity.inventory.set(0, new ItemStack(ModItems.NEUTRON_PILE, 1 + entity.inventory.get(0).getCount()));
+        entity.inventory.set(0, new ItemStack(AvaritiaItems.NEUTRON_PILE, 1 + entity.inventory.get(0).getCount()));
         entity.resetProgress();
     }
 

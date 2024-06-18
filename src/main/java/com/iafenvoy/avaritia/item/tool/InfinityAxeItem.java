@@ -1,7 +1,7 @@
 package com.iafenvoy.avaritia.item.tool;
 
 import com.iafenvoy.avaritia.item.MatterClusterItem;
-import com.iafenvoy.avaritia.registry.ModGameRules;
+import com.iafenvoy.avaritia.registry.AvaritiaGameRules;
 import com.iafenvoy.avaritia.util.Consumer2;
 import com.iafenvoy.avaritia.util.Pair;
 import com.iafenvoy.avaritia.util.ThreadUtil;
@@ -48,7 +48,7 @@ public class InfinityAxeItem extends AxeItem {
                     queue.add(Pair.of(p.west(), l));
                     queue.add(Pair.of(p.north(), l));
                 };
-                allPos.accept(pos, serverWorld.getGameRules().getInt(ModGameRules.INFINITY_AXE_RANGE));
+                allPos.accept(pos, serverWorld.getGameRules().getInt(AvaritiaGameRules.INFINITY_AXE_RANGE));
                 while (!queue.isEmpty()) {
                     Pair<BlockPos, Integer> p = queue.remove();
                     BlockState s = serverWorld.getBlockState(p.first());
@@ -70,7 +70,7 @@ public class InfinityAxeItem extends AxeItem {
                     allPos.accept(p.first(), p.second() - 1);
                 }
                 miner.dropStack(MatterClusterItem.create(packed));
-            }, serverWorld.getGameRules().getBoolean(ModGameRules.SYNC_BREAK));
+            }, serverWorld.getGameRules().getBoolean(AvaritiaGameRules.SYNC_BREAK));
         }
         return super.postMine(stack, world, state, pos, miner);
     }

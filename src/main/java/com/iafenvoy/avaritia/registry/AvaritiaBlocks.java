@@ -14,7 +14,7 @@ import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 
 @SuppressWarnings("unused")
-public class ModBlocks {
+public class AvaritiaBlocks {
     public static final Block EXTREME_CRAFTING_TABLE = register("extreme_crafting_table", new ExtremeCraftingTableBlock(FabricBlockSettings.create()));
     public static final Block NEUTRON_COLLECTOR = register("neutron_collector", new NeutronCollectorBlock(FabricBlockSettings.create()));
     public static final Block COMPRESSOR = register("compressor", new NeutroniumCompressorBlock(FabricBlockSettings.create()));
@@ -25,7 +25,7 @@ public class ModBlocks {
     public static final Block INFINITY_BLOCK = register("infinity_block", new Block(FabricBlockSettings.create()));
 
     private static <T extends Block> T register(String name, T block) {
-        ModItems.register(name, new BlockItem(block, new FabricItemSettings()));
+        AvaritiaItems.register(name, new BlockItem(block, new FabricItemSettings()));
         return Registry.register(Registries.BLOCK, new Identifier(AvaritiaReborn.MOD_ID, name), block);
     }
 

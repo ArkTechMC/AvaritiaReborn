@@ -4,9 +4,9 @@ import com.iafenvoy.avaritia.AvaritiaReborn;
 import com.iafenvoy.avaritia.data.recipe.ExtremeCraftingShapedRecipe;
 import com.iafenvoy.avaritia.data.recipe.ExtremeCraftingShapelessRecipe;
 import com.iafenvoy.avaritia.data.singularity.SingularityHelper;
-import com.iafenvoy.avaritia.registry.ModBlocks;
-import com.iafenvoy.avaritia.registry.ModItems;
-import com.iafenvoy.avaritia.registry.ModScreenHandlers;
+import com.iafenvoy.avaritia.registry.AvaritiaBlocks;
+import com.iafenvoy.avaritia.registry.AvaritiaItems;
+import com.iafenvoy.avaritia.registry.AvaritiaScreenHandlers;
 import com.iafenvoy.avaritia.util.RecipeUtil;
 import dev.emi.emi.api.EmiPlugin;
 import dev.emi.emi.api.EmiRegistry;
@@ -28,7 +28,7 @@ import java.util.List;
 public class ExtremeCraftingRecipePlugin implements EmiPlugin {
     private static final Identifier EXTREME_CRAFTING = new Identifier(AvaritiaReborn.MOD_ID, "extreme_crafting");
     private static final EmiTexture TEXTURE = new EmiTexture(new Identifier(AvaritiaReborn.MOD_ID, "textures/gui/extreme_crafting_jei.png"), 0, 0, 188, 162);
-    private static final EmiStack WORKSTATION = EmiStack.of(ModBlocks.EXTREME_CRAFTING_TABLE);
+    private static final EmiStack WORKSTATION = EmiStack.of(AvaritiaBlocks.EXTREME_CRAFTING_TABLE);
     private static final EmiRecipeCategory EXTREME_CRAFTING_CATEGORY = new EmiRecipeCategory(EXTREME_CRAFTING, WORKSTATION);
 
     @Override
@@ -39,8 +39,8 @@ public class ExtremeCraftingRecipePlugin implements EmiPlugin {
             registry.addRecipe(new EmiExtremeCraftingRecipe(recipe));
         for (ExtremeCraftingShapelessRecipe recipe : registry.getRecipeManager().listAllOfType(ExtremeCraftingShapelessRecipe.Type.INSTANCE))
             registry.addRecipe(new EmiExtremeCraftingRecipe(recipe));
-        registry.addRecipeHandler(ModScreenHandlers.EXTREME_CRAFTING_TABLE_SCREEN_HANDLER, new ExtremeCraftingHandler());
-        registry.setDefaultComparison(ModItems.SINGULARITY, Comparison.of((a, b) -> SingularityHelper.compare(a.getItemStack(), b.getItemStack())));
+        registry.addRecipeHandler(AvaritiaScreenHandlers.EXTREME_CRAFTING_TABLE_SCREEN_HANDLER, new ExtremeCraftingHandler());
+        registry.setDefaultComparison(AvaritiaItems.SINGULARITY, Comparison.of((a, b) -> SingularityHelper.compare(a.getItemStack(), b.getItemStack())));
     }
 
     public record EmiExtremeCraftingRecipe(Identifier id, boolean shapeless, List<List<Ingredient>> inputs,

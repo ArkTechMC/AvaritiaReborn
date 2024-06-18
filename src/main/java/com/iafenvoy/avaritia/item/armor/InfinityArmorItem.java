@@ -2,7 +2,7 @@ package com.iafenvoy.avaritia.item.armor;
 
 import com.google.common.collect.Collections2;
 import com.google.common.collect.Lists;
-import com.iafenvoy.avaritia.registry.ModItems;
+import com.iafenvoy.avaritia.registry.AvaritiaItems;
 import com.iafenvoy.avaritia.util.ArmorMaterialUtil;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.entity.Entity;
@@ -21,7 +21,7 @@ import net.minecraft.world.World;
 import java.util.List;
 
 public class InfinityArmorItem extends ArmorItem {
-    private static final ArmorMaterial MATERIAL = ArmorMaterialUtil.of("infinity", new int[]{999, 999, 999, 999}, 999, new int[]{999, 999, 999, 999}, 1000, SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE, 999, 999, ModItems.INFINITY_INGOT);
+    private static final ArmorMaterial MATERIAL = ArmorMaterialUtil.of("infinity", new int[]{999, 999, 999, 999}, 999, new int[]{999, 999, 999, 999}, 1000, SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE, 999, 999, AvaritiaItems.INFINITY_INGOT);
 
     public InfinityArmorItem(Type slot) {
         super(MATERIAL, slot, new FabricItemSettings().fireproof().rarity(Rarity.EPIC));
@@ -35,12 +35,12 @@ public class InfinityArmorItem extends ArmorItem {
     @Override
     public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
         if (entity instanceof PlayerEntity player) {
-            if (player.getEquippedStack(EquipmentSlot.HEAD).isOf(ModItems.INFINITY_HELMET)) {
+            if (player.getEquippedStack(EquipmentSlot.HEAD).isOf(AvaritiaItems.INFINITY_HELMET)) {
                 player.setAir(player.getMaxAir());
                 player.getHungerManager().setFoodLevel(20);
                 player.addStatusEffect(new StatusEffectInstance(StatusEffects.NIGHT_VISION, 20, 0, false, false));
             }
-            if (player.getEquippedStack(EquipmentSlot.CHEST).isOf(ModItems.INFINITY_CHESTPLATE)) {
+            if (player.getEquippedStack(EquipmentSlot.CHEST).isOf(AvaritiaItems.INFINITY_CHESTPLATE)) {
                 List<StatusEffectInstance> effects = Lists.newArrayList(player.getStatusEffects());
                 for (StatusEffectInstance effectInstance : Collections2.filter(effects, e -> e.getEffectType().getCategory() == StatusEffectCategory.HARMFUL))
                     player.removeStatusEffect(effectInstance.getEffectType());
@@ -51,11 +51,11 @@ public class InfinityArmorItem extends ArmorItem {
                     player.getAbilities().flying = false;
                 }
             }
-            if (player.getEquippedStack(EquipmentSlot.LEGS).isOf(ModItems.INFINITY_LEGS)) {
+            if (player.getEquippedStack(EquipmentSlot.LEGS).isOf(AvaritiaItems.INFINITY_LEGS)) {
                 if (player.isOnFire())
                     player.extinguish();
             }
-            if (player.getEquippedStack(EquipmentSlot.FEET).isOf(ModItems.INFINITY_BOOTS)) {
+            if (player.getEquippedStack(EquipmentSlot.FEET).isOf(AvaritiaItems.INFINITY_BOOTS)) {
                 player.addStatusEffect(new StatusEffectInstance(StatusEffects.SPEED, 20, 9, false, false));
                 player.addStatusEffect(new StatusEffectInstance(StatusEffects.JUMP_BOOST, 20, 3, false, false));
             }
@@ -63,9 +63,9 @@ public class InfinityArmorItem extends ArmorItem {
     }
 
     public static boolean fullyEquipped(PlayerEntity player) {
-        return player.getEquippedStack(EquipmentSlot.HEAD).isOf(ModItems.INFINITY_HELMET)
-                && player.getEquippedStack(EquipmentSlot.CHEST).isOf(ModItems.INFINITY_CHESTPLATE)
-                && player.getEquippedStack(EquipmentSlot.LEGS).isOf(ModItems.INFINITY_LEGS)
-                && player.getEquippedStack(EquipmentSlot.FEET).isOf(ModItems.INFINITY_BOOTS);
+        return player.getEquippedStack(EquipmentSlot.HEAD).isOf(AvaritiaItems.INFINITY_HELMET)
+                && player.getEquippedStack(EquipmentSlot.CHEST).isOf(AvaritiaItems.INFINITY_CHESTPLATE)
+                && player.getEquippedStack(EquipmentSlot.LEGS).isOf(AvaritiaItems.INFINITY_LEGS)
+                && player.getEquippedStack(EquipmentSlot.FEET).isOf(AvaritiaItems.INFINITY_BOOTS);
     }
 }

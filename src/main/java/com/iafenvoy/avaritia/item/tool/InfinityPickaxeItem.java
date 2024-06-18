@@ -2,7 +2,7 @@ package com.iafenvoy.avaritia.item.tool;
 
 import com.iafenvoy.avaritia.AvaritiaReborn;
 import com.iafenvoy.avaritia.item.MatterClusterItem;
-import com.iafenvoy.avaritia.registry.ModGameRules;
+import com.iafenvoy.avaritia.registry.AvaritiaGameRules;
 import com.iafenvoy.avaritia.util.ThreadUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -72,7 +72,7 @@ public class InfinityPickaxeItem extends PickaxeItem {
             boolean isHammer = stack.getOrCreateNbt().getBoolean(HAMMER_NBT);
             if (isHammer) {
                 ThreadUtil.execute(() -> {
-                    final int r = serverWorld.getGameRules().getInt(ModGameRules.INFINITY_PICKAXE_RANGE);
+                    final int r = serverWorld.getGameRules().getInt(AvaritiaGameRules.INFINITY_PICKAXE_RANGE);
                     List<ItemStack> packed = new ArrayList<>();
                     for (int i = pos.getX() - r; i <= pos.getX() + r; i++)
                         for (int j = pos.getZ() - r; j <= pos.getZ() + r; j++)
@@ -96,7 +96,7 @@ public class InfinityPickaxeItem extends PickaxeItem {
                                 serverWorld.breakBlock(blockPos, false);
                             }
                     miner.dropStack(MatterClusterItem.create(packed));
-                }, serverWorld.getGameRules().getBoolean(ModGameRules.SYNC_BREAK));
+                }, serverWorld.getGameRules().getBoolean(AvaritiaGameRules.SYNC_BREAK));
             }
         }
         return super.postMine(stack, world, state, pos, miner);

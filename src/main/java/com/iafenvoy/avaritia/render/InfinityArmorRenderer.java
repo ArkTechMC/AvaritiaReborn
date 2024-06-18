@@ -1,7 +1,7 @@
 package com.iafenvoy.avaritia.render;
 
 import com.iafenvoy.avaritia.AvaritiaReborn;
-import com.iafenvoy.avaritia.registry.ModItems;
+import com.iafenvoy.avaritia.registry.AvaritiaItems;
 import com.iafenvoy.avaritia.render.model.InfinityArmorModel;
 import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.RenderLayer;
@@ -32,7 +32,7 @@ public class InfinityArmorRenderer<T extends LivingEntity, M extends EntityModel
     public void render(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, T entity, float limbAngle, float limbDistance, float tickDelta, float animationProgress, float headYaw, float headPitch) {
         this.tick += tickDelta;
         if (this.tick >= speed * 2) this.tick %= (speed * 2);
-        if (entity instanceof PlayerEntity player && entity.getEquippedStack(EquipmentSlot.CHEST).isOf(ModItems.INFINITY_CHESTPLATE) && player.getAbilities().flying) {
+        if (entity instanceof PlayerEntity player && entity.getEquippedStack(EquipmentSlot.CHEST).isOf(AvaritiaItems.INFINITY_CHESTPLATE) && player.getAbilities().flying) {
             matrices.push();
             InfinityArmorModel<T> model = new InfinityArmorModel<>(InfinityArmorModel.createBodyLayer().createModel());
             VertexConsumer consumer1 = ItemRenderer.getArmorGlintConsumer(vertexConsumers, RenderLayer.getEntityTranslucent(ARMOR_WING), false, false);

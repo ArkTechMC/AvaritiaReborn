@@ -4,7 +4,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.iafenvoy.avaritia.data.singularity.Singularity;
 import com.iafenvoy.avaritia.data.singularity.SingularityHelper;
-import com.iafenvoy.avaritia.registry.ModItems;
+import com.iafenvoy.avaritia.registry.AvaritiaItems;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
@@ -72,7 +72,7 @@ public record ExtremeCraftingShapelessRecipe(Identifier id, ItemStack output, Li
         List<Ingredient> ingredientList = new ArrayList<>(Stream.of(this.ingredients, EXTRA_ITEM.get(this.id)).flatMap(Collection::stream).toList());
         for (String s : this.specials)
             if (s.equals("singularity"))
-                if (ingredientList.stream().noneMatch(x -> Arrays.stream(x.getMatchingStacks()).anyMatch(y -> y.isOf(ModItems.SINGULARITY))))
+                if (ingredientList.stream().noneMatch(x -> Arrays.stream(x.getMatchingStacks()).anyMatch(y -> y.isOf(AvaritiaItems.SINGULARITY))))
                     for (Singularity singularity : Singularity.MATERIALS.values())
                         if (singularity.hasAvailable())
                             ingredientList.add(Ingredient.ofStacks(SingularityHelper.buildStack(singularity)));

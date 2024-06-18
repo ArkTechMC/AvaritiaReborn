@@ -1,6 +1,6 @@
 package com.iafenvoy.avaritia.mixin;
 
-import com.iafenvoy.avaritia.registry.ModItems;
+import com.iafenvoy.avaritia.registry.AvaritiaItems;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.damage.DamageSource;
@@ -25,7 +25,7 @@ public abstract class MobEntityMixin extends Entity {
     @Inject(method = "dropLoot", at = @At("HEAD"))
     public void dropHandler(DamageSource damageSource, boolean causedByPlayer, CallbackInfo ci) {
         if (causedByPlayer && damageSource.getSource() instanceof PlayerEntity player)
-            if (isSkeleton(this) && player.getInventory().getMainHandStack().isOf(ModItems.SKULLFIRE_SWORD))
+            if (isSkeleton(this) && player.getInventory().getMainHandStack().isOf(AvaritiaItems.SKULLFIRE_SWORD))
                 this.dropStack(new ItemStack(Items.WITHER_SKELETON_SKULL));
     }
 

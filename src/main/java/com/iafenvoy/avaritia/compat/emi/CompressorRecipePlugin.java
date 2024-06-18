@@ -3,7 +3,7 @@ package com.iafenvoy.avaritia.compat.emi;
 import com.iafenvoy.avaritia.AvaritiaReborn;
 import com.iafenvoy.avaritia.data.singularity.Singularity;
 import com.iafenvoy.avaritia.data.singularity.SingularityHelper;
-import com.iafenvoy.avaritia.registry.ModBlocks;
+import com.iafenvoy.avaritia.registry.AvaritiaBlocks;
 import dev.emi.emi.api.EmiPlugin;
 import dev.emi.emi.api.EmiRegistry;
 import dev.emi.emi.api.recipe.EmiRecipe;
@@ -22,7 +22,7 @@ import java.util.Map;
 public class CompressorRecipePlugin implements EmiPlugin {
     private static final Identifier COMPRESSOR = new Identifier(AvaritiaReborn.MOD_ID, "compressor");
     private static final EmiTexture TEXTURE = new EmiTexture(new Identifier(AvaritiaReborn.MOD_ID, "textures/gui/compressor.png"), 14, 20, 136, 45);
-    private static final EmiStack WORKSTATION = EmiStack.of(ModBlocks.COMPRESSOR);
+    private static final EmiStack WORKSTATION = EmiStack.of(AvaritiaBlocks.COMPRESSOR);
     private static final EmiRecipeCategory COMPRESSOR_CATEGORY = new EmiRecipeCategory(COMPRESSOR, WORKSTATION);
 
     @Override

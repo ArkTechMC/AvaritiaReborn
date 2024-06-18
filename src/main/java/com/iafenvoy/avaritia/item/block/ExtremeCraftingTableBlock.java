@@ -1,7 +1,7 @@
 package com.iafenvoy.avaritia.item.block;
 
 import com.iafenvoy.avaritia.item.block.entity.ExtremeCraftingTableBlockEntity;
-import com.iafenvoy.avaritia.registry.ModBlockEntities;
+import com.iafenvoy.avaritia.registry.AvaritiaBlockEntities;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.BlockWithEntity;
@@ -46,7 +46,7 @@ public class ExtremeCraftingTableBlock extends BlockWithEntity {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        return checkType(type, ModBlockEntities.EXTREME_CRAFTING_TABLE, ExtremeCraftingTableBlockEntity::tick);
+        return checkType(type, AvaritiaBlockEntities.EXTREME_CRAFTING_TABLE, ExtremeCraftingTableBlockEntity::tick);
     }
 
     @Override

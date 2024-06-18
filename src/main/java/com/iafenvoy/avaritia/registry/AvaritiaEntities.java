@@ -11,7 +11,7 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 
-public class ModEntities {
+public class AvaritiaEntities {
     public static final EntityType<InfinityArrowEntity> INFINITY_ARROW = register("infinity_arrow", build((entityType, world) -> new InfinityArrowEntity(world), SpawnGroup.MISC, 64, 1, false, 0.5F, 0.5F));
 
     public static <T extends Entity> EntityType<T> build(EntityType.EntityFactory<T> constructor, SpawnGroup category, int trackingRange, int updateInterval, boolean fireImmune, float sizeX, float sizeY) {

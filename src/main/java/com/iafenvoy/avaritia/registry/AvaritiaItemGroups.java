@@ -16,9 +16,9 @@ import net.minecraft.util.Identifier;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ModItemGroups {
+public class AvaritiaItemGroups {
     public static final List<Item> groupItems = new ArrayList<>();
-    public static final ItemGroup MAIN = register("main", FabricItemGroup.builder().entries((displayContext, entries) -> groupItems.forEach(entries::add)).displayName(Text.translatable("itemGroup." + AvaritiaReborn.MOD_ID)).icon(() -> new ItemStack(ModItems.INFINITY_CATALYST)).build());
+    public static final ItemGroup MAIN = register("main", FabricItemGroup.builder().entries((displayContext, entries) -> groupItems.forEach(entries::add)).displayName(Text.translatable("itemGroup." + AvaritiaReborn.MOD_ID)).icon(() -> new ItemStack(AvaritiaItems.INFINITY_CATALYST)).build());
 
     private static <T extends ItemGroup> T register(String name, T group) {
         return Registry.register(Registries.ITEM_GROUP, new Identifier(AvaritiaReborn.MOD_ID, name), group);

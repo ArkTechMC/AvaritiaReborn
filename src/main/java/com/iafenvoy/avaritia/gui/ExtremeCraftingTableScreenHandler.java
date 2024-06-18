@@ -1,6 +1,6 @@
 package com.iafenvoy.avaritia.gui;
 
-import com.iafenvoy.avaritia.registry.ModScreenHandlers;
+import com.iafenvoy.avaritia.registry.AvaritiaScreenHandlers;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
@@ -19,7 +19,7 @@ public class ExtremeCraftingTableScreenHandler extends ScreenHandler {
     }
 
     public ExtremeCraftingTableScreenHandler(int syncId, PlayerInventory playerInventory, Inventory inventory) {
-        super(ModScreenHandlers.EXTREME_CRAFTING_TABLE_SCREEN_HANDLER, syncId);
+        super(AvaritiaScreenHandlers.EXTREME_CRAFTING_TABLE_SCREEN_HANDLER, syncId);
         checkSize(inventory, 1);
         this.inventory = inventory;
         this.inventory.onOpen(playerInventory.player);

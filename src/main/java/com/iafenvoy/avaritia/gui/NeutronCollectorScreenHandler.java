@@ -1,6 +1,6 @@
 package com.iafenvoy.avaritia.gui;
 
-import com.iafenvoy.avaritia.registry.ModScreenHandlers;
+import com.iafenvoy.avaritia.registry.AvaritiaScreenHandlers;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
@@ -19,7 +19,7 @@ public class NeutronCollectorScreenHandler extends ScreenHandler {
     }
 
     public NeutronCollectorScreenHandler(int syncId, PlayerInventory playerInventory, Inventory inventory, PropertyDelegate delegate) {
-        super(ModScreenHandlers.NEUTRON_COLLECTOR_SCREEN_HANDLER, syncId);
+        super(AvaritiaScreenHandlers.NEUTRON_COLLECTOR_SCREEN_HANDLER, syncId);
         checkSize(inventory, 1);
         this.propertyDelegate = delegate;
         inventory.onOpen(playerInventory.player);

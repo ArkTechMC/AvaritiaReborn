@@ -3,7 +3,7 @@ package com.iafenvoy.avaritia.item.block.entity;
 import com.iafenvoy.avaritia.data.recipe.ExtremeCraftingShapedRecipe;
 import com.iafenvoy.avaritia.data.recipe.ExtremeCraftingShapelessRecipe;
 import com.iafenvoy.avaritia.gui.ExtremeCraftingTableScreenHandler;
-import com.iafenvoy.avaritia.registry.ModBlockEntities;
+import com.iafenvoy.avaritia.registry.AvaritiaBlockEntities;
 import com.iafenvoy.avaritia.util.RecipeUtil;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
@@ -27,7 +27,7 @@ public class ExtremeCraftingTableBlockEntity extends BlockEntity implements Name
     private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(82, ItemStack.EMPTY);
 
     public ExtremeCraftingTableBlockEntity(BlockPos pos, BlockState state) {
-        super(ModBlockEntities.EXTREME_CRAFTING_TABLE, pos, state);
+        super(AvaritiaBlockEntities.EXTREME_CRAFTING_TABLE, pos, state);
     }
 
     public static void tick(World world, BlockPos pos, BlockState state, ExtremeCraftingTableBlockEntity entity) {

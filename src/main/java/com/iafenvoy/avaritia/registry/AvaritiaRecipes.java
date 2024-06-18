@@ -9,7 +9,7 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 
-public class ModRecipes {
+public class AvaritiaRecipes {
     public static void init() {
         register("extreme_shaped", ExtremeCraftingShapedRecipe.Type.INSTANCE);
         register("extreme_shaped", ExtremeCraftingShapedRecipe.Serializer.INSTANCE);

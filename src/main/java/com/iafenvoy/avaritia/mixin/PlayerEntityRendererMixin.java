@@ -1,7 +1,7 @@
 package com.iafenvoy.avaritia.mixin;
 
 import com.iafenvoy.avaritia.item.tool.InfinityCrossbowItem;
-import com.iafenvoy.avaritia.registry.ModItems;
+import com.iafenvoy.avaritia.registry.AvaritiaItems;
 import com.iafenvoy.avaritia.render.InfinityArmorRenderer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -34,7 +34,7 @@ public abstract class PlayerEntityRendererMixin extends LivingEntityRenderer<Abs
     @Inject(at = @At("HEAD"), method = "getArmPose", cancellable = true)
     private static void getArmPose(AbstractClientPlayerEntity player, Hand hand, CallbackInfoReturnable<BipedEntityModel.ArmPose> info) {
         ItemStack itemStack2 = player.getStackInHand(hand);
-        if (!player.handSwinging && itemStack2.isOf(ModItems.INFINITY_CROSSBOW) && InfinityCrossbowItem.isCharged(itemStack2))
+        if (!player.handSwinging && itemStack2.isOf(AvaritiaItems.INFINITY_CROSSBOW) && InfinityCrossbowItem.isCharged(itemStack2))
             info.setReturnValue(BipedEntityModel.ArmPose.CROSSBOW_HOLD);
     }
 }

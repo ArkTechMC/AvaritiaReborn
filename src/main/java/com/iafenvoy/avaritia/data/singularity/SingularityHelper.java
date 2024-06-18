@@ -1,6 +1,6 @@
 package com.iafenvoy.avaritia.data.singularity;
 
-import com.iafenvoy.avaritia.registry.ModItems;
+import com.iafenvoy.avaritia.registry.AvaritiaItems;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.item.ItemStack;
@@ -29,7 +29,7 @@ public class SingularityHelper {
     }
 
     public static ItemStack buildStack(Singularity singularity) {
-        ItemStack stack = new ItemStack(ModItems.SINGULARITY);
+        ItemStack stack = new ItemStack(AvaritiaItems.SINGULARITY);
         stack.getOrCreateNbt().putString(TYPE_KEY, singularity.getId());
         return stack;
     }

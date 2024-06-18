@@ -1,8 +1,8 @@
 package com.iafenvoy.avaritia.item.tool;
 
 import com.iafenvoy.avaritia.item.armor.InfinityArmorItem;
-import com.iafenvoy.avaritia.registry.ModDamageType;
-import com.iafenvoy.avaritia.registry.ModGameRules;
+import com.iafenvoy.avaritia.registry.AvaritiaDamageType;
+import com.iafenvoy.avaritia.registry.AvaritiaGameRules;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.damage.DamageType;
@@ -20,13 +20,13 @@ public class InfinitySwordItem extends SwordItem {
     @Override
     public boolean postHit(ItemStack itemtack, LivingEntity entity, LivingEntity sourceentity) {
         if (entity instanceof PlayerEntity player) {
-            if (player.isCreative() && !entity.getWorld().getGameRules().getBoolean(ModGameRules.INFINITY_KILL_CREATIVE))
+            if (player.isCreative() && !entity.getWorld().getGameRules().getBoolean(AvaritiaGameRules.INFINITY_KILL_CREATIVE))
                 return false;
             if (InfinityArmorItem.fullyEquipped(player))
                 return false;
         }
         Registry<DamageType> registry = entity.getDamageSources().registry;
-        DamageSource source = new DamageSource(registry.getEntry(registry.get(ModDamageType.INFINITY)), sourceentity, sourceentity);
+        DamageSource source = new DamageSource(registry.getEntry(registry.get(AvaritiaDamageType.INFINITY)), sourceentity, sourceentity);
         entity.setInvulnerable(false);
         entity.damage(source, entity.getHealth());
         entity.setHealth(0);

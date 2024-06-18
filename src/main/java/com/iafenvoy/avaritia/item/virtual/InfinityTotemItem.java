@@ -1,6 +1,6 @@
 package com.iafenvoy.avaritia.item.virtual;
 
-import com.iafenvoy.avaritia.registry.ModItems;
+import com.iafenvoy.avaritia.registry.AvaritiaItems;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
@@ -24,7 +24,7 @@ public class InfinityTotemItem {
 
     public static boolean check(LivingEntity entity) {
         if (entity instanceof PlayerEntity player)
-            return player.getInventory().containsAny(x -> x.isOf(ModItems.INFINITY_TOTEM));
-        return entity.getMainHandStack().isOf(ModItems.INFINITY_TOTEM) || entity.getOffHandStack().isOf(ModItems.INFINITY_TOTEM);
+            return player.getInventory().containsAny(x -> x.isOf(AvaritiaItems.INFINITY_TOTEM));
+        return entity.getMainHandStack().isOf(AvaritiaItems.INFINITY_TOTEM) || entity.getOffHandStack().isOf(AvaritiaItems.INFINITY_TOTEM);
     }
 }

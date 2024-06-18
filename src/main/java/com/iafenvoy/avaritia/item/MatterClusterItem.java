@@ -1,6 +1,6 @@
 package com.iafenvoy.avaritia.item;
 
-import com.iafenvoy.avaritia.registry.ModItems;
+import com.iafenvoy.avaritia.registry.AvaritiaItems;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.client.resource.language.I18n;
@@ -60,7 +60,7 @@ public class MatterClusterItem extends Item {
             x.writeNbt(compound);
             list.add(compound);
         }
-        ItemStack stack = new ItemStack(ModItems.MATTER_CLUSTER);
+        ItemStack stack = new ItemStack(AvaritiaItems.MATTER_CLUSTER);
         stack.getOrCreateNbt().put(ITEMS_NBT, list);
         return stack;
     }

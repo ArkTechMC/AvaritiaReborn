@@ -4,7 +4,7 @@ import com.iafenvoy.avaritia.data.singularity.Singularity;
 import com.iafenvoy.avaritia.data.singularity.SingularityHelper;
 import com.iafenvoy.avaritia.gui.NeutroniumCompressorScreenHandler;
 import com.iafenvoy.avaritia.item.block.NeutroniumCompressorBlock;
-import com.iafenvoy.avaritia.registry.ModBlockEntities;
+import com.iafenvoy.avaritia.registry.AvaritiaBlockEntities;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -29,7 +29,7 @@ public class NeutroniumCompressorBlockEntity extends BlockEntity implements Name
     private Singularity material = Singularity.EMPTY;
 
     public NeutroniumCompressorBlockEntity(BlockPos pos, BlockState state) {
-        super(ModBlockEntities.NEUTRONIUM_COMPRESSOR, pos, state);
+        super(AvaritiaBlockEntities.NEUTRONIUM_COMPRESSOR, pos, state);
         this.propertyDelegate = new PropertyDelegate() {
             @Override
             public int get(int index) {

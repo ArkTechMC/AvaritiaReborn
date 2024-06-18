@@ -15,15 +15,15 @@ public class AvaritiaReborn implements ModInitializer {
 
     @Override
     public void onInitialize() {
-        ModBlockEntities.init();
-        ModBlocks.init();
-        ModEntities.init();
-        ModGameRules.init();
-        ModItemGroups.init();
-        ModItems.init();
-        ModRecipes.init();
-        ModResourceManagers.register();
-        ModScreenHandlers.init();
+        AvaritiaBlockEntities.init();
+        AvaritiaBlocks.init();
+        AvaritiaEntities.init();
+        AvaritiaGameRules.init();
+        AvaritiaItemGroups.init();
+        AvaritiaItems.init();
+        AvaritiaRecipes.init();
+        AvaritiaResourceManagers.register();
+        AvaritiaScreenHandlers.init();
 
         SingularityCommand.register();
 

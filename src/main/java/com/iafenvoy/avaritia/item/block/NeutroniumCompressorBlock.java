@@ -1,7 +1,7 @@
 package com.iafenvoy.avaritia.item.block;
 
 import com.iafenvoy.avaritia.item.block.entity.NeutroniumCompressorBlockEntity;
-import com.iafenvoy.avaritia.registry.ModBlockEntities;
+import com.iafenvoy.avaritia.registry.AvaritiaBlockEntities;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
@@ -63,7 +63,7 @@ public class NeutroniumCompressorBlock extends BlockWithEntity {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        return checkType(type, ModBlockEntities.NEUTRONIUM_COMPRESSOR, NeutroniumCompressorBlockEntity::tick);
+        return checkType(type, AvaritiaBlockEntities.NEUTRONIUM_COMPRESSOR, NeutroniumCompressorBlockEntity::tick);
     }
 
     @Override

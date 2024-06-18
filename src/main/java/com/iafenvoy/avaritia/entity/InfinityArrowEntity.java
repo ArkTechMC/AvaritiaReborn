@@ -1,9 +1,9 @@
 package com.iafenvoy.avaritia.entity;
 
 import com.iafenvoy.avaritia.item.armor.InfinityArmorItem;
-import com.iafenvoy.avaritia.registry.ModDamageType;
-import com.iafenvoy.avaritia.registry.ModEntities;
-import com.iafenvoy.avaritia.registry.ModGameRules;
+import com.iafenvoy.avaritia.registry.AvaritiaDamageType;
+import com.iafenvoy.avaritia.registry.AvaritiaEntities;
+import com.iafenvoy.avaritia.registry.AvaritiaGameRules;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
@@ -28,7 +28,7 @@ public class InfinityArrowEntity extends PersistentProjectileEntity {
     }
 
     public InfinityArrowEntity(World world, Entity owner) {
-        super(ModEntities.INFINITY_ARROW, world);
+        super(AvaritiaEntities.INFINITY_ARROW, world);
         this.setOwner(owner);
         this.pickupType = PickupPermission.CREATIVE_ONLY;
         this.setCritical(true);
@@ -39,14 +39,14 @@ public class InfinityArrowEntity extends PersistentProjectileEntity {
         super.onEntityHit(entityHitResult);
         Entity entity = entityHitResult.getEntity();
         if (entity instanceof PlayerEntity player) {
-            if (player.isCreative() && !entity.getWorld().getGameRules().getBoolean(ModGameRules.INFINITY_KILL_CREATIVE))
+            if (player.isCreative() && !entity.getWorld().getGameRules().getBoolean(AvaritiaGameRules.INFINITY_KILL_CREATIVE))
                 return;
             if (InfinityArmorItem.fullyEquipped(player))
                 return;
         }
         if (this.getOwner() != entity && entity instanceof LivingEntity livingEntity) {
             Registry<DamageType> registry = livingEntity.getDamageSources().registry;
-            DamageSource source = new DamageSource(registry.getEntry(registry.get(ModDamageType.INFINITY)), this, this);
+            DamageSource source = new DamageSource(registry.getEntry(registry.get(AvaritiaDamageType.INFINITY)), this, this);
             livingEntity.setInvulnerable(false);
             livingEntity.damage(source, livingEntity.getHealth());
             livingEntity.setHealth(0);
@@ -57,7 +57,7 @@ public class InfinityArrowEntity extends PersistentProjectileEntity {
     @Override
     protected void onBlockHit(BlockHitResult blockHitResult) {
         if (this.isCritical() && !this.getWorld().isClient)
-            switch (this.getWorld().getGameRules().get(ModGameRules.INFINITY_BOW_BEHAVIOUR).get()) {
+            switch (this.getWorld().getGameRules().get(AvaritiaGameRules.INFINITY_BOW_BEHAVIOUR).get()) {
                 case Explode ->
                         this.getWorld().createExplosion(this, blockHitResult.getBlockPos().getX(), blockHitResult.getBlockPos().getY(), blockHitResult.getBlockPos().getZ(), 100, false, World.ExplosionSourceType.NONE);
                 case ArrowRain -> {
@@ -93,12 +93,12 @@ public class InfinityArrowEntity extends PersistentProjectileEntity {
     @Override
     public void tick() {
         super.tick();
-        if (this.getWorld().getGameRules().getBoolean(ModGameRules.INFINITY_BOW_TRACKING) && this.isCritical() && this.getOwner() != null) {
-            int range = this.getWorld().getGameRules().getInt(ModGameRules.INFINITY_BOW_RANGE);
+        if (this.getWorld().getGameRules().getBoolean(AvaritiaGameRules.INFINITY_BOW_TRACKING) && this.isCritical() && this.getOwner() != null) {
+            int range = this.getWorld().getGameRules().getInt(AvaritiaGameRules.INFINITY_BOW_RANGE);
             List<Entity> entities = this.getWorld().getOtherEntities(this.getOwner(), new Box(this.getBlockPos().add(new Vec3i(range, range, range)), this.getBlockPos().subtract(new Vec3i(range, range, range))), x -> {
                 if (x instanceof PlayerEntity player) {
                     if (player.isSpectator()) return false;
-                    return !player.isCreative() || this.getWorld().getGameRules().getBoolean(ModGameRules.INFINITY_KILL_CREATIVE);
+                    return !player.isCreative() || this.getWorld().getGameRules().getBoolean(AvaritiaGameRules.INFINITY_KILL_CREATIVE);
                 }
                 return x instanceof LivingEntity;
             });

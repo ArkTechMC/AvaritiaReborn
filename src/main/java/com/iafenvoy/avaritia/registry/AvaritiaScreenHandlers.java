@@ -10,7 +10,7 @@ import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.util.Identifier;
 
-public class ModScreenHandlers {
+public class AvaritiaScreenHandlers {
     public static final ScreenHandlerType<NeutronCollectorScreenHandler> NEUTRON_COLLECTOR_SCREEN_HANDLER = register(new Identifier(AvaritiaReborn.MOD_ID, "neutron_collector"), NeutronCollectorScreenHandler::new);
     public static final ScreenHandlerType<ExtremeCraftingTableScreenHandler> EXTREME_CRAFTING_TABLE_SCREEN_HANDLER = register(new Identifier(AvaritiaReborn.MOD_ID, "extreme_crafting_table"), ExtremeCraftingTableScreenHandler::new);
     public static final ScreenHandlerType<NeutroniumCompressorScreenHandler> NEUTRONIUM_COMPRESSOR_SCREEN_HANDLER = register(new Identifier(AvaritiaReborn.MOD_ID, "neutronium_compressor"), NeutroniumCompressorScreenHandler::new);
@@ -23,8 +23,8 @@ public class ModScreenHandlers {
     }
 
     public static void registerAllScreenHandlers() {
-        HandledScreens.register(ModScreenHandlers.NEUTRON_COLLECTOR_SCREEN_HANDLER, NeutronCollectorScreen::new);
-        HandledScreens.register(ModScreenHandlers.EXTREME_CRAFTING_TABLE_SCREEN_HANDLER, ExtremeCraftingTableScreen::new);
-        HandledScreens.register(ModScreenHandlers.NEUTRONIUM_COMPRESSOR_SCREEN_HANDLER, NeutroniumCompressorScreen::new);
+        HandledScreens.register(AvaritiaScreenHandlers.NEUTRON_COLLECTOR_SCREEN_HANDLER, NeutronCollectorScreen::new);
+        HandledScreens.register(AvaritiaScreenHandlers.EXTREME_CRAFTING_TABLE_SCREEN_HANDLER, ExtremeCraftingTableScreen::new);
+        HandledScreens.register(AvaritiaScreenHandlers.NEUTRONIUM_COMPRESSOR_SCREEN_HANDLER, NeutroniumCompressorScreen::new);
     }
 }

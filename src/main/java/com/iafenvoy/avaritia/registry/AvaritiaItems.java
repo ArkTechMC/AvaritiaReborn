@@ -18,7 +18,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
 
 @SuppressWarnings("unused")
-public class ModItems {
+public class AvaritiaItems {
     public static final Item DIAMOND_LATTICE = register("diamond_lattice", new Item(new FabricItemSettings()));
     public static final Item CRYSTAL_MATRIX_INGOT = register("crystal_matrix_ingot", new Item(new FabricItemSettings()));
     public static final Item NEUTRON_PILE = register("neutron_pile", new Item(new FabricItemSettings()));
@@ -48,7 +48,7 @@ public class ModItems {
     public static final Item MATTER_CLUSTER = register("matter_cluster", new MatterClusterItem());
 
     public static <T extends Item> T register(String name, T item) {
-        ModItemGroups.groupItems.add(item);
+        AvaritiaItemGroups.groupItems.add(item);
         return Registry.register(Registries.ITEM, new Identifier(AvaritiaReborn.MOD_ID, name), item);
     }
 
