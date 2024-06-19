@@ -3,6 +3,7 @@ package com.iafenvoy.avaritia.item.tool;
 import com.iafenvoy.avaritia.item.armor.InfinityArmorItem;
 import com.iafenvoy.avaritia.registry.AvaritiaDamageType;
 import com.iafenvoy.avaritia.registry.AvaritiaGameRules;
+import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.damage.DamageType;
@@ -14,7 +15,7 @@ import net.minecraft.util.Rarity;
 
 public class InfinitySwordItem extends SwordItem {
     public InfinitySwordItem() {
-        super(InfinityMaterial.MATERIAL, 3, -2.0F, new Settings().rarity(Rarity.EPIC));
+        super(InfinityMaterial.MATERIAL, 3, -2.0F, new FabricItemSettings().rarity(Rarity.EPIC));
     }
 
     @Override

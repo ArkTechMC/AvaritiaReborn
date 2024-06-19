@@ -5,6 +5,7 @@ import com.iafenvoy.avaritia.registry.AvaritiaGameRules;
 import com.iafenvoy.avaritia.util.Consumer2;
 import com.iafenvoy.avaritia.util.Pair;
 import com.iafenvoy.avaritia.util.ThreadUtil;
+import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
@@ -23,7 +24,7 @@ import java.util.List;
 
 public class InfinityAxeItem extends AxeItem {
     public InfinityAxeItem() {
-        super(InfinityMaterial.MATERIAL, 1.0F, -2.2F, new Settings().rarity(Rarity.EPIC));
+        super(InfinityMaterial.MATERIAL, 1.0F, -2.2F, new FabricItemSettings().rarity(Rarity.EPIC));
     }
 
     @Override

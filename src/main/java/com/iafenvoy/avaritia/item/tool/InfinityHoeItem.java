@@ -2,6 +2,7 @@ package com.iafenvoy.avaritia.item.tool;
 
 import com.iafenvoy.avaritia.registry.AvaritiaGameRules;
 import com.iafenvoy.avaritia.util.ThreadUtil;
+import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.FarmlandBlock;
@@ -15,7 +16,7 @@ import net.minecraft.util.math.BlockPos;
 
 public class InfinityHoeItem extends HoeItem {
     public InfinityHoeItem() {
-        super(InfinityMaterial.MATERIAL, 0, -2.2F, new Settings().rarity(Rarity.EPIC));
+        super(InfinityMaterial.MATERIAL, 0, -2.2F, new FabricItemSettings().rarity(Rarity.EPIC));
     }
 
     @Override

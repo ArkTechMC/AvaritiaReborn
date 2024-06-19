@@ -10,7 +10,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
 import net.minecraft.nbt.NbtList;
+import net.minecraft.text.Style;
 import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
@@ -28,6 +30,7 @@ public class MatterClusterItem extends Item {
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
         super.appendTooltip(stack, world, tooltip, context);
+        tooltip.add(Text.translatable("item.avaritia.matter_cluster.tooltip").fillStyle(Style.EMPTY.withColor(Formatting.GRAY).withItalic(true)));
         NbtList items = stack.getOrCreateNbt().getList(ITEMS_NBT, NbtElement.COMPOUND_TYPE);
         for (int i = 0; i < items.size(); i++) {
             NbtCompound compound = items.getCompound(i);
